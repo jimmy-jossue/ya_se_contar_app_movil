@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/openingFragment">
+
+    <fragment
+        android:id="@+id/openingFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.OpeningFragment"
+        android:label="fragment_opening"
+        tools:layout="@layout/fragment_opening" >
+        <action
+            android:id="@+id/action_opening_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/knowNumbersFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.game.KnowNumbersFragment"
+        android:label="fragment_know_numbers"
+        tools:layout="@layout/fragment_know_numbers" >
+        <action
+            android:id="@+id/action_knowNumbers_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessOrMoreFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.game.LessOrMoreFragment"
+        android:label="fragment_less_or_more"
+        tools:layout="@layout/fragment_less_or_more" >
+        <action
+            android:id="@+id/action_lessOrMore_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menu_to_knowNumbers"
+            app:destination="@id/knowNumbersFragment" />
+        <action
+            android:id="@+id/action_menu_to_howMany"
+            app:destination="@id/howManyFragment" />
+        <action
+            android:id="@+id/action_menu_to_selectAndCount"
+            app:destination="@id/selectAndCountFragment" />
+        <action
+            android:id="@+id/action_menu_to_moveAndCount"
+            app:destination="@id/moveAndCountFragment" />
+        <action
+            android:id="@+id/action_menu_to_lessOrMore"
+            app:destination="@id/lessOrMoreFragment" />
+        <action
+            android:id="@+id/action_menu_to_orderAndCount"
+            app:destination="@id/orderAndCountFragment" />
+        <action
+            android:id="@+id/action_menu_to_signUp"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_menu_to_userProfile"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/howManyFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.game.HowManyFragment"
+        android:label="fragment_how_many"
+        tools:layout="@layout/fragment_how_many" >
+        <action
+            android:id="@+id/action_howMany_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moveAndCountFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.game.MoveAndCountFragment"
+        android:label="fragment_move_and_count"
+        tools:layout="@layout/fragment_move_and_count" >
+        <action
+            android:id="@+id/action_moveAndCount_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectAndCountFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.game.SelectAndCountFragment"
+        android:label="fragment_select_and_count"
+        tools:layout="@layout/fragment_select_and_count" >
+        <action
+            android:id="@+id/action_selectAndCount_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderAndCountFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.game.OrderAndCountFragment"
+        android:label="fragment_order_and_count"
+        tools:layout="@layout/fragment_order_and_count" >
+        <action
+            android:id="@+id/action_orderAndCount_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.informative.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfile_to_menu"
+            app:destination="@id/menuFragment" />
+    </fragment>
+</navigation>

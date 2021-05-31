@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.menu.MenuFragment">
+
+
+
+    <HorizontalScrollView
+        android:id="@+id/contentScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_menu_blue_gradient"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/contentItemMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_menu_blue_gradient"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_50sdp">
+
+            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:position="middle"
+
+            />
+
+<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+<!--                android:id="@+id/mivFirst"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:position="first"-->
+<!--                />-->
+
+<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:position="middle"-->
+<!--                app:status="incomplete"/>-->
+
+<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                />-->
+
+<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+<!--                android:layout_width="3dp"-->
+<!--                android:layout_height="16dp" />-->
+
+<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:position="last"-->
+<!--                />-->
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

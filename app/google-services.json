@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "29024277792",
+    "project_id": "aprendiendo-numeros-8196e",
+    "storage_bucket": "aprendiendo-numeros-8196e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29024277792:android:dca0059bd96c5ce4ad3345",
+        "android_client_info": {
+          "package_name": "com.janus.aprendiendonumeros"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29024277792-if830tpd0usbnjl3su0pnmi08immhjsb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.janus.aprendiendonumeros",
+            "certificate_hash": "3c6732df70d8be5f9a6de7e989757c57fa82ef3a"
+          }
+        },
+        {
+          "client_id": "29024277792-ev3v27b1nouhggkmu6mmvubdlai3j20i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1FsPvTYHdU0bqnPTuQoFfk1-uTsj5m-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29024277792-ev3v27b1nouhggkmu6mmvubdlai3j20i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

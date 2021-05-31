@@ -1,0 +1,22 @@
+package com.janus.aprendiendonumeros.ui.fragment.game
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.janus.aprendiendonumeros.R
+import com.janus.aprendiendonumeros.databinding.FragmentKnowNumbersBinding
+
+class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
+
+    private lateinit var binding: FragmentKnowNumbersBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentKnowNumbersBinding.bind(view)
+
+    }
+
+}
