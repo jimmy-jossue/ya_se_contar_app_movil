@@ -100,7 +100,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.janus.aprendiendonumeros.ui.fragment.SignUpFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.login.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

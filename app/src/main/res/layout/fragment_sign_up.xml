@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.SignUpFragment">
+    android:background="@color/bg_login"
+    tools:context=".ui.fragment.login.SignUpFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/separation_small"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:text="@string/What_is_your_gender"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/text_title"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sound"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_sound"
+        android:layout_width="@dimen/btnSound_size"
+        android:layout_height="@dimen/btnSound_size"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/ic_sound"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_gender"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@color/bg_login"
+        android:tag="@string/What_is_your_gender"
+        app:layout_constraintBottom_toTopOf="@+id/btn_previous"
+        app:layout_constraintEnd_toStartOf="@+id/container_data_user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_gender_girl"
+            android:layout_width="@dimen/btnProfile_size_medium"
+            android:layout_height="@dimen/btnProfile_size_medium"
+            android:src="@drawable/ic_photo_profile_girl"
+            app:civ_border_color="@color/black_25"
+            app:civ_border_width="@dimen/border_width_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_gender_boy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/tv_gender_girl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/separation_small"
+            android:fontFamily="@font/balsamiq_sans_regular"
+            android:text="@string/girl"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_subTitle"
+            app:layout_constraintEnd_toEndOf="@+id/iv_gender_girl"
+            app:layout_constraintStart_toStartOf="@+id/iv_gender_girl"
+            app:layout_constraintTop_toBottomOf="@+id/iv_gender_girl" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_gender_boy"
+            android:layout_width="@dimen/btnProfile_size_medium"
+            android:layout_height="@dimen/btnProfile_size_medium"
+            android:src="@drawable/ic_photo_profile_boy"
+            app:civ_border_color="@color/black_25"
+            app:civ_border_width="@dimen/border_width_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_gender_girl"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/tv_gender_boy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/separation_small"
+            android:fontFamily="@font/balsamiq_sans_regular"
+            android:text="@string/boy"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_subTitle"
+            app:layout_constraintEnd_toEndOf="@+id/iv_gender_boy"
+            app:layout_constraintStart_toStartOf="@+id/iv_gender_boy"
+            app:layout_constraintTop_toBottomOf="@+id/iv_gender_boy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_data_user"
+        android:layout_width="@dimen/_500sdp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@color/bg_login"
+        android:tag="@string/write_nickname"
+        app:layout_constraintBottom_toTopOf="@+id/btn_previous"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/container_gender"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_profile_image"
+            android:layout_width="@dimen/btnProfile_size_semi_small"
+            android:layout_height="@dimen/btnProfile_size_semi_small"
+            android:src="@drawable/ic_photo_profile_girl"
+            app:civ_border_color="@color/black_25"
+            app:civ_border_width="@dimen/border_width_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <EditText
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/bg_blue_gradient"
+            android:drawableStart="@drawable/ic_sound"
+            android:fontFamily="@font/balsamiq_sans_regular"
+            android:hint="@string/Nickname"
+            android:padding="@dimen/separation_extra_small"
+            android:textColor="@color/dark"
+            android:textColorHint="@color/black_25"
+            android:textSize="@dimen/text_subTitle"
+            app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintStart_toStartOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_previous"
+        android:layout_width="@dimen/login_direction_button_width"
+        android:layout_height="@dimen/login_direction_button_height"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/ic_btn_bubble_previous"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_next"
+        android:layout_width="@dimen/login_direction_button_width"
+        android:layout_height="@dimen/login_direction_button_height"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/ic_btn_bubble_next"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

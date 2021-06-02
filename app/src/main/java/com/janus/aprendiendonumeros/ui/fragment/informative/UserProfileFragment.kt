@@ -1,10 +1,8 @@
 package com.janus.aprendiendonumeros.ui.fragment.informative
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.janus.aprendiendonumeros.R
@@ -15,7 +13,7 @@ import com.janus.aprendiendonumeros.databinding.FragmentUserProfileBinding
 import com.janus.aprendiendonumeros.presentation.UserProfileViewModel
 import com.janus.aprendiendonumeros.presentation.UserProfileViewModelFactory
 import com.janus.aprendiendonumeros.repository.UserProfileImpl
-import com.janus.aprendiendonumeros.repository.UserProfileProvider
+
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
@@ -30,11 +28,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         binding = FragmentUserProfileBinding.bind(view)
 
         viewModel.fetchUsers().observe(viewLifecycleOwner, Observer { result ->
-            when(result){
-                is Resource.Loading -> { binding.progressBar.visibility = View.VISIBLE }
-
+            when (result) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
                 is Resource.Success -> {
-                   showInfos(result)
+                    showInfos(result)
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
@@ -45,26 +44,26 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 }
             }
         })
-
     }
 
     private fun showInfo(result: Resource.Success<User>){
         binding.progressBar.visibility = View.GONE
 
-        binding.tvNickName.text = "nickName: "+result.data.nickname
-        binding.tvGender.text = "gender: "+ result.data.gender
+        binding.tvNickName.text = "nickName: " + result.data.nikname
+        binding.tvGender.text = "gender: " + result.data.gender
         binding.tvTime.text = "date: "+ result.data.birthDate
         binding.tvLevel.text = "level: "+ result.data.level
     }
 
     private fun showInfos(result: Resource.Success<List<User>>){
         binding.progressBar.visibility = View.GONE
-
-        for(user in result.data){
-            binding.tvNickName.text = "nickName: "+user.nickname
-            binding.tvGender.text = "gender: "+ user.gender
-            binding.tvTime.text = "date: "+ user.birthDate
-            binding.tvLevel.text = "level: "+ user.level
+        var infoUser = ""
+        for(user in result.data) {
+            infoUser += "nickName: ${user.nikname} \n " +
+                    "gender: ${user.gender} \n " +
+                    "birthDate: ${user.birthDate} \n " +
+                    "level: ${user.level} \n \n"
         }
+        binding.tvNickName.text = infoUser
     }
 }

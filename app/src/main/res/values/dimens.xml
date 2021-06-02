@@ -5,20 +5,35 @@
     to square screens.
     -->
     <dimen name="box_inset_layout_padding">0dp</dimen>
-
     <!--
     This padding applies to both square and round screens. The total padding between the buttons
     and the window insets is box_inset_layout_padding (above variable) on square screens and
     inner_frame_layout_padding (below variable) on round screens.
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
+
     <dimen name="menuItem_button_size">@dimen/_115sdp</dimen>
     <dimen name="menuItem_button_separator_small">@dimen/_10ssp</dimen>
     <dimen name="menuItem_separationLine_width">@dimen/_65sdp</dimen>
     <dimen name="menuItem_separationLine_height">@dimen/_5ssp</dimen>
     <dimen name="menuItem_status_size">@dimen/_25sdp</dimen>
     <dimen name="menuItem_Status_marginTop">@dimen/_15sdp</dimen>
+
     <dimen name="btnBack_width">@dimen/_50sdp</dimen>
     <dimen name="btnBack_height">@dimen/_45sdp</dimen>
+
     <dimen name="btnDirection_width">@dimen/_38sdp</dimen>
+
+    <dimen name="text_title">@dimen/_25ssp</dimen>
+    <dimen name="text_subTitle">@dimen/_20ssp</dimen>
+
+    <dimen name="login_direction_button_width">@dimen/_75sdp</dimen>
+    <dimen name="login_direction_button_height">@dimen/_50sdp</dimen>
+
+    <dimen name="separation_small">@dimen/_10sdp</dimen>
+    <dimen name="border_width_small">@dimen/_2sdp</dimen>
+    <dimen name="btnSound_size">@dimen/_35sdp</dimen>
+    <dimen name="btnProfile_size_medium">@dimen/_110sdp</dimen>
+    <dimen name="btnProfile_size_semi_small">@dimen/_100sdp</dimen>
+    <dimen name="separation_extra_small">@dimen/_5sdp</dimen>
 </resources>

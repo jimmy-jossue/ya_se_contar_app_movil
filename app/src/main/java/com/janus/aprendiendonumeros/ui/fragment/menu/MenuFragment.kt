@@ -8,9 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.janus.aprendiendonumeros.R
-import com.janus.aprendiendonumeros.core.Resource
-import com.janus.aprendiendonumeros.data.model.User
-import com.janus.aprendiendonumeros.databinding.FragmentKnowNumbersBinding
 import com.janus.aprendiendonumeros.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment(R.layout.fragment_menu) {
@@ -47,12 +44,12 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
                 "level" to 1000
             )
 
-            users.document("Joseph").set(data)
+            users.document("Joseph").set(data1)
             users.document("Belen").set(data)
 
                 .addOnSuccessListener {
-                Toast.makeText(requireContext(),"datos ingresados", Toast.LENGTH_SHORT).show()
-            }
+                    Toast.makeText(requireContext(), "datos ingresados", Toast.LENGTH_SHORT).show()
+                }
         })
 
         binding.contentItemMenu.addView(item)
