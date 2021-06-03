@@ -6,17 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.menu.MenuFragment">
 
-
-
     <HorizontalScrollView
         android:id="@+id/contentScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_menu_blue_gradient"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/contentItemMenu"
@@ -32,40 +30,51 @@
                 android:layout_height="wrap_content"
                 app:position="middle"
 
-            />
+                />
 
-<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
-<!--                android:id="@+id/mivFirst"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:position="first"-->
-<!--                />-->
+            <!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+            <!--                android:id="@+id/mivFirst"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:position="first"-->
+            <!--                />-->
 
-<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:position="middle"-->
-<!--                app:status="incomplete"/>-->
+            <!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:position="middle"-->
+            <!--                app:status="incomplete"/>-->
 
-<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                />-->
+            <!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                />-->
 
-<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
-<!--                android:layout_width="3dp"-->
-<!--                android:layout_height="16dp" />-->
+            <!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+            <!--                android:layout_width="3dp"-->
+            <!--                android:layout_height="16dp" />-->
 
-<!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:position="last"-->
-<!--                />-->
+            <!--            <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:position="last"-->
+            <!--                />-->
 
         </LinearLayout>
 
     </HorizontalScrollView>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_user_profile"
+        android:layout_width="@dimen/btnProfile_size_small"
+        android:layout_height="@dimen/btnProfile_size_small"
+        android:layout_margin="@dimen/separation_small"
+        android:src="@drawable/ic_photo_profile_girl"
+        app:civ_border_color="@color/semi_transparent"
+        app:civ_border_width="@dimen/border_width_small"
+        app:civ_circle_background_color="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

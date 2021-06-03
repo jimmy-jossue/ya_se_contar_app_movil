@@ -28,11 +28,7 @@ class OpeningFragment : Fragment(R.layout.fragment_opening) {
         startAnimation(binding.ivCloudMiddle, R.anim.floating_cloud_middle)
         startAnimation(binding.ivCloudBack, R.anim.floating_cloud_back)
 
-        binding.btnPlay.setOnClickListener {
-            it.startAnimation(
-                AnimationUtils.loadAnimation(requireContext(), R.anim.bounce_in)
-            ).run { findNavController().navigate(R.id.action_opening_to_menu) }
-        }
+        binding.btnPlay.setOnClickListener { findNavController().navigate(R.id.action_opening_to_menu) }
 
         binding.ivAirPlane.setOnClickListener { startAnimation(it, R.anim.animate_airplane) }
         binding.ivTitle.setOnClickListener { startAnimation(it, R.anim.bounce_in) }

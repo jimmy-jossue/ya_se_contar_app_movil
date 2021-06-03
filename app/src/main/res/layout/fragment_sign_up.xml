@@ -7,33 +7,9 @@
     android:background="@color/bg_login"
     tools:context=".ui.fragment.login.SignUpFragment">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/separation_small"
-        android:fontFamily="@font/balsamiq_sans_bold"
-        android:text="@string/What_is_your_gender"
-        android:textColor="@color/dark"
-        android:textSize="@dimen/text_title"
-        app:layout_constraintEnd_toStartOf="@+id/btn_sound"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_sound"
-        android:layout_width="@dimen/btnSound_size"
-        android:layout_height="@dimen/btnSound_size"
-        android:layout_margin="@dimen/separation_small"
-        android:background="@drawable/ic_sound"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_title" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_gender"
-        android:layout_width="20dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/separation_small"
         android:background="@color/bg_login"
@@ -50,6 +26,7 @@
             android:src="@drawable/ic_photo_profile_girl"
             app:civ_border_color="@color/black_25"
             app:civ_border_width="@dimen/border_width_small"
+            app:civ_circle_background_color="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iv_gender_boy"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,6 +53,7 @@
             android:src="@drawable/ic_photo_profile_boy"
             app:civ_border_color="@color/black_25"
             app:civ_border_width="@dimen/border_width_small"
+            app:civ_circle_background_color="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_gender_girl"
@@ -99,15 +77,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_data_user"
-        android:layout_width="@dimen/_500sdp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/separation_small"
+        android:layout_marginStart="@dimen/separation_small"
         android:background="@color/bg_login"
         android:tag="@string/write_nickname"
-        app:layout_constraintBottom_toTopOf="@+id/btn_previous"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/container_gender"
         app:layout_constraintStart_toEndOf="@+id/container_gender"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+        app:layout_constraintTop_toTopOf="@+id/container_gender">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile_image"
@@ -116,21 +93,37 @@
             android:src="@drawable/ic_photo_profile_girl"
             app:civ_border_color="@color/black_25"
             app:civ_border_width="@dimen/border_width_small"
+            app:civ_circle_background_color="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.2" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_add_image_profile"
+            android:layout_width="@dimen/btnSound_size"
+            android:layout_height="@dimen/btnSound_size"
+            android:background="@color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_btn_add_image_profile"
+            app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toTopOf="@+id/iv_profile_image" />
 
         <EditText
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/separation_small"
-            android:background="@drawable/bg_blue_gradient"
+            android:autofillHints="true"
+            android:background="@drawable/login_edit_text"
             android:drawableStart="@drawable/ic_sound"
+            android:drawablePadding="@dimen/separation_small"
             android:fontFamily="@font/balsamiq_sans_regular"
             android:hint="@string/Nickname"
-            android:padding="@dimen/separation_extra_small"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="text"
+            android:paddingHorizontal="@dimen/separation_small"
+            android:paddingVertical="@dimen/separation_extra_small"
             android:textColor="@color/dark"
             android:textColorHint="@color/black_25"
             android:textSize="@dimen/text_subTitle"
@@ -140,12 +133,36 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/separation_small"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:text="@string/What_is_your_gender"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/text_title"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sound"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_sound"
+        android:layout_width="@dimen/btnSound_size"
+        android:layout_height="@dimen/btnSound_size"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/ic_sound"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_previous"
         android:layout_width="@dimen/login_direction_button_width"
         android:layout_height="@dimen/login_direction_button_height"
         android:layout_margin="@dimen/separation_small"
-        android:background="@drawable/ic_btn_bubble_previous"
+        android:background="@drawable/btn_previous_bubble"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -155,7 +172,7 @@
         android:layout_width="@dimen/login_direction_button_width"
         android:layout_height="@dimen/login_direction_button_height"
         android:layout_margin="@dimen/separation_small"
-        android:background="@drawable/ic_btn_bubble_next"
+        android:background="@drawable/btn_next_bubble"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
