@@ -55,9 +55,9 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     // dp scalable
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
-
     // Firestore
     implementation 'com.google.firebase:firebase-firestore-ktx'
     //Messaging
@@ -69,8 +69,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     // play services coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Simple date
+    implementation 'com.github.sidhuparas:SimpleDate:2.1.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

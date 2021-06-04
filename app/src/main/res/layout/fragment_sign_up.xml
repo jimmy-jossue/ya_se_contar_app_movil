@@ -7,15 +7,16 @@
     android:background="@color/bg_login"
     tools:context=".ui.fragment.login.SignUpFragment">
 
+    <!--Container gender    -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_gender"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/separation_small"
         android:background="@color/bg_login"
         android:tag="@string/What_is_your_gender"
         app:layout_constraintBottom_toTopOf="@+id/btn_previous"
-        app:layout_constraintEnd_toStartOf="@+id/container_data_user"
+        app:layout_constraintEnd_toStartOf="@+id/container_birth_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
@@ -74,17 +75,60 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_gender_boy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--End Container gender    -->
 
+    <!--Container birth date-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_data_user"
-        android:layout_width="match_parent"
+        android:id="@+id/container_birth_date"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/separation_small"
+        android:layout_marginHorizontal="@dimen/separation_small"
         android:background="@color/bg_login"
-        android:tag="@string/write_nickname"
+        android:tag="@string/what_birth_date"
         app:layout_constraintBottom_toBottomOf="@+id/container_gender"
+        app:layout_constraintEnd_toStartOf="@+id/container_data_user"
         app:layout_constraintStart_toEndOf="@+id/container_gender"
         app:layout_constraintTop_toTopOf="@+id/container_gender">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_watermark_birth_date"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_watermark_birth_date"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <DatePicker
+            android:id="@+id/dp_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarTextColor="@color/dark"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:scaleX="1.3"
+            android:scaleY="1.25"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--End Container date-->
+
+    <!--Container Data User    -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_data_user"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:background="@color/bg_login"
+        android:tag="@string/write_nickname"
+        app:layout_constraintBottom_toBottomOf="@+id/container_birth_date"
+        app:layout_constraintEnd_toStartOf="@id/container_password"
+        app:layout_constraintStart_toEndOf="@+id/container_birth_date"
+        app:layout_constraintTop_toTopOf="@+id/container_birth_date">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile_image"
@@ -111,6 +155,7 @@
             app:layout_constraintTop_toTopOf="@+id/iv_profile_image" />
 
         <EditText
+            android:id="@+id/et_nick_name"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/separation_small"
@@ -132,7 +177,189 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--End Container Data User    -->
 
+    <!--Container Password-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_password"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:background="@color/bg_login"
+        android:tag="@string/write_nickname"
+        app:layout_constraintBottom_toBottomOf="@+id/container_data_user"
+        app:layout_constraintEnd_toStartOf="@id/container_register_summary"
+        app:layout_constraintStart_toEndOf="@+id/container_data_user"
+        app:layout_constraintTop_toTopOf="@+id/container_data_user">
+
+        <GridLayout
+            android:id="@+id/container_images_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="6"
+            android:rowCount="2">
+
+            <!--First ROW            -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="3"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="4"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="5"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+            <!--End First ROW-->
+
+            <!--Second ROW-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="3"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="4"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="5"
+                android:layout_columnWeight="1"
+                android:src="@drawable/ic_btn_play_pressed"
+                android:tag="deselected" />
+            <!--End Second ROW-->
+        </GridLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--End Container Password-->
+
+    <!--Container Register summary-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_register_summary"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:background="@color/bg_login"
+        android:tag="@string/write_nickname"
+        app:layout_constraintBottom_toBottomOf="@+id/container_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/container_password"
+        app:layout_constraintTop_toTopOf="@+id/container_password">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_selected_profile_image"
+            android:layout_width="@dimen/btnProfile_size_semi_small"
+            android:layout_height="@dimen/btnProfile_size_semi_small"
+            android:src="@drawable/ic_photo_profile_girl"
+            app:civ_border_color="@color/black_25"
+            app:civ_border_width="@dimen/border_width_small"
+            app:civ_circle_background_color="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--End Container Register summary-->
+
+    <!--Exterior components-->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="0dp"

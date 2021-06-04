@@ -5,6 +5,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
@@ -44,7 +45,7 @@ class OpeningFragment : Fragment(R.layout.fragment_opening) {
         })
     }
 
-    private fun startAnimation(view: View, idAnimation: Int) {
+    private fun startAnimation(view: View, @AnimRes idAnimation: Int) {
         val anim: Animation =
             AnimationUtils.loadAnimation(requireContext(), idAnimation)
         view.startAnimation(anim)

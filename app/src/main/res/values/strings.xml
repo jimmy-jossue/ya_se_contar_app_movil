@@ -19,5 +19,6 @@
     <string name="boy">Niño</string>
     <string name="write_nickname">Escribe un apodo</string>
     <string name="Nickname">Apodo</string>
+    <string name="what_birth_date">¿Cuál es tu fecha de nacimiento?</string>
 
 </resources>
