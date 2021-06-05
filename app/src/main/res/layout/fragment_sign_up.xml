@@ -7,357 +7,459 @@
     android:background="@color/bg_login"
     tools:context=".ui.fragment.login.SignUpFragment">
 
-    <!--Container gender    -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_gender"
-        android:layout_width="@dimen/_100sdp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/separation_small"
         android:background="@color/bg_login"
-        android:tag="@string/What_is_your_gender"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_previous"
-        app:layout_constraintEnd_toStartOf="@+id/container_birth_date"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_gender_girl"
-            android:layout_width="@dimen/btnProfile_size_medium"
-            android:layout_height="@dimen/btnProfile_size_medium"
-            android:src="@drawable/ic_photo_profile_girl"
-            app:civ_border_color="@color/black_25"
-            app:civ_border_width="@dimen/border_width_small"
-            app:civ_circle_background_color="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_gender_boy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
-
-        <TextView
-            android:id="@+id/tv_gender_girl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/separation_small"
-            android:fontFamily="@font/balsamiq_sans_regular"
-            android:text="@string/girl"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/text_subTitle"
-            app:layout_constraintEnd_toEndOf="@+id/iv_gender_girl"
-            app:layout_constraintStart_toStartOf="@+id/iv_gender_girl"
-            app:layout_constraintTop_toBottomOf="@+id/iv_gender_girl" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_gender_boy"
-            android:layout_width="@dimen/btnProfile_size_medium"
-            android:layout_height="@dimen/btnProfile_size_medium"
-            android:src="@drawable/ic_photo_profile_boy"
-            app:civ_border_color="@color/black_25"
-            app:civ_border_width="@dimen/border_width_small"
-            app:civ_circle_background_color="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_gender_girl"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
-
-        <TextView
-            android:id="@+id/tv_gender_boy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/separation_small"
-            android:fontFamily="@font/balsamiq_sans_regular"
-            android:text="@string/boy"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/text_subTitle"
-            app:layout_constraintEnd_toEndOf="@+id/iv_gender_boy"
-            app:layout_constraintStart_toStartOf="@+id/iv_gender_boy"
-            app:layout_constraintTop_toBottomOf="@+id/iv_gender_boy" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--End Container gender    -->
-
-    <!--Container birth date-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_birth_date"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/separation_small"
-        android:background="@color/bg_login"
-        android:tag="@string/what_birth_date"
-        app:layout_constraintBottom_toBottomOf="@+id/container_gender"
-        app:layout_constraintEnd_toStartOf="@+id/container_data_user"
-        app:layout_constraintStart_toEndOf="@+id/container_gender"
-        app:layout_constraintTop_toTopOf="@+id/container_gender">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_watermark_birth_date"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="match_parent"
-            android:scaleType="fitStart"
-            android:src="@drawable/ic_watermark_birth_date"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <DatePicker
-            android:id="@+id/dp_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarTextColor="@color/dark"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:scaleX="1.3"
-            android:scaleY="1.25"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--End Container date-->
-
-    <!--Container Data User    -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_data_user"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/separation_small"
-        android:background="@color/bg_login"
-        android:tag="@string/write_nickname"
-        app:layout_constraintBottom_toBottomOf="@+id/container_birth_date"
-        app:layout_constraintEnd_toStartOf="@id/container_password"
-        app:layout_constraintStart_toEndOf="@+id/container_birth_date"
-        app:layout_constraintTop_toTopOf="@+id/container_birth_date">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_profile_image"
-            android:layout_width="@dimen/btnProfile_size_semi_small"
-            android:layout_height="@dimen/btnProfile_size_semi_small"
-            android:src="@drawable/ic_photo_profile_girl"
-            app:civ_border_color="@color/black_25"
-            app:civ_border_width="@dimen/border_width_small"
-            app:civ_circle_background_color="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_add_image_profile"
-            android:layout_width="@dimen/btnSound_size"
-            android:layout_height="@dimen/btnSound_size"
-            android:background="@color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_btn_add_image_profile"
-            app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
-            app:layout_constraintTop_toTopOf="@+id/iv_profile_image" />
-
-        <EditText
-            android:id="@+id/et_nick_name"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/separation_small"
-            android:autofillHints="true"
-            android:background="@drawable/login_edit_text"
-            android:drawableStart="@drawable/ic_sound"
-            android:drawablePadding="@dimen/separation_small"
-            android:fontFamily="@font/balsamiq_sans_regular"
-            android:hint="@string/Nickname"
-            android:imeOptions="flagNoExtractUi"
-            android:inputType="text"
-            android:paddingHorizontal="@dimen/separation_small"
-            android:paddingVertical="@dimen/separation_extra_small"
-            android:textColor="@color/dark"
-            android:textColorHint="@color/black_25"
-            android:textSize="@dimen/text_subTitle"
-            app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
-            app:layout_constraintStart_toStartOf="@+id/iv_profile_image"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--End Container Data User    -->
-
-    <!--Container Password-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_password"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/separation_small"
-        android:background="@color/bg_login"
-        android:tag="@string/write_nickname"
-        app:layout_constraintBottom_toBottomOf="@+id/container_data_user"
-        app:layout_constraintEnd_toStartOf="@id/container_register_summary"
-        app:layout_constraintStart_toEndOf="@+id/container_data_user"
-        app:layout_constraintTop_toTopOf="@+id/container_data_user">
-
-        <GridLayout
-            android:id="@+id/container_images_password"
+        <!--Container gender-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_gender"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnCount="6"
-            android:rowCount="2">
+            android:tag="@string/What_is_your_gender"
+            android:visibility="gone">
 
-            <!--First ROW            -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="0"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_gender_girl"
+                android:layout_width="@dimen/btnProfile_size_medium"
+                android:layout_height="@dimen/btnProfile_size_medium"
+                android:src="@drawable/ic_photo_profile_girl"
+                app:civ_border_color="@color/black_25"
+                app:civ_border_width="@dimen/border_width_small"
+                app:civ_circle_background_color="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_gender_boy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="1"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+            <TextView
+                android:id="@+id/tv_gender_girl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/separation_extra_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:text="@string/girl"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_subTitle"
+                app:layout_constraintEnd_toEndOf="@+id/iv_gender_girl"
+                app:layout_constraintStart_toStartOf="@+id/iv_gender_girl"
+                app:layout_constraintTop_toBottomOf="@+id/iv_gender_girl" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="2"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_gender_boy"
+                android:layout_width="@dimen/btnProfile_size_medium"
+                android:layout_height="@dimen/btnProfile_size_medium"
+                android:src="@drawable/ic_photo_profile_boy"
+                app:civ_border_color="@color/black_25"
+                app:civ_border_width="@dimen/border_width_small"
+                app:civ_circle_background_color="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_gender_girl"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="3"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+            <TextView
+                android:id="@+id/tv_gender_boy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/separation_extra_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:text="@string/boy"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_subTitle"
+                app:layout_constraintEnd_toEndOf="@+id/iv_gender_boy"
+                app:layout_constraintStart_toStartOf="@+id/iv_gender_boy"
+                app:layout_constraintTop_toBottomOf="@+id/iv_gender_boy" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="4"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--End Container gender-->
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="5"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
-            <!--End First ROW-->
-
-            <!--Second ROW-->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="0"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+        <!--Container birth date-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_birth_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="@string/what_birth_date"
+            android:visibility="visible">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_watermark_birth_date"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="match_parent"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_watermark_birth_date"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <DatePicker
+                android:id="@+id/dp_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_login"
+                android:calendarTextColor="@color/dark"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:scaleX="1.3"
+                android:scaleY="1.25"
+                android:spinnersShown="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--End Container birth date-->
+
+        <!--Container Data User-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_data_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="@string/write_nickname"
+            android:visibility="gone">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile_image"
+                android:layout_width="@dimen/btnProfile_size_semi_small"
+                android:layout_height="@dimen/btnProfile_size_semi_small"
+                android:src="@drawable/ic_photo_profile_girl"
+                app:civ_border_color="@color/black_25"
+                app:civ_border_width="@dimen/border_width_small"
+                app:civ_circle_background_color="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_add_image_profile"
+                android:layout_width="@dimen/btnSound_size"
+                android:layout_height="@dimen/btnSound_size"
+                android:background="@color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_btn_add_image_profile"
+                app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
+                app:layout_constraintTop_toTopOf="@+id/iv_profile_image" />
+
+            <EditText
+                android:id="@+id/et_nick_name"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/separation_small"
+                android:autofillHints="true"
+                android:background="@drawable/login_edit_text"
+                android:drawableStart="@drawable/ic_sound"
+                android:drawablePadding="@dimen/separation_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:hint="@string/Nickname"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/separation_small"
+                android:paddingVertical="@dimen/separation_extra_small"
+                android:textColor="@color/dark"
+                android:textColorHint="@color/black_25"
+                android:textSize="@dimen/text_subTitle"
+                app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
+                app:layout_constraintStart_toStartOf="@+id/iv_profile_image"
+                app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--End Container Data User-->
+
+        <!--Container Password-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="Elige 3 imágenes para tu contraseña"
+            android:visibility="gone">
+
+            <GridLayout
+                android:id="@+id/container_images_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="6"
+                android:rowCount="2">
+
+                <!--First ROW            -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="4"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="5"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+                <!--End First ROW-->
+
+                <!--Second ROW-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="4"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="5"
+                    android:layout_columnWeight="1"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    android:tag="deselected" />
+                <!--End Second ROW-->
+            </GridLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--End Container Password-->
+
+        <!--Container Register summary-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_register_summary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/separation_small"
+            android:tag="@string/register_summary"
+            android:visibility="gone">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="1"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+                android:layout_marginEnd="@dimen/separation_long"
+                android:background="@drawable/bg_et_login"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_selected_profile_image"
+                    android:layout_width="@dimen/_75sdp"
+                    android:layout_height="@dimen/_75sdp"
+                    android:src="@drawable/ic_photo_profile_girl"
+                    app:civ_border_color="@color/black_25"
+                    app:civ_border_width="@dimen/border_width_small"
+                    app:civ_circle_background_color="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_selected_nick_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/separation_small"
+                    android:layout_marginTop="@dimen/separation_extra_small"
+                    android:fontFamily="@font/balsamiq_sans_bold"
+                    android:gravity="center"
+                    android:text="@string/Nickname"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/text_normal"
+                    app:layout_constraintBottom_toTopOf="@id/tv_selected_gender"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_selected_profile_image" />
+
+                <TextView
+                    android:id="@+id/tv_selected_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/separation_small"
+                    android:fontFamily="@font/balsamiq_sans_regular"
+                    android:gravity="center"
+                    android:text="@string/gender"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_normal" />
+
+                <TextView
+                    android:id="@+id/tv_selected_birth_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/separation_small"
+                    android:fontFamily="@font/balsamiq_sans_regular"
+                    android:gravity="center"
+                    android:text="@string/birth_date"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_normal" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="2"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+                android:background="@drawable/bg_et_login"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="3"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+                <TextView
+                    android:id="@+id/tv_subtitle_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/separation_small"
+                    android:layout_marginVertical="@dimen/separation_medium"
+                    android:fontFamily="@font/balsamiq_sans_bold"
+                    android:gravity="center"
+                    android:text="@string/password"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_subTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="4"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_first_image_password"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/separation_small"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_second_image_password"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subtitle_password" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="5"
-                android:layout_columnWeight="1"
-                android:src="@drawable/ic_btn_play_pressed"
-                android:tag="deselected" />
-            <!--End Second ROW-->
-        </GridLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_second_image_password"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/separation_small"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_third_image_password"
+                    app:layout_constraintStart_toEndOf="@id/iv_first_image_password"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subtitle_password" />
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_third_image_password"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/separation_small"
+                    android:src="@drawable/ic_btn_play_pressed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_second_image_password"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subtitle_password" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--End Container Password-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--Container Register summary-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_register_summary"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/separation_small"
-        android:background="@color/bg_login"
-        android:tag="@string/write_nickname"
-        app:layout_constraintBottom_toBottomOf="@+id/container_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/container_password"
-        app:layout_constraintTop_toTopOf="@+id/container_password">
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--End Container Register summary-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_selected_profile_image"
-            android:layout_width="@dimen/btnProfile_size_semi_small"
-            android:layout_height="@dimen/btnProfile_size_semi_small"
-            android:src="@drawable/ic_photo_profile_girl"
-            app:civ_border_color="@color/black_25"
-            app:civ_border_width="@dimen/border_width_small"
-            app:civ_circle_background_color="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+    </LinearLayout>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--End Container Register summary-->
 
     <!--Exterior components-->
     <TextView

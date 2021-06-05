@@ -2,6 +2,7 @@ package com.janus.aprendiendonumeros.ui.fragment.login
 
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.janus.aprendiendonumeros.R
@@ -12,30 +13,27 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private lateinit var binding: FragmentSignUpBinding
     private val imagesPassword: MutableList<View> = mutableListOf()
-    private val anim: UIAnimations = UIAnimations(requireContext())
-
+    private val anim: UIAnimations by lazy { UIAnimations(requireContext()) }
+    private var index: Int = 0
+    private val containers: List<ConstraintLayout> by lazy {
+        listOf(
+            binding.containerGender,
+            binding.containerBirthDate,
+            binding.containerDataUser,
+            binding.containerPassword,
+            binding.containerRegisterSummary
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentSignUpBinding.bind(view)
 
+        binding.btnNext.setOnClickListener { nextContainer() }
+        binding.btnPrevious.setOnClickListener { previousContainer() }
+        addEventImagesPassword()
 
-        binding.containerGender.animate().alpha(0F).start()
-        val durationAnimation: Long = 500
-        binding.btnNext.setOnClickListener {
-            binding.containerDataUser.animate().alpha(0F).setDuration(durationAnimation).start()
-            binding.containerGender.animate().alpha(1F).setDuration(durationAnimation)
-                .setStartDelay(durationAnimation).start()
-        }
-
-        binding.btnPrevious.setOnClickListener {
-            binding.containerGender.animate().alpha(0F).setDuration(durationAnimation).start()
-            binding.containerDataUser.animate().alpha(1F).setDuration(durationAnimation)
-                .setStartDelay(durationAnimation).start()
-        }
     }
-
 
     private fun addEventImagesPassword() {
         val allImagesPassword = binding.containerImagesPassword.children.iterator()
@@ -46,18 +44,32 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
     }
 
-    private fun selectImageForPassword(view: View) {
-        if (imagesPassword.size < 3) {
-            selectImage(view)
-        } else imagesPassword.forEach { anim.startSimple(it, R.anim.error) }
+    private fun nextContainer() {
+        if (index < containers.size - 1) {
+            containers[index].visibility = View.GONE
+            containers[index + 1].visibility = View.VISIBLE
+            index++
+            binding.tvTitle.text = containers[index].tag.toString()
+        }
     }
 
-    private fun selectImage(view: View) {
+    private fun previousContainer() {
+        if (index > 0) {
+            containers[index].visibility = View.GONE
+            containers[index - 1].visibility = View.VISIBLE
+            index--
+            binding.tvTitle.text = containers[index].tag.toString()
+        }
+    }
+
+    private fun selectImageForPassword(view: View) {
         val tag: String = view.tag.toString()
         if (tag == "deselected") {
-            view.tag = "selected"
-            view.setBackgroundResource(R.drawable.ic_status_complete)
-            imagesPassword.add(view)
+            if (imagesPassword.size < 3) {
+                view.tag = "selected"
+                view.setBackgroundResource(R.drawable.ic_mark_selection)
+                imagesPassword.add(view)
+            } else imagesPassword.forEach { anim.startSimple(it, R.anim.attention) }
         } else {
             view.tag = "deselected"
             view.setBackgroundResource(0)

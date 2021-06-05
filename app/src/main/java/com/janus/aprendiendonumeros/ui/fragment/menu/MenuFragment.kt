@@ -23,14 +23,14 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         }
 
         val item = MenuItemView(requireContext())
-        item.setOnClickListener {
+        item.setClickListener {
             item.changeIconButton(R.drawable.bg_item_menu_button_complete).run {
                 findNavController().navigate(R.id.action_menu_to_userProfile)
             }
         }
 
         val item2 = MenuItemView(requireContext())
-        item2.setOnClickListener {
+        item2.setClickListener {
             val users = FirebaseFirestore.getInstance().collection("users")
 
             val data1 = hashMapOf(

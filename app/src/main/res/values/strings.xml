@@ -20,5 +20,9 @@
     <string name="write_nickname">Escribe un apodo</string>
     <string name="Nickname">Apodo</string>
     <string name="what_birth_date">¿Cuál es tu fecha de nacimiento?</string>
+    <string name="gender">Genero</string>
+    <string name="birth_date">01/Enero/2015</string>
+    <string name="register_summary">Resumen del registro</string>
+    <string name="password">Contraseña</string>
 
 </resources>

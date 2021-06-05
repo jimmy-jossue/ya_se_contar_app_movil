@@ -26,6 +26,7 @@
 
     <dimen name="text_title">@dimen/_28ssp</dimen>
     <dimen name="text_subTitle">@dimen/_20ssp</dimen>
+    <dimen name="text_normal">@dimen/_17ssp</dimen>
 
     <dimen name="login_direction_button_width">@dimen/_70sdp</dimen>
     <dimen name="login_direction_button_height">@dimen/_45sdp</dimen>
@@ -33,8 +34,10 @@
     <dimen name="separation_small">@dimen/_10sdp</dimen>
     <dimen name="border_width_small">@dimen/_2sdp</dimen>
     <dimen name="btnSound_size">@dimen/_35sdp</dimen>
-    <dimen name="btnProfile_size_medium">@dimen/_110sdp</dimen>
-    <dimen name="btnProfile_size_semi_small">@dimen/_100sdp</dimen>
+    <dimen name="btnProfile_size_medium">@dimen/_100sdp</dimen>
+    <dimen name="btnProfile_size_semi_small">@dimen/_90sdp</dimen>
     <dimen name="separation_extra_small">@dimen/_5sdp</dimen>
-    <dimen name="btnProfile_size_small">@dimen/_50sdp</dimen>
+    <dimen name="btnProfile_size_small">@dimen/_45sdp</dimen>
+    <dimen name="separation_medium">@dimen/_20sdp</dimen>
+    <dimen name="separation_long">@dimen/_35sdp</dimen>
 </resources>
