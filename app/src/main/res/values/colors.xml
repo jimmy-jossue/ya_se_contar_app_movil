@@ -2,7 +2,7 @@
 <resources>
     <color name="purple_200">#8AC5FF</color>
     <color name="purple_500">#44A3FF</color>
-    <color name="purple_700">#188DFF</color>
+    <color name="purple_700">#1885EF</color>
     <color name="teal_200">@color/accent</color>
     <color name="teal_700">@color/accent_dark</color>
 

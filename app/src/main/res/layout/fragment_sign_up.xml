@@ -23,14 +23,14 @@
             android:id="@+id/container_gender"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:tag="@string/What_is_your_gender"
+            android:tag="@string/What_gender"
             android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_gender_girl"
                 android:layout_width="@dimen/btnProfile_size_medium"
                 android:layout_height="@dimen/btnProfile_size_medium"
-                android:src="@drawable/ic_photo_profile_girl"
+                android:src="@drawable/ic_photo_profile_girl_deselected"
                 app:civ_border_color="@color/black_25"
                 app:civ_border_width="@dimen/border_width_small"
                 app:civ_circle_background_color="@color/white"
@@ -57,7 +57,7 @@
                 android:id="@+id/iv_gender_boy"
                 android:layout_width="@dimen/btnProfile_size_medium"
                 android:layout_height="@dimen/btnProfile_size_medium"
-                android:src="@drawable/ic_photo_profile_boy"
+                android:src="@drawable/ic_photo_profile_boy_deselected"
                 app:civ_border_color="@color/black_25"
                 app:civ_border_width="@dimen/border_width_small"
                 app:civ_circle_background_color="@color/white"
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:tag="@string/what_birth_date"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_watermark_birth_date"
@@ -126,13 +126,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:tag="@string/write_nickname"
-            android:visibility="gone">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="visible">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile_image"
                 android:layout_width="@dimen/btnProfile_size_semi_small"
                 android:layout_height="@dimen/btnProfile_size_semi_small"
-                android:src="@drawable/ic_photo_profile_girl"
+                android:src="@drawable/ic_photo_profile_girl_deselected"
                 app:civ_border_color="@color/black_25"
                 app:civ_border_width="@dimen/border_width_small"
                 app:civ_circle_background_color="@color/white"
@@ -157,14 +159,16 @@
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/separation_small"
+                android:drawableStart="@drawable/ic_user"
                 android:autofillHints="true"
                 android:background="@drawable/login_edit_text"
-                android:drawableStart="@drawable/ic_sound"
+                android:maxLength="15"
                 android:drawablePadding="@dimen/separation_small"
                 android:fontFamily="@font/balsamiq_sans_regular"
                 android:hint="@string/Nickname"
                 android:imeOptions="flagNoExtractUi"
                 android:inputType="text"
+                android:selectAllOnFocus="false"
                 android:paddingHorizontal="@dimen/separation_small"
                 android:paddingVertical="@dimen/separation_extra_small"
                 android:textColor="@color/dark"
@@ -182,7 +186,7 @@
             android:id="@+id/container_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:tag="Elige 3 imágenes para tu contraseña"
+            android:tag="@string/select_password"
             android:visibility="gone">
 
             <GridLayout
@@ -202,7 +206,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -212,7 +215,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -222,7 +224,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -232,7 +233,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -242,7 +242,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -264,7 +263,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -274,7 +272,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -284,7 +281,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -294,7 +290,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -304,7 +299,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_btn_play_pressed"
                     android:tag="deselected" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -336,65 +330,75 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.35" />
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/separation_long"
                 android:background="@drawable/bg_et_login"
-                android:gravity="center"
-                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_1sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_selected_profile_image"
-                    android:layout_width="@dimen/_75sdp"
-                    android:layout_height="@dimen/_75sdp"
-                    android:src="@drawable/ic_photo_profile_girl"
-                    app:civ_border_color="@color/black_25"
-                    app:civ_border_width="@dimen/border_width_small"
-                    app:civ_circle_background_color="@color/white" />
-
-                <TextView
-                    android:id="@+id/tv_selected_nick_name"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/separation_small"
-                    android:layout_marginTop="@dimen/separation_extra_small"
-                    android:fontFamily="@font/balsamiq_sans_bold"
                     android:gravity="center"
-                    android:text="@string/Nickname"
-                    android:textColor="@color/dark"
-                    android:textSize="@dimen/text_normal"
-                    app:layout_constraintBottom_toTopOf="@id/tv_selected_gender"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_selected_profile_image" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_20sdp">
 
-                <TextView
-                    android:id="@+id/tv_selected_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/separation_small"
-                    android:fontFamily="@font/balsamiq_sans_regular"
-                    android:gravity="center"
-                    android:text="@string/gender"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_normal" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_selected_profile_image"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/ic_photo_profile_girl_deselected"
+                        app:civ_border_color="@color/black_25"
+                        app:civ_border_width="@dimen/border_width_small"
+                        app:civ_circle_background_color="@color/white" />
 
-                <TextView
-                    android:id="@+id/tv_selected_birth_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/separation_small"
-                    android:fontFamily="@font/balsamiq_sans_regular"
-                    android:gravity="center"
-                    android:text="@string/birth_date"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_normal" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_selected_nick_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/separation_small"
+                        android:layout_marginTop="@dimen/separation_small"
+                        android:fontFamily="@font/balsamiq_sans_bold"
+                        android:gravity="center"
+                        android:text="@string/Nickname"
+                        android:textColor="@color/dark"
+                        android:textSize="@dimen/text_normal"
+                        app:layout_constraintBottom_toTopOf="@id/tv_selected_gender"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_selected_profile_image" />
+
+                    <TextView
+                        android:id="@+id/tv_selected_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/separation_small"
+                        android:fontFamily="@font/balsamiq_sans_regular"
+                        android:gravity="center"
+                        android:text="@string/gender"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_normal" />
+
+                    <TextView
+                        android:id="@+id/tv_selected_birth_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/separation_small"
+                        android:fontFamily="@font/balsamiq_sans_regular"
+                        android:gravity="center"
+                        android:text="@string/birth_date"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_normal" />
+                </LinearLayout>
+
+            </ScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
@@ -468,7 +472,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/separation_small"
         android:fontFamily="@font/balsamiq_sans_bold"
-        android:text="@string/What_is_your_gender"
+        android:text="@string/What_gender"
         android:textColor="@color/dark"
         android:textSize="@dimen/text_title"
         app:layout_constraintEnd_toStartOf="@+id/btn_sound"
@@ -488,8 +492,8 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_previous"
-        android:layout_width="@dimen/login_direction_button_width"
-        android:layout_height="@dimen/login_direction_button_height"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
         android:layout_margin="@dimen/separation_small"
         android:background="@drawable/btn_previous_bubble"
         android:scaleType="fitCenter"
@@ -498,8 +502,8 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_next"
-        android:layout_width="@dimen/login_direction_button_width"
-        android:layout_height="@dimen/login_direction_button_height"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
         android:layout_margin="@dimen/separation_small"
         android:background="@drawable/btn_next_bubble"
         android:scaleType="fitCenter"

@@ -14,7 +14,7 @@
 
     <!-- Incoming notification channel -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="What_is_your_gender">¿Cuál es tu género?</string>
+    <string name="What_gender">¿Cuál es tu género?</string>
     <string name="girl">Niña</string>
     <string name="boy">Niño</string>
     <string name="write_nickname">Escribe un apodo</string>
@@ -24,5 +24,10 @@
     <string name="birth_date">01/Enero/2015</string>
     <string name="register_summary">Resumen del registro</string>
     <string name="password">Contraseña</string>
+    <string name="title">Titulo</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Aceptar</string>
+    <string name="select_password">Elige 3 imágenes para tu contraseña</string>
+    <string name="camera">Camera</string>
 
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/separation_small">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_negative"
+        android:layout_width="@dimen/width_button_semi_long"
+        android:layout_height="@dimen/height_button_small"
+        android:background="@drawable/btn_secondary"
+        android:drawableStart="@drawable/ic_camera"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:scaleType="fitCenter"
+        android:text="@string/camera"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_subTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_negative2"
+        android:layout_width="@dimen/width_button_shorted"
+        android:layout_height="@dimen/height_button_small"
+        android:background="@drawable/btn_primary_small"
+        android:src="@drawable/ic_check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_negative" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
