@@ -12,15 +12,18 @@ import com.janus.aprendiendonumeros.data.remote.UserProfileDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentUserProfileBinding
 import com.janus.aprendiendonumeros.presentation.UserProfileViewModel
 import com.janus.aprendiendonumeros.presentation.UserProfileViewModelFactory
-import com.janus.aprendiendonumeros.repository.UserProfileImpl
-
+import com.janus.aprendiendonumeros.repository.userprofile.UserProfileImpl
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private lateinit var binding: FragmentUserProfileBinding
-    private val viewModel by viewModels<UserProfileViewModel>{ UserProfileViewModelFactory(UserProfileImpl(
-        UserProfileDataSource()
-    ))}
+    private val viewModel by viewModels<UserProfileViewModel> {
+        UserProfileViewModelFactory(
+            UserProfileImpl(
+                UserProfileDataSource()
+            )
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,13 +49,13 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         })
     }
 
-    private fun showInfo(result: Resource.Success<User>){
+    private fun showInfo(result: Resource.Success<User>) {
         binding.progressBar.visibility = View.GONE
 
-        binding.tvNickName.text = "nickName: " + result.data.nikname
-        binding.tvGender.text = "gender: " + result.data.gender
-        binding.tvTime.text = "date: "+ result.data.birthDate
-        binding.tvLevel.text = "level: "+ result.data.level
+        binding.tvNickName.text = "nickName: ${result.data.nikname}"
+        binding.tvGender.text = "gender: ${result.data.gender}"
+        binding.tvTime.text = "date: ${result.data.birthDate}"
+        binding.tvLevel.text = "level: ${result.data.level}"
     }
 
     private fun showInfos(result: Resource.Success<List<User>>){

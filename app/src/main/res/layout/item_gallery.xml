@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_image"
+        android:layout_width="@dimen/width_item_gallery"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/separation_extra_small"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/default_profile_image"
+        android:scaleType="fitCenter" />
+</LinearLayout>

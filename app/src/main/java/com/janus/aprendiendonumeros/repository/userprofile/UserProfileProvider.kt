@@ -1,4 +1,4 @@
-package com.janus.aprendiendonumeros.repository
+package com.janus.aprendiendonumeros.repository.userprofile
 
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User

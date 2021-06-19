@@ -2,11 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_et_login"
+    android:minWidth="@dimen/_300sdp"
     android:layout_height="match_parent"
+    android:minHeight="@dimen/_250sdp"
     android:padding="@dimen/separation_small">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_negative"
+        android:id="@+id/btn_camera"
         android:layout_width="@dimen/width_button_semi_long"
         android:layout_height="@dimen/height_button_small"
         android:background="@drawable/btn_secondary"
@@ -22,21 +25,50 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_negative2"
-        android:layout_width="@dimen/width_button_shorted"
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/height_button_small"
         android:layout_height="@dimen/height_button_small"
-        android:background="@drawable/btn_primary_small"
-        android:src="@drawable/ic_check"
+        android:background="@drawable/btn_close"
+        android:src="@drawable/ic_close"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:minHeight="@dimen/_50sdp"-->
+    <!--        android:layout_marginTop="@dimen/_48sdp"-->
+    <!--        android:gravity="center_horizontal"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/btn_close" >-->
+
+    <!--        <RelativeLayout-->
+    <!--            android:id="@+id/progress_bar"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:visibility="gone">-->
+
+    <!--            <ProgressBar-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_centerInParent="true" />-->
+
+    <!--        </RelativeLayout>-->
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_default_profile_pictures"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_48sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_negative" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_close" />
+
+    <!--    </LinearLayout>-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

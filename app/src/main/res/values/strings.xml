@@ -28,6 +28,7 @@
     <string name="cancel">Cancel</string>
     <string name="accept">Aceptar</string>
     <string name="select_password">Elige 3 imágenes para tu contraseña</string>
-    <string name="camera">Camera</string>
+    <string name="camera">Cámara</string>
+    <string name="default_profile_image">Imagen de perfil del sistema</string>
 
 </resources>

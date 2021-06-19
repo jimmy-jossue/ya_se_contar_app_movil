@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.janus.aprendiendonumeros.core.Resource
-import com.janus.aprendiendonumeros.repository.UserProfileProvider
+import com.janus.aprendiendonumeros.repository.userprofile.UserProfileProvider
 import kotlinx.coroutines.Dispatchers
-import java.lang.Exception
 
 class UserProfileViewModel(private val repository: UserProfileProvider) : ViewModel() {
 

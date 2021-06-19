@@ -34,7 +34,7 @@
     <dimen name="width_button_short">@dimen/_70sdp</dimen>
     <dimen name="width_button_semi_short">@dimen/_90sdp</dimen>
     <dimen name="width_button_medium">@dimen/_100sdp</dimen>
-    <dimen name="width_button_semi_long">@dimen/_110sdp</dimen>
+    <dimen name="width_button_semi_long">@dimen/_115sdp</dimen>
     <dimen name="width_button_long">@dimen/_125sdp</dimen>
 
     <dimen name="separation_small">@dimen/_10sdp</dimen>
@@ -46,4 +46,5 @@
     <dimen name="btnProfile_size_small">@dimen/_45sdp</dimen>
     <dimen name="separation_medium">@dimen/_20sdp</dimen>
     <dimen name="separation_long">@dimen/_35sdp</dimen>
+    <dimen name="width_item_gallery">@dimen/_100sdp</dimen>
 </resources>

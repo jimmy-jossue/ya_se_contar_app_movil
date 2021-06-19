@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:tag="@string/What_gender"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_gender_girl"
@@ -128,7 +128,7 @@
             android:tag="@string/write_nickname"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile_image"
@@ -204,8 +204,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="0"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_bee"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -213,8 +215,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="1"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_eagle"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -222,8 +226,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="2"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_butterfly"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -231,8 +237,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="3"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_kite"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -240,8 +248,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="4"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_balloon"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -249,7 +259,8 @@
                     android:layout_rowWeight="1"
                     android:layout_column="5"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_airballoon"
                     android:tag="deselected" />
                 <!--End First ROW-->
 
@@ -261,8 +272,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="0"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_helicopter"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -270,8 +283,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="1"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_airplane"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -279,8 +294,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="2"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_heroe"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -288,8 +305,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="3"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_rocket"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -297,8 +316,10 @@
                     android:layout_rowWeight="1"
                     android:layout_column="4"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_sun"
                     android:tag="deselected" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -306,7 +327,8 @@
                     android:layout_rowWeight="1"
                     android:layout_column="5"
                     android:layout_columnWeight="1"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:padding="@dimen/separation_extra_small"
+                    android:src="@drawable/ic_pass_ufo"
                     android:tag="deselected" />
                 <!--End Second ROW-->
             </GridLayout>
@@ -428,8 +450,8 @@
                     android:id="@+id/iv_first_image_password"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_margin="@dimen/separation_small"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:layout_margin="@dimen/separation_extra_small"
+                    android:padding="@dimen/separation_extra_small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_second_image_password"
                     app:layout_constraintStart_toStartOf="parent"
@@ -439,8 +461,8 @@
                     android:id="@+id/iv_second_image_password"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_margin="@dimen/separation_small"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:layout_margin="@dimen/separation_extra_small"
+                    android:padding="@dimen/separation_extra_small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_third_image_password"
                     app:layout_constraintStart_toEndOf="@id/iv_first_image_password"
@@ -450,11 +472,22 @@
                     android:id="@+id/iv_third_image_password"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_margin="@dimen/separation_small"
-                    android:src="@drawable/ic_btn_play_pressed"
+                    android:layout_margin="@dimen/separation_extra_small"
+                    android:padding="@dimen/separation_extra_small"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_quarter_image_password"
+                    app:layout_constraintStart_toEndOf="@id/iv_second_image_password"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subtitle_password" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_quarter_image_password"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/separation_extra_small"
+                    android:padding="@dimen/separation_extra_small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_second_image_password"
+                    app:layout_constraintStart_toEndOf="@id/iv_third_image_password"
                     app:layout_constraintTop_toBottomOf="@id/tv_subtitle_password" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -497,6 +530,7 @@
         android:layout_margin="@dimen/separation_small"
         android:background="@drawable/btn_previous_bubble"
         android:scaleType="fitCenter"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
