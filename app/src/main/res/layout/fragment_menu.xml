@@ -86,8 +86,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_user_profile"
-        android:layout_width="@dimen/btnProfile_size_small"
-        android:layout_height="@dimen/btnProfile_size_small"
+        android:layout_width="@dimen/btn_size_small"
+        android:layout_height="@dimen/btn_size_small"
         android:layout_margin="@dimen/separation_small"
         android:src="@drawable/ic_photo_profile_girl_deselected"
         app:civ_border_color="@color/semi_transparent"

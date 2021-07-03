@@ -19,4 +19,6 @@
     <color name="dark">#435969</color>
     <color name="gray">#7F8D97</color>
     <color name="bg_login">#F7F9FA</color>
+    <color name="border_text">#977729</color>
+    <color name="text">#FFD772</color>
 </resources>

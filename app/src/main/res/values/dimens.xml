@@ -43,8 +43,15 @@
     <dimen name="btnProfile_size_medium">@dimen/_100sdp</dimen>
     <dimen name="btnProfile_size_semi_small">@dimen/_90sdp</dimen>
     <dimen name="separation_extra_small">@dimen/_5sdp</dimen>
-    <dimen name="btnProfile_size_small">@dimen/_45sdp</dimen>
+
+    <dimen name="btn_size_small">@dimen/_40sdp</dimen>
+    <dimen name="btn_size_extra_small">@dimen/_35sdp</dimen>
+
     <dimen name="separation_medium">@dimen/_20sdp</dimen>
     <dimen name="separation_long">@dimen/_35sdp</dimen>
     <dimen name="width_item_gallery">@dimen/_100sdp</dimen>
+
+    <dimen name="img_size_large">@dimen/_100sdp</dimen>
+    <dimen name="img_size_medium">@dimen/_80sdp</dimen>
+    <dimen name="img_size_small">@dimen/_60sdp</dimen>
 </resources>

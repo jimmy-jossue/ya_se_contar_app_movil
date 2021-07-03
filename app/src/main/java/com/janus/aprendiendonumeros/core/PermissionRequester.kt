@@ -1,5 +1,6 @@
 package com.janus.aprendiendonumeros.core
 
+
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 

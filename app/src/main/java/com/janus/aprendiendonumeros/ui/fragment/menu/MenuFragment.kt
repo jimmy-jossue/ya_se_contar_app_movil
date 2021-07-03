@@ -2,12 +2,12 @@ package com.janus.aprendiendonumeros.ui.fragment.menu
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.databinding.FragmentMenuBinding
+import com.janus.aprendiendonumeros.ui.utilities.loadImageFromUrl
 
 class MenuFragment : Fragment(R.layout.fragment_menu) {
 
@@ -29,27 +29,20 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
             }
         }
 
-        val item2 = MenuItemView(requireContext())
-        item2.setClickListener {
-            val users = FirebaseFirestore.getInstance().collection("users")
-
-            val data1 = hashMapOf(
-                "nikname" to "Joseph",
-                "gender" to "niño",
-                "birthDate" to Timestamp.now(),
-                "level" to 10
-            )
-            val data = hashMapOf(
-                "nikname" to "Belen",
-                "gender" to "niña hermosa ❤",
-                "birthDate" to Timestamp.now(),
-                "level" to 1000
-            )
-            users.document("Joseph").set(data1)
-            users.document("Belen").set(data)
+        val itemBtnKnowNumbers = MenuItemView(requireContext())
+        itemBtnKnowNumbers.getIcon()
+            .loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_know_numbers.png?alt=media&token=e405e492-5b6a-41f1-aeca-6aff59db125d")
+        itemBtnKnowNumbers.setPosition(2)
+        itemBtnKnowNumbers.setStatus(MenuItemView.STATUS_EMPTY)
+        itemBtnKnowNumbers.setClickListener {
+            findNavController().navigate(R.id.action_menu_to_knowNumbers)
         }
 
         binding.contentItemMenu.addView(item)
-        binding.contentItemMenu.addView(item2)
+        binding.contentItemMenu.addView(itemBtnKnowNumbers)
+    }
+
+    private fun goTo(@IdRes idAction: Int) {
+        findNavController().navigate(idAction)
     }
 }

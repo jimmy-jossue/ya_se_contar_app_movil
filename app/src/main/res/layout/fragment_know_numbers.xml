@@ -1,80 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_blue_gradient"
     tools:context=".ui.fragment.game.KnowNumbersFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_bg_know_numbers"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/bg_blue_gradient">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_back"
-        android:layout_width="@dimen/btnBack_width"
-        android:layout_height="@dimen/btnBack_height"
-        android:layout_margin="@dimen/separation_small"
-        android:background="@drawable/ic_btn_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/btn_back" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_bg_know_numbers"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_previous"
-        android:layout_width="@dimen/btnDirection_width"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/separation_small"
-        android:layout_marginVertical="@dimen/btnBack_height"
-        android:src="@drawable/ic_btn_previous_line"
-        android:background="@color/transparent"
-        android:scaleType="centerInside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/btn_previous" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/btn_size_small"
+            android:layout_height="@dimen/btn_size_extra_small"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/ic_btn_main_menu"
+            android:contentDescription="@string/btn_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_next"
-        android:layout_width="@dimen/btnDirection_width"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/separation_small"
-        android:layout_marginVertical="@dimen/btnBack_height"
-        android:src="@drawable/ic_btn_next_line"
-        android:background="@color/transparent"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/btn_next" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_previous"
+            android:layout_width="@dimen/btnDirection_width"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/separation_small"
+            android:layout_marginVertical="@dimen/btnBack_height"
+            android:background="@color/transparent"
+            android:contentDescription="@string/btn_previous"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_btn_previous_line"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/separation_small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_next"
-        app:layout_constraintStart_toEndOf="@+id/btn_previous"
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="@dimen/btnDirection_width"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/separation_small"
+            android:layout_marginVertical="@dimen/btnBack_height"
+            android:background="@color/transparent"
+            android:contentDescription="@string/btn_next"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_btn_next_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_plane"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="125dp"
-            tools:layout_editor_absoluteY="90dp" />
+        <TextView
+            android:id="@+id/tv_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/separation_small"
+            android:layout_marginBottom="@dimen/separation_extra_small"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:shadowColor="@color/border_text"
+            android:shadowRadius="15"
+            android:textColor="@color/text"
+            android:textSize="@dimen/_80ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_picture"
+            android:layout_width="@dimen/_205sdp"
+            android:layout_height="@dimen/_205sdp"
+            android:layout_margin="@dimen/separation_small"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/container_images"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/separation_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_next"
+            app:layout_constraintStart_toEndOf="@+id/btn_previous"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</FrameLayout>

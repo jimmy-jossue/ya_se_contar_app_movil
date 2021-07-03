@@ -42,7 +42,7 @@ class MenuItemView @JvmOverloads constructor(
             iconStatus = view.findViewById(R.id.itemMenu_status)
 
             try {
-                initPosition(getInteger(R.styleable.MenuItemView_position, 1))
+                setPosition(getInteger(R.styleable.MenuItemView_position, 1))
                 setStatus(getInteger(R.styleable.MenuItemView_status, STATUS_LOCKED))
             } finally {
                 recycle()
@@ -51,17 +51,21 @@ class MenuItemView @JvmOverloads constructor(
         }
     }
 
-    fun setImage(idImageResources: Int){
+    fun setImage(idImageResources: Int) {
         btnIcon.setBackgroundResource(idImageResources)
         invalidate()
         requestLayout()
     }
 
-    fun setClickListener(listener: View.OnClickListener){
+    fun getIcon(): ImageButton {
+        return btnIcon
+    }
+
+    fun setClickListener(listener: View.OnClickListener) {
         btnIcon.setOnClickListener(listener)
     }
 
-    private fun initPosition(position: Int) {
+    fun setPosition(position: Int) {
         when (position) {
             0 -> {
                 lineBeforeStatus.visibility = View.INVISIBLE
@@ -109,9 +113,4 @@ class MenuItemView @JvmOverloads constructor(
     fun changeIconButton(iconResources: Int){
         animationChangeBackground(btnIcon, iconResources)
     }
-
-    fun setStatus(){
-
-    }
-
 }
