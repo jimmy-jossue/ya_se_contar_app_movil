@@ -1,20 +1,20 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.janus.aprendiendonumeros.R
+import com.janus.aprendiendonumeros.databinding.FragmentHowManyBinding
 
-class HowManyFragment : Fragment() {
+class HowManyFragment : Fragment(R.layout.fragment_how_many) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_how_many, container, false)
+    private lateinit var binding: FragmentHowManyBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentHowManyBinding.bind(view)
+
+
     }
-
 }

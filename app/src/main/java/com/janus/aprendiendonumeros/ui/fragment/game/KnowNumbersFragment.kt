@@ -38,7 +38,7 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentKnowNumbersBinding.bind(view)
-        binding.btnBack.setOnClickListener {
+        binding.btnBackToMenu.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_knowNumbers_to_menu)
         }
         binding.btnNext.setOnClickListener { next() }

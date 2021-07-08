@@ -42,58 +42,37 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-
-                <com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:position="middle" />
-            </LinearLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </HorizontalScrollView>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/civ_user_profile"
-        android:layout_width="@dimen/btn_size_small"
-        android:layout_height="@dimen/btn_size_small"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/separation_small"
-        android:src="@drawable/ic_photo_profile_girl_deselected"
-        app:civ_border_color="@color/semi_transparent"
-        app:civ_border_width="@dimen/border_width_small"
-        app:civ_circle_background_color="@color/white"
+        android:background="@drawable/bg_blurred"
+        android:orientation="horizontal"
+        android:padding="@dimen/separation_extra_small"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_user_profile"
+            android:layout_width="@dimen/btn_size_small"
+            android:layout_height="@dimen/btn_size_small"
+            android:layout_marginEnd="@dimen/separation_small"
+            android:src="@drawable/ic_photo_profile_girl_deselected"
+            app:civ_border_color="@color/semi_transparent"
+            app:civ_border_width="@dimen/border_width_small"
+            app:civ_circle_background_color="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="@dimen/btn_size_small"
+            android:layout_height="@dimen/btn_size_small"
+            android:background="@drawable/ic_settings" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

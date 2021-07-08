@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_back_to_menu"
             android:layout_width="@dimen/btn_size_small"
             android:layout_height="@dimen/btn_size_extra_small"
             android:layout_margin="@dimen/separation_small"

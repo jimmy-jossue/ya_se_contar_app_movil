@@ -12,10 +12,10 @@
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
 
-    <dimen name="menuItem_button_size">@dimen/_115sdp</dimen>
+    <dimen name="menuItem_button_size">@dimen/_110sdp</dimen>
     <dimen name="menuItem_button_separator_small">@dimen/_10ssp</dimen>
-    <dimen name="menuItem_separationLine_width">@dimen/_65sdp</dimen>
-    <dimen name="menuItem_separationLine_height">@dimen/_5ssp</dimen>
+    <dimen name="menuItem_separationLine_width">@dimen/_70sdp</dimen>
+    <dimen name="menuItem_separationLine_height">@dimen/_7ssp</dimen>
     <dimen name="menuItem_status_size">@dimen/_25sdp</dimen>
     <dimen name="menuItem_Status_marginTop">@dimen/_15sdp</dimen>
 
@@ -44,7 +44,7 @@
     <dimen name="btnProfile_size_semi_small">@dimen/_90sdp</dimen>
     <dimen name="separation_extra_small">@dimen/_5sdp</dimen>
 
-    <dimen name="btn_size_small">@dimen/_40sdp</dimen>
+    <dimen name="btn_size_small">@dimen/_38sdp</dimen>
     <dimen name="btn_size_extra_small">@dimen/_35sdp</dimen>
 
     <dimen name="separation_medium">@dimen/_20sdp</dimen>
@@ -54,4 +54,5 @@
     <dimen name="img_size_large">@dimen/_100sdp</dimen>
     <dimen name="img_size_medium">@dimen/_80sdp</dimen>
     <dimen name="img_size_small">@dimen/_60sdp</dimen>
+    <dimen name="border_width_medium">@dimen/_5sdp</dimen>
 </resources>
