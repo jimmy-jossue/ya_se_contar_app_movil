@@ -52,20 +52,20 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private fun showInfo(result: Resource.Success<User>) {
         binding.progressBar.visibility = View.GONE
 
-        binding.tvNickName.text = "nickName: ${result.data.nikname}"
+        binding.tvNickName.text = "nickName: ${result.data.nickName}"
         binding.tvGender.text = "gender: ${result.data.gender}"
         binding.tvTime.text = "date: ${result.data.birthDate}"
-        binding.tvLevel.text = "level: ${result.data.level}"
+        binding.tvLevel.text = "level: ${result.data.coins}"
     }
 
     private fun showInfos(result: Resource.Success<List<User>>){
         binding.progressBar.visibility = View.GONE
         var infoUser = ""
         for(user in result.data) {
-            infoUser += "nickName: ${user.nikname} \n " +
+            infoUser += "nickName: ${user.nickName} \n " +
                     "gender: ${user.gender} \n " +
                     "birthDate: ${user.birthDate} \n " +
-                    "level: ${user.level} \n \n"
+                    "level: ${user.coins} \n \n"
         }
         binding.tvNickName.text = infoUser
     }

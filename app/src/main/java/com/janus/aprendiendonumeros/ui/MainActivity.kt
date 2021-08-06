@@ -9,5 +9,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initUI() {
+
     }
 }

@@ -1,9 +1,7 @@
 package com.janus.aprendiendonumeros.ui.fragment.login
 
-import android.app.Activity.RESULT_OK
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -15,19 +13,17 @@ import androidx.fragment.app.Fragment
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpBinding
 import com.janus.aprendiendonumeros.ui.BaseActivity
-import com.janus.aprendiendonumeros.ui.utilities.Constants
+import com.janus.aprendiendonumeros.ui.listener.NotifyDrawable
+import com.janus.aprendiendonumeros.ui.utilities.Constant
 import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 
-class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
+class SignUpFragment : Fragment(R.layout.fragment_sign_up), NotifyDrawable {
 
     private lateinit var mContext: BaseActivity
     private lateinit var binding: FragmentSignUpBinding
     private val imagesPassword: MutableList<ImageView> = mutableListOf()
     private val anim: UIAnimations by lazy { UIAnimations(requireContext()) }
     private var index: Int = 0
-    private val PASSWORD_LENGTH: Int = 4
-    private val STATUS_SELECTED: String = "selected"
-    private val STATUS_DESELECTED: String = "deselected"
     private val containers: List<ConstraintLayout> by lazy {
         listOf(
             binding.containerGender,
@@ -53,9 +49,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context as BaseActivity
+        mContext.setDrawableTarget(this)
     }
 
     private fun nextContainer() {
+
         if (index < containers.size - 1) {
             containers[index].visibility = View.GONE
             containers[index + 1].visibility = View.VISIBLE
@@ -78,8 +76,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             for (i in 0 until imagesPassword.size) {
                 ivViews[i].setImageDrawable(imagesPassword[i].drawable)
             }
-
-
         }
         if (binding.btnPrevious.visibility == View.INVISIBLE) {
             binding.btnPrevious.visibility = View.VISIBLE
@@ -96,7 +92,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         if (containers[index] == binding.containerGender) {
             binding.btnPrevious.visibility = View.INVISIBLE
         }
-
     }
 
     private fun addEventImagesPassword() {
@@ -137,27 +132,22 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun selectImageForPassword(view: ImageView) {
         val tag: String = view.tag.toString()
-        if (tag == STATUS_DESELECTED) {
-            if (imagesPassword.size < PASSWORD_LENGTH) {
-                view.tag = STATUS_SELECTED
+        if (tag == Constant.STATUS_DESELECTED) {
+            if (imagesPassword.size < Constant.PASSWORD_LENGTH) {
+                view.tag = Constant.STATUS_SELECTED
                 view.setBackgroundResource(R.drawable.ic_mark_selection)
                 view.setPadding(0)
                 imagesPassword.add(view)
             } else imagesPassword.forEach { anim.startSimple(it, R.anim.attention) }
         } else {
-            view.tag = STATUS_DESELECTED
+            view.tag = Constant.STATUS_DESELECTED
             view.setBackgroundResource(0)
             view.setPadding(resources.getDimension(R.dimen.separation_extra_small).toInt())
             imagesPassword.remove(view)
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.CODE_REQUEST_CAMERA && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            binding.ivProfileImage.setImageBitmap(imageBitmap)
-        }
+    override fun update(drawable: Drawable) {
+        binding.ivProfileImage.setImageDrawable(drawable)
     }
 }

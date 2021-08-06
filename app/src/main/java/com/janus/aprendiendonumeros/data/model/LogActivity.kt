@@ -2,10 +2,9 @@ package com.janus.aprendiendonumeros.data.model
 
 import com.google.firebase.Timestamp
 
-data class LogActivity (
-    val nameActivity: String = "",
-    val corrects: Int = 0,
-    val wrong: Int = 0,
-    val timeSeconds: Int = 0,
-    val date: Timestamp?= null
+data class LogActivity(
+    var correct: Int = 0,
+    var incorrect: Int = 0,
+    val timeInSeconds: Int = 0,
+    val date: Timestamp? = null
 )

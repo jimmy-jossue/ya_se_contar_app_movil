@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:tag="@string/What_gender"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_gender_girl"
@@ -128,7 +128,7 @@
             android:tag="@string/write_nickname"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile_image"
@@ -496,7 +496,6 @@
         <!--End Container Register summary-->
 
     </LinearLayout>
-
 
     <!--Exterior components-->
     <TextView

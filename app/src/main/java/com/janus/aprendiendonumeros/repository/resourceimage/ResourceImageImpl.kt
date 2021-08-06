@@ -5,6 +5,6 @@ import com.janus.aprendiendonumeros.data.model.ResourceImage
 import com.janus.aprendiendonumeros.data.remote.ResourceImageDataSource
 
 class ResourceImageImpl(private val dataSource: ResourceImageDataSource) : ResourceImageProvider {
-    override suspend fun getResourceImages(): Resource<List<ResourceImage>> =
-        dataSource.getResourceImages()
+    override suspend fun getResourceImages(level: ResourceImageDataSource.Level): Resource<List<ResourceImage>> =
+        dataSource.getResourceImages(level)
 }

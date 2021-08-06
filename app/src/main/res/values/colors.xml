@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#8AC5FF</color>
-    <color name="purple_500">#44A3FF</color>
+    <color name="purple_500">@color/primary</color>
     <color name="purple_700">#1885EF</color>
     <color name="teal_200">@color/accent</color>
     <color name="teal_700">@color/accent_dark</color>
+
+    <color name="primary_light">#7CBBFA</color>
+    <color name="primary">#44A3FF</color>
 
     <color name="accent">#FFD85B</color>
     <color name="accent_dark">#B39D67</color>
@@ -19,6 +22,6 @@
     <color name="dark">#435969</color>
     <color name="gray">#7F8D97</color>
     <color name="bg_login">#F7F9FA</color>
-    <color name="border_text">#977729</color>
+    <color name="border_text">#6A5318</color>
     <color name="text">#FFD772</color>
 </resources>

@@ -2,52 +2,88 @@ package com.janus.aprendiendonumeros.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
+import androidx.fragment.app.viewModels
 import com.janus.aprendiendonumeros.R
+import com.janus.aprendiendonumeros.core.Resource
+import com.janus.aprendiendonumeros.data.datastore.SettingsSessionDataStore
+import com.janus.aprendiendonumeros.data.model.SettingsSession
 import com.janus.aprendiendonumeros.databinding.FragmentOpeningBinding
+import com.janus.aprendiendonumeros.presentation.SettingsSessionViewModel
+import com.janus.aprendiendonumeros.presentation.SettingsSessionViewModelFactory
+import com.janus.aprendiendonumeros.repository.settingssession.SettingsSessionImpl
+import com.janus.aprendiendonumeros.ui.utilities.Sound
+import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
+import com.janus.aprendiendonumeros.ui.utilities.goTo
 
 
 class OpeningFragment : Fragment(R.layout.fragment_opening) {
 
     private lateinit var binding: FragmentOpeningBinding
+    private val anim: UIAnimations by lazy { UIAnimations(requireContext()) }
+    private lateinit var settingsSession: SettingsSession
+    private val soundBackground: Sound =
+        Sound("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/general_sounds%2Ffinish.mp3?alt=media&token=6c93ef60-e5ee-4c2e-b035-d0c100b62013")
+    private val viewModel by viewModels<SettingsSessionViewModel> {
+        SettingsSessionViewModelFactory(
+            SettingsSessionImpl(
+                SettingsSessionDataStore(requireContext())
+            )
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentOpeningBinding.bind(view)
 
-        startAnimation(binding.ivAirPlane, R.anim.translate_airplane)
-        startAnimation(binding.ivTitle, R.anim.bounce_in)
-        startAnimation(binding.ivCloudFront, R.anim.floating_cloud_front)
-        startAnimation(binding.ivCloudMiddle, R.anim.floating_cloud_middle)
-        startAnimation(binding.ivCloudBack, R.anim.floating_cloud_back)
+        binding.root.post {
+            anim.startAnimation(binding.ivAirPlane, R.anim.translate_airplane)
+            anim.startAnimation(binding.ivTitle, R.anim.bounce_in)
+            anim.startAnimation(binding.ivCloudFront, R.anim.floating_cloud_front)
+            anim.startAnimation(binding.ivCloudMiddle, R.anim.floating_cloud_middle)
+            anim.startAnimation(binding.ivCloudBack, R.anim.floating_cloud_back)
+            binding.ivAirPlane.setOnClickListener {
+                anim.startAnimation(
+                    it,
+                    R.anim.animate_airplane
+                )
+            }
+            binding.ivTitle.setOnClickListener { anim.startAnimation(it, R.anim.bounce_in) }
 
-        binding.btnPlay.setOnClickListener { findNavController().navigate(R.id.action_opening_to_menu) }
+            binding.btnPlay.setOnClickListener {
+                viewModel.fetchSettingsSession().observe(viewLifecycleOwner, { result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is Resource.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            isRegistered(result.data)
+                        }
+                        is Resource.Failure -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(
+                                context,
+                                "Error al comoprovar la sesion\n¿te gustaria crear una cuenta?",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                })
+            }
 
-        binding.ivAirPlane.setOnClickListener { startAnimation(it, R.anim.animate_airplane) }
-        binding.ivTitle.setOnClickListener { startAnimation(it, R.anim.bounce_in) }
+            soundBackground.play()
+        }
     }
 
-    private fun getTokenFirebase() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) return@OnCompleteListener
-
-            val token = task.result
-            Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
-            print("Token \n \n \n $token \n \n \n")
-        })
-    }
-
-    private fun startAnimation(view: View, @AnimRes idAnimation: Int) {
-        val anim: Animation =
-            AnimationUtils.loadAnimation(requireContext(), idAnimation)
-        view.startAnimation(anim)
+    private fun isRegistered(session: SettingsSession) {
+        if (session.saved) {
+            val action = OpeningFragmentDirections.actionOpeningToMenu(session.id)
+            goTo(action)
+        } else {
+            goTo(R.id.action_opening_to_signIn)
+        }
     }
 }

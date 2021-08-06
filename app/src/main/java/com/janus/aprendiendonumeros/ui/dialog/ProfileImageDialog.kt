@@ -1,27 +1,29 @@
 package com.janus.aprendiendonumeros.ui.dialog
 
-import android.Manifest
-import android.content.ActivityNotFoundException
-import android.content.Intent
+import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.janus.aprendiendonumeros.R
-import com.janus.aprendiendonumeros.core.PermissionRequester
 import com.janus.aprendiendonumeros.databinding.DialogProfileImageBinding
 import com.janus.aprendiendonumeros.ui.adapter.ImageDialogAdapter
-import com.janus.aprendiendonumeros.ui.utilities.Constants
+import com.janus.aprendiendonumeros.ui.listener.ItemGalleryListener
 
-class ProfileImageDialog : DialogFragment(R.layout.dialog_profile_image) {
+class ProfileImageDialog : DialogFragment(R.layout.dialog_profile_image), ItemGalleryListener {
 
     private lateinit var binding: DialogProfileImageBinding
     private val rowCont: Int = 2
+    private lateinit var drawable: Drawable
+    private lateinit var listener: Listener
+
+    interface Listener {
+        fun onSelectionImage(dialog: ProfileImageDialog)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,11 +32,27 @@ class ProfileImageDialog : DialogFragment(R.layout.dialog_profile_image) {
 
         binding = DialogProfileImageBinding.bind(view)
         binding.btnClose.setOnClickListener { dismiss() }
-        binding.btnCamera.setOnClickListener { checkPermission() }
+        //binding.btnCamera.setOnClickListener { checkPermission() }
 
         val layoutManager = GridLayoutManager(context, rowCont, GridLayoutManager.HORIZONTAL, false)
-        binding.rvDefaultProfilePictures.adapter = ImageDialogAdapter(getImages())
+        val adapter = ImageDialogAdapter(getImages())
+        adapter.setListener(this)
+        binding.rvDefaultProfilePictures.adapter = adapter
         binding.rvDefaultProfilePictures.layoutManager = layoutManager
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        try {
+            listener = context as Listener
+        } catch (e: ClassCastException) {
+            throw ClassCastException(
+                (context.toString() +
+                        " must implement Listener")
+            )
+        }
     }
 
     private fun getImages(): List<Drawable> {
@@ -50,42 +68,19 @@ class ProfileImageDialog : DialogFragment(R.layout.dialog_profile_image) {
         return drawableList
     }
 
-    private fun openCamera() {
-        //Change for registerForActivityResult
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        try {
-            startActivityForResult(takePictureIntent, Constants.CODE_REQUEST_CAMERA)
-        } catch (e: ActivityNotFoundException) {
-            showDialogInformation()
-        }
-    }
-
-    private fun checkPermission() {
-        val permissionCamera: PermissionRequester =
-            PermissionRequester(
-                activity as ComponentActivity,
-                Manifest.permission.CAMERA,
-                onRationale = { showRationaleCameraUI() },
-                onDenied = { showDeniedPermissionCameraUI() }
-            )
-
-        permissionCamera.runWithPermissionGranted {
-            openCamera()
-        }
-    }
-
-    private fun showRationaleCameraUI() {
-        Toast.makeText(context, "SHOW RATIONALE CAMERA UI", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showDeniedPermissionCameraUI() {
-        Toast.makeText(context, "SHOW DENIED PERMISSION CAMERA UI", Toast.LENGTH_SHORT).show()
-    }
-
     private fun showDialogInformation() {
         Toast.makeText(context, "NO HAY APLICACION QUE PUEDA USAR LA CAMARA", Toast.LENGTH_SHORT)
             .show()
     }
 
+    override fun OnItemSelect(view: AppCompatImageView) {
+        view.scaleX = 1.1F
+        view.scaleY = 1.1F
+        drawable = view.drawable
+        listener.onSelectionImage(this)
+    }
 
+    fun getDrawable(): Drawable {
+        return drawable
+    }
 }

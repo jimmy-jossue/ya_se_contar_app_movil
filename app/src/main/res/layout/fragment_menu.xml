@@ -1,78 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.menu.MenuFragment">
 
-    <HorizontalScrollView
-        android:id="@+id/contentScroll"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_menu_blue_gradient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/contentScroll"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_menu_blue_gradient">
+            android:background="@drawable/bg_menu_blue_gradient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_background"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_menu_background"
-                app:layout_constraintBottom_toBottomOf="@id/contentItemMenu"
-                app:layout_constraintEnd_toEndOf="@id/contentItemMenu"
-                app:layout_constraintStart_toStartOf="@id/contentItemMenu"
-                app:layout_constraintTop_toTopOf="@id/contentItemMenu" />
-
-            <LinearLayout
-                android:id="@+id/contentItemMenu"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/_50sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@drawable/bg_menu_blue_gradient">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_background"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_menu_background"
+                    app:layout_constraintBottom_toBottomOf="@id/contentItemMenu"
+                    app:layout_constraintEnd_toEndOf="@id/contentItemMenu"
+                    app:layout_constraintStart_toStartOf="@id/contentItemMenu"
+                    app:layout_constraintTop_toTopOf="@id/contentItemMenu" />
 
-    </HorizontalScrollView>
+                <LinearLayout
+                    android:id="@+id/contentItemMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/_50sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/separation_small"
-        android:background="@drawable/bg_blurred"
-        android:orientation="horizontal"
-        android:padding="@dimen/separation_extra_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_user_profile"
-            android:layout_width="@dimen/btn_size_small"
-            android:layout_height="@dimen/btn_size_small"
-            android:layout_marginEnd="@dimen/separation_small"
-            android:src="@drawable/ic_photo_profile_girl_deselected"
-            app:civ_border_color="@color/semi_transparent"
-            app:civ_border_width="@dimen/border_width_small"
-            app:civ_circle_background_color="@color/white" />
+        </HorizontalScrollView>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="@dimen/btn_size_small"
-            android:layout_height="@dimen/btn_size_small"
-            android:background="@drawable/ic_settings" />
+            android:id="@+id/btn_exit"
+            android:layout_width="@dimen/btn_size_semi_small"
+            android:layout_height="@dimen/btn_size_semi_small"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/btn_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/containar_coins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/bg_blurred"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/separation_small"
+            android:paddingVertical="@dimen/separation_extra_small"
+            app:layout_constraintEnd_toStartOf="@id/container_btn"
+            app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_coin"
+                android:layout_width="@dimen/btn_size_semi_small"
+                android:layout_height="@dimen/btn_size_semi_small"
+                android:layout_marginEnd="@dimen/separation_small"
+                android:background="@drawable/ic_coin" />
+
+            <TextView
+                android:id="@+id/tv_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/btn_size_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_33ssp"
+                android:textStyle="bold"
+                tools:text="100" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/bg_blurred"
+            android:orientation="horizontal"
+            android:padding="@dimen/separation_extra_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_user_profile"
+                android:layout_width="@dimen/btn_size_semi_small"
+                android:layout_height="@dimen/btn_size_semi_small"
+                android:layout_marginEnd="@dimen/separation_small"
+                android:src="@drawable/ic_photo_profile_girl_deselected"
+                app:civ_border_color="@color/semi_transparent"
+                app:civ_border_width="@dimen/border_width_small"
+                app:civ_circle_background_color="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_settings"
+                android:layout_width="@dimen/btn_size_semi_small"
+                android:layout_height="@dimen/btn_size_semi_small"
+                android:background="@drawable/ic_settings" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_25"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</FrameLayout>

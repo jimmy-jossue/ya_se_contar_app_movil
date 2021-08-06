@@ -8,11 +8,4 @@
         android:fromDegrees="225"
         android:toDegrees="360"
         android:duration="2000"/>
-
-<!--    <translate-->
-<!--        android:duration="2200"-->
-<!--        android:fromXDelta="-80%"-->
-<!--        android:fromYDelta="80%"-->
-<!--        android:toXDelta="0%"-->
-<!--        android:toYDelta="0%" />-->
 </set>

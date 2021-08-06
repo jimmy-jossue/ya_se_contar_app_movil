@@ -8,8 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_blue_gradient">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_background"
@@ -71,7 +70,7 @@
             android:shadowColor="@color/border_text"
             android:shadowRadius="15"
             android:textColor="@color/text"
-            android:textSize="@dimen/_80ssp"
+            android:textSize="@dimen/_90ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

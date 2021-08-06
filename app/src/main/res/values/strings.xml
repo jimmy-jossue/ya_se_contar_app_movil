@@ -31,4 +31,10 @@
     <string name="camera">Cámara</string>
     <string name="default_profile_image">Imagen de perfil del sistema</string>
 
+    <string name="how_many_question_es">¿%1$s %2$s hay?</string>
+    <string name="login">Inicia sesión</string>
+    <string name="select_your_password">Elige las tres imagenes de tu contraseña</string>
+    <string name="write_your_user_and_password">Escribe tu nombre de usuario y contraseña</string>
+    <string name="user">Usuario</string>
+
 </resources>

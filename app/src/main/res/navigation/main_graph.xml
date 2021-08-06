@@ -9,10 +9,13 @@
         android:id="@+id/openingFragment"
         android:name="com.janus.aprendiendonumeros.ui.fragment.OpeningFragment"
         android:label="fragment_opening"
-        tools:layout="@layout/fragment_opening" >
+        tools:layout="@layout/fragment_opening">
         <action
             android:id="@+id/action_opening_to_menu"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_opening_to_signIn"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/knowNumbersFragment"
@@ -56,11 +59,15 @@
             android:id="@+id/action_menu_to_orderAndCount"
             app:destination="@id/orderAndCountFragment" />
         <action
-            android:id="@+id/action_menu_to_signUp"
-            app:destination="@id/signUpFragment" />
-        <action
             android:id="@+id/action_menu_to_userProfile"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_menu_to_signIn"
+            app:destination="@id/signInFragment" />
+        <argument
+            android:name="userId"
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/howManyFragment"
@@ -104,16 +111,28 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUp_to_menu"
-            app:destination="@id/menuFragment" />
+            android:id="@+id/action_signUp_to_signIn"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.janus.aprendiendonumeros.ui.fragment.informative.UserProfileFragment"
         android:label="fragment_user_profile"
-        tools:layout="@layout/fragment_user_profile" >
+        tools:layout="@layout/fragment_user_profile">
         <action
             android:id="@+id/action_userProfile_to_menu"
             app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.login.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signIn_to_menu"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_signIn_to_signUp"
+            app:destination="@id/signUpFragment" />
     </fragment>
 </navigation>

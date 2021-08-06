@@ -18,6 +18,15 @@ class UserProfileViewModel(private val repository: UserProfileProvider) : ViewMo
         }
     }
 
+    fun fetchUser(userId: String) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            emit(repository.getUser(userId))
+        } catch (ex: Exception) {
+            emit(Resource.Failure(ex))
+        }
+    }
+
     fun fetchUsers() = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
