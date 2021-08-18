@@ -6,15 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.janus.aprendiendonumeros.R
-
+import com.janus.aprendiendonumeros.ui.utilities.loadImageFromUrl
+import kotlinx.coroutines.delay
 
 class MenuItemView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val iconStatus: View
+    private var name: String = ""
     private val lineBeforeStatus: View
     private val lineAfterStatus: View
     private val btnIcon: ImageButton
@@ -33,9 +36,11 @@ class MenuItemView @JvmOverloads constructor(
                 .inflate(R.layout.view_menu_item, this, true)
 
         context.theme.obtainStyledAttributes(
-                attrs, R.styleable.MenuItemView,
-                0, 0).apply {
-
+            attrs,
+            R.styleable.MenuItemView,
+            0,
+            0
+        ).apply {
             lineBeforeStatus = view.findViewById(R.id.itemMenu_lineBeforeStatus)
             lineAfterStatus = view.findViewById(R.id.itemMenu_lineAfterStatus)
             btnIcon = view.findViewById(R.id.itemMenu_icon)
@@ -51,6 +56,10 @@ class MenuItemView @JvmOverloads constructor(
         }
     }
 
+    fun setName(name: String) {
+        this.name = name
+    }
+
     fun setImage(idImageResources: Int) {
         btnIcon.setBackgroundResource(idImageResources)
         invalidate()
@@ -61,7 +70,7 @@ class MenuItemView @JvmOverloads constructor(
         return btnIcon
     }
 
-    fun setClickListener(listener: View.OnClickListener) {
+    fun setClickListener(listener: OnClickListener) {
         btnIcon.setOnClickListener(listener)
     }
 
@@ -103,14 +112,25 @@ class MenuItemView @JvmOverloads constructor(
         }
     }
 
-    private fun animationChangeBackground(view: View, iconResources: Int){
+    private suspend fun animationChangeBackground(view: ImageView, iconResources: Int) {
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_bounce_in))
-        Thread.sleep(100)
+        delay(100)
         view.setBackgroundResource(iconResources)
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_bounce_out))
     }
 
-    fun changeIconButton(iconResources: Int){
+    private suspend fun animationChangeBackground(view: ImageView, urlImage: String) {
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_bounce_in))
+        delay(100)
+        view.loadImageFromUrl(urlImage)
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_bounce_out))
+    }
+
+    suspend fun changeIconButton(iconResources: Int) {
         animationChangeBackground(btnIcon, iconResources)
+    }
+
+    suspend fun changeIconButton(urlImage: String) {
+        animationChangeBackground(btnIcon, urlImage)
     }
 }

@@ -48,34 +48,62 @@ class MenuFragment : BaseFragment(R.layout.fragment_menu), NotifyQuestionListene
             "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce",
             "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce"
         )
-        val itemBtnKnowNumbers: MenuItemView = createItemMenu(iconsMenu[0],
-            0,
-            MenuItemView.STATUS_EMPTY,
-            R.id.action_menu_to_knowNumbers)
-        val itemBtnSelectAndCount: MenuItemView =
-            createItemMenu(iconsMenu[1], 1, MenuItemView.STATUS_EMPTY, R.id.action_menu_to_howMany)
-        val itemBtnMoveAndCount: MenuItemView = createItemMenu(iconsMenu[2],
-            1,
-            MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_moveAndCount)
-        val itemBtnHowMany: MenuItemView =
-            createItemMenu(iconsMenu[3], 1, MenuItemView.STATUS_LOCKED, R.id.action_menu_to_howMany)
-        val itemBtnLessOrMore: MenuItemView = createItemMenu(iconsMenu[4],
-            1,
-            MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_lessOrMore)
-        val itemBtnOrderAndCount: MenuItemView = createItemMenu(iconsMenu[5],
-            2,
-            MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_orderAndCount)
-        val itemBtnOrderAndCount2: MenuItemView = createItemMenu(iconsMenu[5],
-            2,
-            MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_orderAndCount)
-        val itemBtnOrderAndCount3: MenuItemView = createItemMenu(iconsMenu[5],
-            2,
-            MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_orderAndCount)
+        val itemBtnKnowNumbers: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[0],
+            position = 0,
+            status = MenuItemView.STATUS_EMPTY,
+            destination = R.id.action_menu_to_knowNumbers
+        )
+        val itemBtnSelectAndCount: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[1],
+            position = 1,
+            status = MenuItemView.STATUS_EMPTY,
+            destination = R.id.action_menu_to_howMany
+        )
+        val itemBtnMoveAndCount: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[2],
+            position = 1,
+            status = MenuItemView.STATUS_LOCKED,
+            destination = R.id.action_menu_to_moveAndCount
+        )
+        val itemBtnHowMany: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[3],
+            position = 1,
+            status = MenuItemView.STATUS_LOCKED,
+            destination = R.id.action_menu_to_howMany
+        )
+        val itemBtnLessOrMore: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[4],
+            position = 1,
+            status = MenuItemView.STATUS_LOCKED,
+            destination = R.id.action_menu_to_lessOrMore
+        )
+        val itemBtnOrderAndCount: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[5],
+            position = 2,
+            status = MenuItemView.STATUS_LOCKED,
+            destination = R.id.action_menu_to_orderAndCount
+        )
+        val itemBtnOrderAndCount2: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[5],
+            position = 2,
+            status = MenuItemView.STATUS_LOCKED,
+            destination = R.id.action_menu_to_orderAndCount
+        )
+        val itemBtnOrderAndCount3: MenuItemView = createItemMenu(
+            name = "",
+            icon = iconsMenu[5],
+            position = 2,
+            status = MenuItemView.STATUS_LOCKED,
+            destination = R.id.action_menu_to_orderAndCount
+        )
 
         binding.contentItemMenu.addView(itemBtnKnowNumbers)
         binding.contentItemMenu.addView(itemBtnSelectAndCount)
@@ -134,6 +162,7 @@ class MenuFragment : BaseFragment(R.layout.fragment_menu), NotifyQuestionListene
     }
 
     private fun createItemMenu(
+        name: String,
         icon: String,
         position: Int,
         status: Int,
