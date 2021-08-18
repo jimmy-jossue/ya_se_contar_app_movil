@@ -11,7 +11,7 @@ class SettingsSessionViewModel(private val repository: SettingsSessionProvider) 
     fun fetchSettingsSession() = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
-            emit(repository.getSettingsSession())
+            emit(Resource.Success(repository.getSettingsSession()))
         } catch (ex: Exception) {
             emit(Resource.Failure(ex))
         }

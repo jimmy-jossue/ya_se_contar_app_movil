@@ -1,87 +1,81 @@
 package com.janus.aprendiendonumeros.ui.fragment.menu
 
-import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
-import com.janus.aprendiendonumeros.data.remote.UserProfileDataSource
+import com.janus.aprendiendonumeros.data.remote.AuthDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentMenuBinding
-import com.janus.aprendiendonumeros.presentation.UserProfileViewModel
-import com.janus.aprendiendonumeros.presentation.UserProfileViewModelFactory
-import com.janus.aprendiendonumeros.repository.userprofile.UserProfileImpl
+import com.janus.aprendiendonumeros.presentation.AuthViewModel
+import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
+import com.janus.aprendiendonumeros.repository.auth.AuthImpl
+import com.janus.aprendiendonumeros.ui.base.BaseFragment
+import com.janus.aprendiendonumeros.ui.listener.NotifyQuestionListener
+import com.janus.aprendiendonumeros.ui.utilities.Constant
 import com.janus.aprendiendonumeros.ui.utilities.goTo
 import com.janus.aprendiendonumeros.ui.utilities.loadImageFromUrl
 
-class MenuFragment : Fragment(R.layout.fragment_menu) {
+class MenuFragment : BaseFragment(R.layout.fragment_menu), NotifyQuestionListener {
 
     private lateinit var binding: FragmentMenuBinding
     private val args: MenuFragmentArgs by navArgs()
-    private val viewModel by viewModels<UserProfileViewModel> {
-        UserProfileViewModelFactory(
-            UserProfileImpl(
-                UserProfileDataSource()
+    private var navigationAction: Int = 0
+    private val authViewModel by viewModels<AuthViewModel> {
+        AuthViewModelFactory(
+            AuthImpl(
+                AuthDataSource()
             )
         )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    companion object {
+        private const val IMAGE_DEFAULT_MALE: Int = R.drawable.ic_photo_profile_boy_deselected
+        private const val IMAGE_DEFAULT_FEMALE: Int = R.drawable.ic_photo_profile_girl_deselected
+    }
 
+    override fun initUI(view: View) {
         binding = FragmentMenuBinding.bind(view)
+        mContext.setQuestionTarget(this)
 
-        binding.civUserProfile.setOnClickListener { goTo(R.id.action_menu_to_signIn) }
-        binding.btnSettings.setOnClickListener { goTo(R.id.action_opening_to_signIn) }
-
-        val iconKnowNumbers =
-            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_know_numbers.png?alt=media&token=e405e492-5b6a-41f1-aeca-6aff59db125d"
-        val iconSelectAndCount =
-            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_how_many.png?alt=media&token=45b6fa8d-ca55-4384-bf95-93c1f57e3e3c"
-        val iconMoveAndCount =
+        val iconsMenu: List<String> = listOf(
+            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_know_numbers.png?alt=media&token=e405e492-5b6a-41f1-aeca-6aff59db125d",
+            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_how_many.png?alt=media&token=45b6fa8d-ca55-4384-bf95-93c1f57e3e3c",
+            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce",
+            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce",
+            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce",
             "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce"
-        val iconHowMany =
-            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce"
-        val iconLessOrMore =
-            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce"
-        val iconOrderAndCount =
-            "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/activities_images%2Fic_blocked_activit.png?alt=media&token=a368a4af-ba68-444c-aac8-91a5aa1521ce"
-
-        val itemBtnKnowNumbers: MenuItemView = createItemMenu(
-            iconKnowNumbers,
+        )
+        val itemBtnKnowNumbers: MenuItemView = createItemMenu(iconsMenu[0],
             0,
             MenuItemView.STATUS_EMPTY,
-            R.id.action_menu_to_knowNumbers
-        )
-        val itemBtnSelectAndCount: MenuItemView = createItemMenu(
-            iconSelectAndCount,
-            1,
-            MenuItemView.STATUS_EMPTY,
-            R.id.action_menu_to_howMany
-        )
-        val itemBtnMoveAndCount: MenuItemView = createItemMenu(
-            iconMoveAndCount,
+            R.id.action_menu_to_knowNumbers)
+        val itemBtnSelectAndCount: MenuItemView =
+            createItemMenu(iconsMenu[1], 1, MenuItemView.STATUS_EMPTY, R.id.action_menu_to_howMany)
+        val itemBtnMoveAndCount: MenuItemView = createItemMenu(iconsMenu[2],
             1,
             MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_moveAndCount
-        )
+            R.id.action_menu_to_moveAndCount)
         val itemBtnHowMany: MenuItemView =
-            createItemMenu(iconHowMany, 1, MenuItemView.STATUS_LOCKED, R.id.action_menu_to_howMany)
-        val itemBtnLessOrMore: MenuItemView = createItemMenu(
-            iconLessOrMore,
+            createItemMenu(iconsMenu[3], 1, MenuItemView.STATUS_LOCKED, R.id.action_menu_to_howMany)
+        val itemBtnLessOrMore: MenuItemView = createItemMenu(iconsMenu[4],
+            1,
+            MenuItemView.STATUS_LOCKED,
+            R.id.action_menu_to_lessOrMore)
+        val itemBtnOrderAndCount: MenuItemView = createItemMenu(iconsMenu[5],
             2,
             MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_lessOrMore
-        )
-        val itemBtnOrderAndCount: MenuItemView = createItemMenu(
-            iconOrderAndCount,
+            R.id.action_menu_to_orderAndCount)
+        val itemBtnOrderAndCount2: MenuItemView = createItemMenu(iconsMenu[5],
             2,
             MenuItemView.STATUS_LOCKED,
-            R.id.action_menu_to_orderAndCount
-        )
+            R.id.action_menu_to_orderAndCount)
+        val itemBtnOrderAndCount3: MenuItemView = createItemMenu(iconsMenu[5],
+            2,
+            MenuItemView.STATUS_LOCKED,
+            R.id.action_menu_to_orderAndCount)
 
         binding.contentItemMenu.addView(itemBtnKnowNumbers)
         binding.contentItemMenu.addView(itemBtnSelectAndCount)
@@ -89,28 +83,61 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         binding.contentItemMenu.addView(itemBtnHowMany)
         binding.contentItemMenu.addView(itemBtnLessOrMore)
         binding.contentItemMenu.addView(itemBtnOrderAndCount)
+        binding.contentItemMenu.addView(itemBtnOrderAndCount2)
+        binding.contentItemMenu.addView(itemBtnOrderAndCount3)
+
+        getData()
+        addEvents()
     }
 
-    private fun initUI() {
+    private fun addEvents() {
+        binding.civUserProfile.setOnClickListener {
+            navigationAction = R.id.action_menu_to_userProfile
+            mContext.showDialogConfirmBeingAdult()
+        }
+        binding.btnSettings.setOnClickListener {
+            navigationAction = R.id.action_menu_to_settings
+            mContext.showDialogConfirmBeingAdult()
+        }
+        binding.btnExit.setOnClickListener { }
+    }
+
+    private fun getData() {
         val userId: String = args.userId
-        viewModel.fetchUser(userId).observe(viewLifecycleOwner, { result ->
+        authViewModel.getUser(userId).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                }
-                is Resource.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                }
+                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
+                    View.VISIBLE
+                is Resource.Success -> resultSuccess(result.data)
+                is Resource.Failure -> resultFailure(result.exception)
             }
         })
+    }
+
+    private fun resultFailure(exception: Exception) {
+        binding.containerProgressBar.progressBar.visibility = View.GONE
+    }
+
+    private fun resultSuccess(user: User) {
+        binding.containerProgressBar.progressBar.visibility = View.GONE
+        setupData(user)
+    }
+
+    private fun setupData(user: User) {
+        val defaultImage: Int = when (user.gender) {
+            Constant.GENDER_MALE -> IMAGE_DEFAULT_MALE
+            else -> IMAGE_DEFAULT_FEMALE
+        }
+
+        binding.civUserProfile.loadImageFromUrl(user.image, defaultImage)
+        binding.tvCoin.text = user.coins.toString()
     }
 
     private fun createItemMenu(
         icon: String,
         position: Int,
         status: Int,
-        @IdRes destination: Int
+        @IdRes destination: Int,
     ): MenuItemView {
         val item = MenuItemView(requireContext())
         item.getIcon().loadImageFromUrl(icon)
@@ -121,7 +148,12 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         return item
     }
 
-    private fun setupData(user: User) {
-        binding.civUserProfile.loadImageFromUrl(user.image)
+    override fun update(answer: Boolean) {
+        if (answer && navigationAction != 0) {
+            goTo(navigationAction)
+        }
     }
 }
+
+
+// EndOfExerciseDialog

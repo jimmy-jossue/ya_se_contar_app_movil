@@ -39,7 +39,11 @@
         android:id="@+id/menuFragment"
         android:name="com.janus.aprendiendonumeros.ui.fragment.menu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        tools:layout="@layout/fragment_menu">
+        <argument
+            android:name="userId"
+            android:defaultValue='""'
+            app:argType="string" />
         <action
             android:id="@+id/action_menu_to_knowNumbers"
             app:destination="@id/knowNumbersFragment" />
@@ -62,12 +66,8 @@
             android:id="@+id/action_menu_to_userProfile"
             app:destination="@id/userProfileFragment" />
         <action
-            android:id="@+id/action_menu_to_signIn"
-            app:destination="@id/signInFragment" />
-        <argument
-            android:name="userId"
-            android:defaultValue='""'
-            app:argType="string" />
+            android:id="@+id/action_menu_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/howManyFragment"
@@ -107,7 +107,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.janus.aprendiendonumeros.ui.fragment.login.SignUpFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.auth.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -125,7 +125,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.janus.aprendiendonumeros.ui.fragment.login.SignInFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.auth.signin.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -134,5 +134,14 @@
         <action
             android:id="@+id/action_signIn_to_signUp"
             app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.janus.aprendiendonumeros.ui.fragment.informative.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_menu"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

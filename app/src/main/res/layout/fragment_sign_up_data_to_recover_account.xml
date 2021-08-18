@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.fragment.auth.signup.SignUpDataToRecoverAccountFragment">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_light"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingBottom="@dimen/separation_extra_small"
+        android:text="@string/write_email_to_recover_account"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/text_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btn_finish"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".35"
+            android:paddingVertical="@dimen/separation_small"
+            android:paddingStart="@dimen/separation_small"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_security" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".65"
+            android:gravity="start|center_vertical"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/separation_medium"
+                android:layout_marginTop="@dimen/separation_extra_small"
+                android:layout_marginEnd="@dimen/separation_long"
+                android:layout_marginBottom="@dimen/separation_small"
+                android:autofillHints="true"
+                android:background="@drawable/login_edit_text"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="@dimen/separation_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:hint="@string/email"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textEmailAddress"
+                android:maxLength="30"
+                android:paddingHorizontal="@dimen/separation_small"
+                android:paddingVertical="@dimen/separation_extra_small"
+                android:selectAllOnFocus="false"
+                android:textColor="@color/dark"
+                android:textColorHint="@color/black_25"
+                android:textSize="@dimen/text_subTitle" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/separation_medium"
+                android:layout_marginTop="@dimen/separation_extra_small"
+                android:layout_marginEnd="@dimen/separation_long"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:text="@string/write_your_real_email"
+                android:textColor="@color/black_25"
+                android:textSize="@dimen/text_normal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_backward"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/btn_previous_bubble"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_finish"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/btn_finish"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

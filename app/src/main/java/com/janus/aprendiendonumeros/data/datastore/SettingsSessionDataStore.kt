@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.SettingsSession
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -41,16 +40,15 @@ class SettingsSessionDataStore(private val context: Context)
     //        )
     //    }
 
-    suspend fun getSettingsSession(): Flow<Resource<SettingsSession>> =
+    suspend fun getSettingsSession(): Flow<SettingsSession> =
         context.dataStore.data.map { preferences ->
             val id: String = preferences[USER_ID_KEY] ?: ""
             val saved: Boolean = preferences[SESSION_SAVED_KEY] ?: false
 
-            val session: SettingsSession = SettingsSession(
+            SettingsSession(
                 id = id,
                 saved = saved
             )
-            Resource.Success(session)
         }
 
     suspend fun saveSession(session: SettingsSession) {

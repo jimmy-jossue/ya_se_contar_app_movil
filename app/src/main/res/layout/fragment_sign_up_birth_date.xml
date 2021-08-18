@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    tools:context=".ui.fragment.auth.signup.SignUpBirthDateFragment">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_light"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingBottom="@dimen/separation_extra_small"
+        android:text="@string/what_birth_date"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/text_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_watermark_birth_date"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="0dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_watermark_birth_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <EditText
+        android:id="@+id/et_day"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/width_button_short"
+        android:background="@drawable/login_edit_text"
+        android:drawableEnd="@drawable/ic_calendar_day"
+        android:drawablePadding="@dimen/separation_small"
+        android:fontFamily="@font/balsamiq_sans_regular"
+        android:hint="@string/day"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="2"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingVertical="@dimen/separation_extra_small"
+        android:textColor="@color/dark"
+        android:textColorHint="@color/dark"
+        android:textSize="@dimen/text_subTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/container_spinner"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_spinner"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="0dp"
+        android:background="@drawable/login_edit_text"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingVertical="@dimen/separation_extra_small"
+        app:layout_constraintBottom_toBottomOf="@+id/et_day"
+        app:layout_constraintEnd_toStartOf="@id/et_year"
+        app:layout_constraintStart_toEndOf="@id/et_day"
+        app:layout_constraintTop_toTopOf="@+id/et_day">
+
+        <Spinner
+            android:id="@+id/spinnerMonth"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/separation_extra_small"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:prompt="@string/month"
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_drawable_spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_drawable_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_calendar_month"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/et_year"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/width_button_short"
+        android:background="@drawable/login_edit_text"
+        android:drawableEnd="@drawable/ic_calendar_year"
+        android:drawablePadding="@dimen/separation_small"
+        android:fontFamily="@font/balsamiq_sans_regular"
+        android:hint="@string/year"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="4"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingVertical="@dimen/separation_extra_small"
+        android:textColor="@color/dark"
+        android:textColorHint="@color/dark"
+        android:textSize="@dimen/text_subTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/container_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_clear_date"
+        android:layout_width="@dimen/width_button_semi_long"
+        android:layout_height="@dimen/height_button_medium"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:layout_marginBottom="@dimen/separation_medium"
+        android:background="@drawable/btn_secondary"
+        android:drawableStart="@drawable/ic_clear"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingVertical="@dimen/separation_extra_small"
+        android:scaleType="fitCenter"
+        android:text="@string/clear"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_normal"
+        app:layout_constraintBottom_toTopOf="@+id/btn_forward"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_backward"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/btn_previous_bubble"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_forward"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/btn_next_bubble"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

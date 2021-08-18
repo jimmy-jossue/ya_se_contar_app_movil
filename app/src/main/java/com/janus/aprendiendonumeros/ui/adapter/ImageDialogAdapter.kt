@@ -34,33 +34,9 @@ class ImageDialogAdapter(private val dataSet: List<Drawable>) :
         holder.binding.ivImage.setImageDrawable(dataSet[position])
         holder.binding.ivImage.setOnClickListener {
             val iv: AppCompatImageView = it as AppCompatImageView
-            listener.OnItemSelect(iv)
+            listener.onItemSelect(iv)
         }
     }
 
     override fun getItemCount(): Int = dataSet.size
 }
-//class ImageDialogAdapter(private val dataSet: List<GalleryImage>): RecyclerView.Adapter<BaseViewHolder<*>>() {
-//
-//    private inner class ImageDialogViewHolder(
-//        val binding: ItemGalleryBinding,
-//        val context: Context
-//    ): BaseViewHolder<GalleryImage>(binding.root){
-//        override fun bind(item: GalleryImage) {
-//            Glide.with(context).load(item.url).centerCrop().into(binding.ivImage)
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-//        val itemBinding = ItemGalleryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        return  ImageDialogViewHolder(itemBinding, parent.context)
-//    }
-//
-//    override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
-//        when(holder){
-//            is ImageDialogViewHolder -> holder.bind(dataSet[position])
-//        }
-//    }
-//
-//    override fun getItemCount() = dataSet.size
-//}

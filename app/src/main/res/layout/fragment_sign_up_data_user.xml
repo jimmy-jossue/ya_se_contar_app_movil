@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    tools:context=".ui.fragment.auth.signup.SignUpDataUserFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_light"
+            android:fadingEdge="horizontal"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:paddingHorizontal="@dimen/separation_small"
+            android:paddingBottom="@dimen/separation_extra_small"
+            android:text="@string/write_nickname"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/text_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_profile_image"
+            android:layout_width="@dimen/btnProfile_size_semi_small"
+            android:layout_height="@dimen/btnProfile_size_semi_small"
+            android:src="@drawable/ic_photo_profile_girl_deselected"
+            app:civ_border_color="@color/black_25"
+            app:civ_border_width="@dimen/border_width_small"
+            app:civ_circle_background_color="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_add_image_profile"
+            android:layout_width="@dimen/btnSound_size"
+            android:layout_height="@dimen/btnSound_size"
+            android:background="@color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_btn_add_image_profile"
+            app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toTopOf="@+id/iv_profile_image" />
+
+        <EditText
+            android:id="@+id/et_nick_name"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/separation_small"
+            android:autofillHints="true"
+            android:background="@drawable/login_edit_text"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="@dimen/separation_small"
+            android:fontFamily="@font/balsamiq_sans_regular"
+            android:hint="@string/Nickname"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="text"
+            android:maxLength="30"
+            android:paddingHorizontal="@dimen/separation_small"
+            android:paddingVertical="@dimen/separation_extra_small"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/dark"
+            android:textColorHint="@color/black_25"
+            android:textSize="@dimen/text_subTitle"
+            app:layout_constraintEnd_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintStart_toStartOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_backward"
+            android:layout_width="@dimen/width_button_short"
+            android:layout_height="@dimen/height_button_medium"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/btn_previous_bubble"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_forward"
+            android:layout_width="@dimen/width_button_short"
+            android:layout_height="@dimen/height_button_medium"
+            android:layout_margin="@dimen/separation_small"
+            android:background="@drawable/btn_next_bubble"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/container_progress_bar"
+        layout="@layout/progress_bar" />
+
+</FrameLayout>

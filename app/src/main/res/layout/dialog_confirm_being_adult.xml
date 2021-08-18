@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_410sdp"
+    android:layout_height="@dimen/_230sdp"
+    android:background="@drawable/bg_dialog_information"
+    android:padding="@dimen/separation_medium">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/btn_size_extra_small"
+        android:layout_height="@dimen/btn_size_extra_small"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_warning"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_subtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/separation_small"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:maxWidth="@dimen/_300sdp"
+        android:text="@string/confirm_being_adult"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/_22ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsamiq_sans_regular"
+        android:maxWidth="@dimen/_300sdp"
+        android:text="@string/what_is_the_sum"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/text_normal"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_numbers"
+        android:layout_width="@dimen/_370sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginVertical="@dimen/separation_small"
+        app:layout_constraintBottom_toTopOf="@+id/et_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_subtitle">
+
+        <TextView
+            android:id="@+id/tv_first_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/separation_long"
+            android:elegantTextHeight="true"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/_40ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_second_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="99" />
+
+        <TextView
+            android:id="@+id/tv_second_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/separation_long"
+            android:elegantTextHeight="true"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/_40ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_first_number"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="99" />
+
+        <TextView
+            android:id="@+id/tv_toast_incorrect"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/separation_small"
+            android:background="@drawable/bg_toast_incorrect"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:gravity="center"
+            android:maxWidth="@dimen/_300sdp"
+            android:text="@string/incorrect"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25ssp"
+            android:translationY="@dimen/_65sdp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/et_answer"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/height_button_small"
+        android:autofillHints="true"
+        android:background="@drawable/login_edit_text"
+        android:drawableStart="@drawable/ic_numeral_symbol"
+        android:drawablePadding="@dimen/separation_small"
+        android:fontFamily="@font/balsamiq_sans_regular"
+        android:hint="@string/response"
+        android:imeOptions="flagNoExtractUi"
+        android:inputType="number"
+        android:maxLength="30"
+        android:paddingHorizontal="@dimen/separation_small"
+        android:paddingVertical="@dimen/separation_extra_small"
+        android:selectAllOnFocus="false"
+        android:textColor="@color/dark"
+        android:textColorHint="@color/black_25"
+        android:textSize="@dimen/text_subTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_check"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_check"
+        android:layout_width="@dimen/width_button_long"
+        android:layout_height="@dimen/height_button_small"
+        android:background="@drawable/btn_primary"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:scaleType="fitCenter"
+        android:text="Comprobar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_subTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

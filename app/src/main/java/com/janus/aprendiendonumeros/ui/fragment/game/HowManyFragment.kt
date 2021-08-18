@@ -1,28 +1,26 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.firestore.FirebaseFirestore
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
-import com.janus.aprendiendonumeros.data.model.LogActivity
+import com.janus.aprendiendonumeros.data.model.LogExercise
 import com.janus.aprendiendonumeros.data.model.Rank
 import com.janus.aprendiendonumeros.data.model.ResourceImage
-import com.janus.aprendiendonumeros.data.remote.ResourceImageDataSource
-import com.janus.aprendiendonumeros.data.remote.ResourceImageDataSource.Level
+import com.janus.aprendiendonumeros.data.remote.ImageDataSource
+import com.janus.aprendiendonumeros.data.remote.ImageDataSource.Level
 import com.janus.aprendiendonumeros.databinding.FragmentHowManyBinding
 import com.janus.aprendiendonumeros.presentation.ResourceImageViewModel
 import com.janus.aprendiendonumeros.presentation.ResourceImageViewModelFactory
 import com.janus.aprendiendonumeros.repository.resourceimage.ResourceImageImpl
+import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.utilities.*
 
-class HowManyFragment : Fragment(R.layout.fragment_how_many) {
+class HowManyFragment : BaseFragment(R.layout.fragment_how_many) {
 
     private lateinit var binding: FragmentHowManyBinding
     private lateinit var listNumbers: List<Int>
@@ -34,73 +32,52 @@ class HowManyFragment : Fragment(R.layout.fragment_how_many) {
         Sound("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/general_sounds%2Fcorrect.mp3?alt=media&token=341fa8c6-fd7c-4ab2-9024-a9aac170c99f")
     private val soundIncorrect: Sound =
         Sound("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/general_sounds%2Fincorrect.mp3?alt=media&token=5ab58ab0-2514-4fb7-8227-b1de04235bd4")
-    private val log: LogActivity = LogActivity()
+    private val log: LogExercise = LogExercise()
     private val viewModel by viewModels<ResourceImageViewModel> {
         ResourceImageViewModelFactory(
             ResourceImageImpl(
-                ResourceImageDataSource()
+                ImageDataSource()
             )
         )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initUI(view: View) {
         level = Level.FIRST
         binding = FragmentHowManyBinding.bind(view)
         generateListOfNumbers()
+        binding.containerImages.post { initGame() }
+        addEvents()
+    }
 
+    private fun addEvents() {
         binding.btnBackToMenu.setOnClickListener { goTo(R.id.action_howMany_to_menu) }
         binding.btnOptionOne.setOnClickListener { evaluateOption((it as AppCompatButton)) }
         binding.btnOptionTwo.setOnClickListener { evaluateOption((it as AppCompatButton)) }
         binding.btnOptionThree.setOnClickListener { evaluateOption((it as AppCompatButton)) }
-        binding.btnRepeatQuestion.setOnClickListener {
-            val textLists: StringBuffer = StringBuffer("NUMBERS ")
-            listNumbers.forEach { textLists.append("$it - ") }
-            textLists.append("")
-            mess(textLists.toString())
-        }
-        binding.containerImages.post { initGame() }
-
-        //
-        binding.dialog.btnRepeat.setOnClickListener {
-            binding.containerImages.removeViews()
-            generateListOfNumbers()
-            indexNumbers = 0
-            generateQuestion(listNumbers[indexNumbers])
-            log.incorrect = 0
-            log.correct = 0
-            binding.containerDialog.visibility = View.GONE
-            if (binding.dialog.ivGoldenFlash.animation != null) {
-                binding.dialog.ivGoldenFlash.animation.cancel()
-            }
-            binding.dialog.ivGoldenFlash.visibility = View.GONE
-            binding.dialog.lavConfetti.cancelAnimation()
-            binding.dialog.lavConfetti.visibility = View.GONE
-            binding.dialog.ivStarFirst.setImageResource(R.drawable.ic_without_star)
-            binding.dialog.ivStarSecond.setImageResource(R.drawable.ic_without_star)
-            binding.dialog.ivStarThird.setImageResource(R.drawable.ic_without_star)
-        }
+        binding.btnRepeatQuestion.setOnClickListener { }
     }
+
 
     private fun initGame() {
         viewModel.fetchResourceImage(level).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
+                    View.VISIBLE
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.containerProgressBar.progressBar.visibility = View.GONE
                     listImages = result.data
                     generateQuestion(listNumbers[indexNumbers])
                 }
                 is Resource.Failure -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.containerProgressBar.progressBar.visibility = View.GONE
                 }
             }
         })
     }
 
     private fun generateListOfNumbers() {
-        listNumbers = Numbers.getRandomNumberList(1, 9)
+        listNumbers = (1..9).toList().shuffled()
+        //Numbers.getRandomNumberList(1, 9)
     }
 
     private fun addImages(totalImages: Int) {
@@ -207,8 +184,6 @@ class HowManyFragment : Fragment(R.layout.fragment_how_many) {
             incorrect()
         }
 
-
-
         indexNumbers++
         if (indexNumbers < listNumbers.size) {
             binding.containerImages.removeViews()
@@ -218,41 +193,10 @@ class HowManyFragment : Fragment(R.layout.fragment_how_many) {
         }
     }
 
-    private fun finish(log: LogActivity) {
-        indexNumbers--
-        val total: Int = (log.correct + log.incorrect) / 3
-
-        when {
-            log.correct <= total -> badScore(log)
-            log.correct < (total * 3) -> goodScore(log)
-            else -> perfectScore(log)
-        }
-
-        binding.dialog.ivAvatar.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/avatar_images%2Fjawi_normal.png?alt=media&token=7a732b9c-7eda-42a4-b85e-ff770809c12f")
+    private fun finish(log: LogExercise) {
+        mContext.showDialogEndOfExercise("jimmy", 0, 0, log)
     }
 
-    private fun badScore(log: LogActivity) {
-        binding.containerDialog.visibility = View.VISIBLE
-        binding.dialog.tvScore.text = String.format("${log.correct}/${listNumbers.size}")
-        binding.dialog.ivStarFirst.setImageResource(R.drawable.ic_with_star)
-    }
-
-    private fun goodScore(log: LogActivity) {
-        badScore(log)
-        binding.dialog.ivStarSecond.setImageResource(R.drawable.ic_with_star)
-    }
-
-    private fun perfectScore(log: LogActivity) {
-        goodScore(log)
-        binding.dialog.ivStarThird.setImageResource(R.drawable.ic_with_star)
-        binding.dialog.lavConfetti.visibility = View.VISIBLE
-        binding.dialog.lavConfetti.playAnimation()
-        binding.dialog.ivGoldenFlash.visibility = View.VISIBLE
-        UIAnimations(requireContext()).startAnimation(
-            binding.dialog.ivGoldenFlash,
-            R.anim.rotate_infinite
-        )
-    }
 
     private fun generateQuestion(number: Int) {
         addImages(number)
@@ -261,16 +205,12 @@ class HowManyFragment : Fragment(R.layout.fragment_how_many) {
     }
 
     private fun incorrect() {
-        log.incorrect++
+        log.attemptsIncorrect++
         soundIncorrect.play()
     }
 
     private fun correct() {
-        log.correct++
+        log.attemptsCorrect++
         soundCorrect.play()
-    }
-
-    fun mess(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 }

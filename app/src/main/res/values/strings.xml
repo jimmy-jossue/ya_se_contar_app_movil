@@ -1,12 +1,8 @@
 <resources>
-    <string name="app_name">Aprendiendo numeros</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Aprendiendo números</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_second">SecondActivity</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
+
     <string name="hello_world">Hello Square World!</string>
     <string name="btn_back">Regresar</string>
     <string name="btn_next">Siguiente</string>
@@ -25,6 +21,7 @@
     <string name="register_summary">Resumen del registro</string>
     <string name="password">Contraseña</string>
     <string name="title">Titulo</string>
+    <string name="continue_">Continuar</string>
     <string name="cancel">Cancel</string>
     <string name="accept">Aceptar</string>
     <string name="select_password">Elige 3 imágenes para tu contraseña</string>
@@ -36,5 +33,36 @@
     <string name="select_your_password">Elige las tres imagenes de tu contraseña</string>
     <string name="write_your_user_and_password">Escribe tu nombre de usuario y contraseña</string>
     <string name="user">Usuario</string>
+    <string name="write_email_to_recover_account">Escribe un correo electrónico</string>
+    <string name="email">Correo electrónico</string>
+    <string name="day">Día</string>
+    <string name="month">Mes</string>
+    <string name="year">Año</string>
+
+    <string name="month_january">Enero</string>
+    <string name="month_february">Febrero</string>
+    <string name="month_march">Marzo</string>
+    <string name="month_april">Abril</string>
+    <string name="month_may">Mayo</string>
+    <string name="month_june">Junio</string>
+    <string name="month_july">Julio</string>
+    <string name="month_august">Agosto</string>
+    <string name="month_september">Septiembre</string>
+    <string name="month_october">Octubre</string>
+    <string name="month_november">Novembre</string>
+    <string name="month_december">Diciembre</string>
+    <string name="sign_up_opennig">Crea tu cuenta</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="forgot_passwod">¿Olvidaste la contraseña?</string>
+    <string name="clear_date">Limpiar fecha</string>
+    <string name="clear">Limpiar</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="format_password_adult">Usa en tu contraseña minimo 8 caracteres con una combinación de letras, números y símbolos</string>
+    <string name="write_a_password">Escribe una contraseña</string>
+    <string name="write_your_real_email">Registrate con un correo electrónico real ya que a el llegará la información para recuperar tu cuenta.</string>
+    <string name="confirm_being_adult">Comprueba que eres adulto</string>
+    <string name="response">Respuesta</string>
+    <string name="incorrect">Incorrecto</string>
+    <string name="what_is_the_sum">¿Cuál es la suma de estos dos números?</string>
 
 </resources>

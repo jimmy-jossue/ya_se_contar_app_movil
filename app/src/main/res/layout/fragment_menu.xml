@@ -34,7 +34,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/contentItemMenu"
                     app:layout_constraintEnd_toEndOf="@id/contentItemMenu"
                     app:layout_constraintStart_toStartOf="@id/contentItemMenu"
-                    app:layout_constraintTop_toTopOf="@id/contentItemMenu" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/contentItemMenu"
@@ -43,6 +43,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/separation_long"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,30 +65,32 @@
         <LinearLayout
             android:id="@+id/containar_coins"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/separation_small"
+            android:layout_height="@dimen/_50sdp"
             android:background="@drawable/bg_blurred"
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/separation_small"
             android:paddingVertical="@dimen/separation_extra_small"
+            android:layout_marginEnd="@dimen/separation_small"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/container_btn"
             app:layout_constraintEnd_toStartOf="@id/container_btn"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/container_btn">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_coin"
-                android:layout_width="@dimen/btn_size_semi_small"
-                android:layout_height="@dimen/btn_size_semi_small"
+                android:layout_width="@dimen/btn_size_extra_small"
+                android:layout_height="@dimen/btn_size_extra_small"
                 android:layout_marginEnd="@dimen/separation_small"
                 android:background="@drawable/ic_coin" />
 
             <TextView
                 android:id="@+id/tv_coin"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_size_small"
-                android:fontFamily="@font/balsamiq_sans_regular"
+                android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_33ssp"
+                android:gravity="top"
                 android:textStyle="bold"
+                android:textSize="@dimen/_30ssp"
                 tools:text="100" />
 
         </LinearLayout>
@@ -122,16 +125,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_25"
-        android:visibility="gone">
+    <include
+        android:id="@+id/container_progress_bar"
+        layout="@layout/progress_bar" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
 </FrameLayout>

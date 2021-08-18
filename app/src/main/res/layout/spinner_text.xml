@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:fontFamily="@font/balsamiq_sans_regular"
+    android:hint="@string/month"
+    android:layoutDirection="ltr"
+    android:paddingStart="2dp"
+    android:singleLine="true"
+    android:textColor="@color/dark"
+    android:textColorHint="@color/black_25"
+    android:textSize="@dimen/text_subTitle" />

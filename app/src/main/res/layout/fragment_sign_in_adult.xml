@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    tools:context=".ui.fragment.auth.signin.SignInAdultFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_subtitle_adult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:text="@string/write_your_user_and_password"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_subTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_adult">
+
+            <EditText
+                android:id="@+id/et_nick_name"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/separation_small"
+                android:autofillHints="true"
+                android:background="@drawable/login_edit_text"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="@dimen/separation_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:hint="@string/user"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="text"
+                android:maxLength="15"
+                android:paddingHorizontal="@dimen/separation_small"
+                android:paddingVertical="@dimen/separation_extra_small"
+                android:selectAllOnFocus="false"
+                android:textColor="@color/dark"
+                android:textColorHint="@color/black_25"
+                android:textSize="@dimen/text_subTitle" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/separation_small"
+                android:autofillHints="true"
+                android:background="@drawable/login_edit_text"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="@dimen/separation_small"
+                android:fontFamily="@font/balsamiq_sans_regular"
+                android:hint="@string/password"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingHorizontal="@dimen/separation_small"
+                android:paddingVertical="@dimen/separation_extra_small"
+                android:selectAllOnFocus="false"
+                android:textColor="@color/dark"
+                android:textColorHint="@color/black_25"
+                android:textSize="@dimen/text_subTitle" />
+
+            <TextView
+                android:id="@+id/tv_forgot_passwod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/separation_medium"
+                android:fontFamily="@font/balsamiq_sans_bold"
+                android:text="@string/forgot_passwod"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_normal" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="@dimen/width_button_long"
+            android:layout_height="@dimen/height_button_medium"
+            android:background="@drawable/btn_sign_up_bubble"
+            android:fontFamily="@font/balsamiq_sans_bold"
+            android:scaleType="fitCenter"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_subTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="@dimen/width_button_short"
+            android:layout_height="@dimen/height_button_medium"
+            android:background="@drawable/btn_next_bubble"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/container_progress_bar"
+        layout="@layout/progress_bar" />
+
+</FrameLayout>

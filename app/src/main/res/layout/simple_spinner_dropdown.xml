@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:fontFamily="@font/balsamiq_sans_regular"
+    android:paddingStart="@dimen/separation_small"
+    android:paddingTop="@dimen/separation_extra_small"
+    android:paddingEnd="@dimen/separation_small"
+    android:paddingBottom="@dimen/separation_extra_small"
+    android:singleLine="true"
+    android:textColor="@color/dark"
+    android:textColorHint="@color/black_25"
+    android:textSize="@dimen/text_subTitle" />

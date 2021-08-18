@@ -121,33 +121,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_25"
-        android:visibility="gone">
+    <include
+        android:id="@+id/container_progress_bar"
+        layout="@layout/progress_bar" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_25"
-        android:paddingHorizontal="@dimen/separation_long"
-        android:paddingVertical="@dimen/separation_small"
-        android:visibility="gone">
-
-        <include
-            android:id="@+id/dialog"
-            layout="@layout/dialog_end_of_exercise"
+    <!--
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_dialog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/separation_long" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:background="@color/black_25"
+            android:paddingHorizontal="@dimen/separation_long"
+            android:paddingVertical="@dimen/separation_small"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/dialog"
+                layout="@layout/dialog_end_of_exercise"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/separation_long" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
+
 </FrameLayout>

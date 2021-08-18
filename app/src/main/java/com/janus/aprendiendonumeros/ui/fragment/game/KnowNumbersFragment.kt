@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.ResourceImage
-import com.janus.aprendiendonumeros.data.remote.ResourceImageDataSource
+import com.janus.aprendiendonumeros.data.remote.ImageDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentKnowNumbersBinding
 import com.janus.aprendiendonumeros.presentation.ResourceImageViewModel
 import com.janus.aprendiendonumeros.presentation.ResourceImageViewModelFactory
@@ -22,14 +22,14 @@ import com.janus.aprendiendonumeros.ui.utilities.positionIsRepeated
 class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
 
     private lateinit var binding: FragmentKnowNumbersBinding
-    private lateinit var level: ResourceImageDataSource.Level
+    private lateinit var level: ImageDataSource.Level
     private lateinit var listImages: List<ResourceImage>
     private lateinit var randomResourceImage: ResourceImage
     private var indexNumbers: Int = 1
     private val viewModel by viewModels<ResourceImageViewModel> {
         ResourceImageViewModelFactory(
             ResourceImageImpl(
-                ResourceImageDataSource()
+                ImageDataSource()
             )
         )
     }
@@ -37,7 +37,7 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentKnowNumbersBinding.bind(view)
-        level = ResourceImageDataSource.Level.FIRST
+        level = ImageDataSource.Level.FIRST
 
         binding.btnBackToMenu.setOnClickListener { goTo(R.id.action_knowNumbers_to_menu) }
         binding.btnNext.setOnClickListener { next() }
@@ -48,10 +48,11 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
     private fun initGame() {
         viewModel.fetchResourceImage(level).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
+                    View.VISIBLE
                 is Resource.Success -> {
                     Toast.makeText(context, "Success\n $indexNumbers", Toast.LENGTH_SHORT).show()
-                    binding.progressBar.visibility = View.GONE
+                    binding.containerProgressBar.progressBar.visibility = View.GONE
                     listImages = result.data
                     addImages(indexNumbers)
                     binding.tvQuantity.text = indexNumbers.toString()
@@ -62,7 +63,7 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
                         "Failure: ${result.exception.message}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    binding.progressBar.visibility = View.GONE
+                    binding.containerProgressBar.progressBar.visibility = View.GONE
                 }
             }
         })
@@ -114,13 +115,9 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
             binding.tvQuantity.text = indexNumbers.toString()
         }
 
-        if (indexNumbers == 9) {
-            binding.btnNext.visibility = View.INVISIBLE
-        }
-
-        if (binding.btnPrevious.visibility != View.VISIBLE) {
-            binding.btnPrevious.visibility = View.VISIBLE
-        }
+        if (indexNumbers == 9) binding.btnNext.visibility = View.INVISIBLE
+        if (binding.btnPrevious.visibility != View.VISIBLE) binding.btnPrevious.visibility =
+            View.VISIBLE
     }
 
     private fun previous() {
@@ -130,12 +127,8 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
             addImages(indexNumbers)
             binding.tvQuantity.text = indexNumbers.toString()
         }
-        if (indexNumbers == 1) {
-            binding.btnPrevious.visibility = View.INVISIBLE
-        }
 
-        if (binding.btnNext.visibility != View.VISIBLE) {
-            binding.btnNext.visibility = View.VISIBLE
-        }
+        if (indexNumbers == 1) binding.btnPrevious.visibility = View.INVISIBLE
+        if (binding.btnNext.visibility != View.VISIBLE) binding.btnNext.visibility = View.VISIBLE
     }
 }

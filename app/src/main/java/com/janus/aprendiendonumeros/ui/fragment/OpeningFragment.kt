@@ -47,7 +47,7 @@ class OpeningFragment : Fragment(R.layout.fragment_opening) {
             binding.ivAirPlane.setOnClickListener {
                 anim.startAnimation(
                     it,
-                    R.anim.animate_airplane
+                    R.anim.animate_airplane,
                 )
             }
             binding.ivTitle.setOnClickListener { anim.startAnimation(it, R.anim.bounce_in) }
@@ -56,14 +56,14 @@ class OpeningFragment : Fragment(R.layout.fragment_opening) {
                 viewModel.fetchSettingsSession().observe(viewLifecycleOwner, { result ->
                     when (result) {
                         is Resource.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
+                            binding.containerProgressBar.progressBar.visibility = View.VISIBLE
                         }
                         is Resource.Success -> {
-                            binding.progressBar.visibility = View.GONE
+                            binding.containerProgressBar.progressBar.visibility = View.GONE
                             isRegistered(result.data)
                         }
                         is Resource.Failure -> {
-                            binding.progressBar.visibility = View.GONE
+                            binding.containerProgressBar.progressBar.visibility = View.GONE
                             Toast.makeText(
                                 context,
                                 "Error al comoprovar la sesion\n¿te gustaria crear una cuenta?",
