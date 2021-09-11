@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.janus.aprendiendonumeros.core.Resource
-import com.janus.aprendiendonumeros.repository.settingssession.SettingsSessionProvider
+import com.janus.aprendiendonumeros.domain.settingssession.SettingsSessionProvider
 import kotlinx.coroutines.Dispatchers
 
 class SettingsSessionViewModel(private val repository: SettingsSessionProvider) : ViewModel() {

@@ -23,10 +23,13 @@ class MenuItemView @JvmOverloads constructor(
     private val btnIcon: ImageButton
 
     companion object {
-        const val STATUS_LOCKED = 0
-        const val STATUS_EMPTY = 1
-        const val STATUS_INCOMPLETE = 2
-        const val STATUS_COMPLETE = 3
+        const val STATUS_LOCKED: Int = 0
+        const val STATUS_EMPTY: Int = 1
+        const val STATUS_INCOMPLETE: Int = 2
+        const val STATUS_COMPLETE: Int = 3
+        const val POSITION_START: Int = 0
+        const val POSITION_MIDDLE: Int = 1
+        const val POSITION_END: Int = 2
     }
 
 
@@ -52,7 +55,6 @@ class MenuItemView @JvmOverloads constructor(
             } finally {
                 recycle()
             }
-
         }
     }
 
@@ -66,21 +68,23 @@ class MenuItemView @JvmOverloads constructor(
         requestLayout()
     }
 
-    fun getIcon(): ImageButton {
-        return btnIcon
+    fun setImage(url: String) {
+        btnIcon.loadImageFromUrl(url)
+        invalidate()
+        requestLayout()
     }
 
     fun setClickListener(listener: OnClickListener) {
         btnIcon.setOnClickListener(listener)
     }
 
-    fun setPosition(position: Int) {
+    fun setPosition(position: Int = 2) {
         when (position) {
-            0 -> {
+            POSITION_START -> {
                 lineBeforeStatus.visibility = View.INVISIBLE
                 lineAfterStatus.visibility = View.VISIBLE
             }
-            1 -> {
+            POSITION_MIDDLE -> {
                 lineBeforeStatus.visibility = View.VISIBLE
                 lineAfterStatus.visibility = View.VISIBLE
             }
@@ -111,6 +115,7 @@ class MenuItemView @JvmOverloads constructor(
             }
         }
     }
+
 
     private suspend fun animationChangeBackground(view: ImageView, iconResources: Int) {
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_bounce_in))

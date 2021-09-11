@@ -86,7 +86,7 @@ class SignUpBirthDateFragment : BaseFragment(R.layout.fragment_sign_up_birth_dat
 
     private fun validateDate() {
         val day: String = binding.etDay.text.toString().trim()
-        val month: Int = binding.spinnerMonth.selectedItemPosition - 1
+        val month: Int = binding.spinnerMonth.selectedItemPosition
         val year: String = binding.etYear.text.toString().trim()
 
         when {
@@ -101,7 +101,6 @@ class SignUpBirthDateFragment : BaseFragment(R.layout.fragment_sign_up_birth_dat
             ).not() -> messageNonExistentDate()
             else -> saveData(day.toInt(), month, year.toInt())
         }
-
     }
 
     private fun validateDay(day: Int): Boolean {
@@ -109,7 +108,7 @@ class SignUpBirthDateFragment : BaseFragment(R.layout.fragment_sign_up_birth_dat
     }
 
     private fun validateMonth(month: Int): Boolean {
-        return (month in 1..13)
+        return (month in 1..12)
     }
 
     private fun validateYear(year: Int): Boolean {

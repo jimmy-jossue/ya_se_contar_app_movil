@@ -7,18 +7,20 @@ import com.janus.aprendiendonumeros.core.AESCrypt
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignInAdultBinding
+import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.presentation.AuthViewModel
 import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
-import com.janus.aprendiendonumeros.repository.auth.AuthImpl
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
+import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.utilities.fieldIsEmpty
 import com.janus.aprendiendonumeros.ui.utilities.goTo
 
 class SignInAdultFragment : BaseFragment(R.layout.fragment_sign_in_adult) {
 
     private lateinit var binding: FragmentSignInAdultBinding
-    private val viewModel by viewModels<AuthViewModel> {
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
+    private val authViewModel by viewModels<AuthViewModel> {
         AuthViewModelFactory(
             AuthImpl(
                 AuthDataSource()
@@ -32,15 +34,19 @@ class SignInAdultFragment : BaseFragment(R.layout.fragment_sign_in_adult) {
     }
 
     private fun addEvents() {
-        binding.btnSignUp.setOnClickListener { validateAge() }
+        binding.btnSignUp.setOnClickListener { checkInternet() }
         binding.btnSignIn.setOnClickListener { validateCredentials() }
     }
 
-    private fun validateAge() {
+    private fun checkInternet() {
         if (true) {
             goTo(R.id.action_signIn_to_signUp)
         } else {
-
+            mContext.showDialogInformation(
+                icon = InformationDialog.ICON_ERROR,
+                title = "¡Oh, vaya! No se udo uniciar sesión",
+                text = "Ningun usuario corresponde a los datos ingresados."
+            )
         }
     }
 
@@ -57,33 +63,31 @@ class SignInAdultFragment : BaseFragment(R.layout.fragment_sign_in_adult) {
     private fun signIn(nickName: String, passwordAdult: String) {
         val passwordEncrypt: String = AESCrypt.encrypt(passwordAdult)
 
-        viewModel.signInAdult(nickName, passwordEncrypt).observe(viewLifecycleOwner, { result ->
+        authViewModel.signInAdult(nickName, passwordEncrypt).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                    View.VISIBLE
+                is Resource.Loading -> loadingDialog.startDialog("Comprobando usuario y contraseña...")
                 is Resource.Success -> resultSuccess(result.data)
-                is Resource.Failure -> resultFailure()
+                is Resource.Failure -> messageResultFailure()
             }
         })
     }
 
     private fun resultSuccess(idUser: String) {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
-        mContext.showDialogInformation(
-            icon = InformationDialog.ICON_SUCCESS,
-            title = "Inicio de sesión exitoso",
-            text = "¡BIENVENIDO!"
-        )
+        loadingDialog.dismiss()
         val action = SignInFragmentDirections.actionSignInToMenu(idUser)
         goTo(action)
     }
 
-    private fun resultFailure() {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
+    private fun messageResultFailure() {
+        loadingDialog.dismiss()
         mContext.showDialogInformation(
             icon = InformationDialog.ICON_ERROR,
-            title = "¡Ups! Inicio de sesión fallido",
+            title = "¡Oh, vaya! No se udo uniciar sesión",
             text = "Ningun usuario corresponde a los datos ingresados."
         )
+    }
+
+    private fun messageNotInternet() {
+
     }
 }

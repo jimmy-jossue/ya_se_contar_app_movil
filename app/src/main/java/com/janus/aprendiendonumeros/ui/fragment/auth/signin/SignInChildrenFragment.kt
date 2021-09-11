@@ -10,11 +10,12 @@ import com.janus.aprendiendonumeros.core.AESCrypt
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignInChildrenBinding
+import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.presentation.AuthViewModel
 import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
-import com.janus.aprendiendonumeros.repository.auth.AuthImpl
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
+import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.utilities.Constant
 import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 import com.janus.aprendiendonumeros.ui.utilities.goTo
@@ -25,7 +26,8 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
     private lateinit var binding: FragmentSignInChildrenBinding
     private val listPassword: MutableMap<Int, ImageView> = mutableMapOf()
     private val anim: UIAnimations by lazy { UIAnimations(requireContext()) }
-    private val viewModel by viewModels<AuthViewModel> {
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
+    private val authViewModel by viewModels<AuthViewModel> {
         AuthViewModelFactory(
             AuthImpl(
                 AuthDataSource()
@@ -62,10 +64,9 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
 
     private fun signIn(passwordAdult: String) {
         val passwordEncrypt: String = AESCrypt.encrypt(passwordAdult)
-        viewModel.signInChild(passwordEncrypt).observe(viewLifecycleOwner, { result ->
+        authViewModel.signInChild(passwordEncrypt).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                    View.VISIBLE
+                is Resource.Loading -> loadingDialog.startDialog("Comprobando la contraseña...")
                 is Resource.Success -> resultSuccess(result.data)
                 is Resource.Failure -> resultFailure()
             }
@@ -73,21 +74,21 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
     }
 
     private fun resultSuccess(idUser: String) {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
-        mContext.showDialogInformation(
-            icon = InformationDialog.ICON_SUCCESS,
-            title = "Inicio de sesión exitoso",
-            text = "¡BIENVENIDO!"
-        )
+        loadingDialog.dismiss()
+        //mContext.showDialogInformation(
+        //    icon = InformationDialog.ICON_SUCCESS,
+        //    title = "Inicio de sesión exitoso",
+        //    text = "¡BIENVENIDO!"
+        //)
         val action = SignInFragmentDirections.actionSignInToMenu(idUser)
         goTo(action)
     }
 
     private fun resultFailure() {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
+        loadingDialog.dismiss()
         mContext.showDialogInformation(
             icon = InformationDialog.ICON_ERROR,
-            title = "¡Ups! Inicio de sesión fallido",
+            title = "¡Oh, vaya! No se udo uniciar sesión",
             text = "Ningun usuario corresponde a los datos ingresados."
         )
     }

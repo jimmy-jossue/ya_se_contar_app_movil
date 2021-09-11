@@ -24,6 +24,8 @@ class ConfirmBeingAdultDialog : DialogFragment(R.layout.dialog_confirm_being_adu
     companion object {
         private const val LIMIT_COUNT_ANSWER: Int = 3
         private const val DELAY_DURATION: Long = 1000
+        private const val MIN_NUMBER: Int = 5
+        private const val MAX_NUMBER: Int = 35
     }
 
     interface Listener {
@@ -45,7 +47,7 @@ class ConfirmBeingAdultDialog : DialogFragment(R.layout.dialog_confirm_being_adu
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 (context.toString() +
-                        " must implement Listener")
+                        " must implement ConfirmBeingAdultDialog.Listener")
             )
         }
     }
@@ -60,12 +62,13 @@ class ConfirmBeingAdultDialog : DialogFragment(R.layout.dialog_confirm_being_adu
     }
 
     private fun setUpRandomsNumbers() {
-        binding.tvFirstNumber.text = (5..15).random().toString()
-        binding.tvSecondNumber.text = (5..15).random().toString()
+        binding.tvFirstNumber.text = (MIN_NUMBER..MAX_NUMBER).random().toString()
+        binding.tvSecondNumber.text = (MIN_NUMBER..MAX_NUMBER).random().toString()
     }
 
     private fun setUpEvents() {
         binding.btnCheck.setOnClickListener { confirmSumAnswer() }
+        binding.btnClose.setOnClickListener { listener.isPositive(this@ConfirmBeingAdultDialog) }
     }
 
     private fun confirmSumAnswer() {
@@ -97,11 +100,12 @@ class ConfirmBeingAdultDialog : DialogFragment(R.layout.dialog_confirm_being_adu
 
     private fun incorrectAnswer() {
         lifecycleScope.launch {
+            binding.btnCheck.isEnabled = false
             anim.startAnimation(binding.etAnswer, R.anim.attention)
             anim.startAnimation(binding.tvToastIncorrect, R.anim.jump_and_disappear)
-
             delay(DELAY_DURATION)
             setUpRandomsNumbers()
+            binding.btnCheck.isEnabled = true
         }
     }
 }

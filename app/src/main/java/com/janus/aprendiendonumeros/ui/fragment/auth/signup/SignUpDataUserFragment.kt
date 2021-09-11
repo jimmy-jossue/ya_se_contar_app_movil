@@ -9,11 +9,12 @@ import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpDataUserBinding
+import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.presentation.AuthViewModel
 import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
-import com.janus.aprendiendonumeros.repository.auth.AuthImpl
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
+import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
 import com.janus.aprendiendonumeros.ui.listener.NotifyDrawableListener
@@ -23,6 +24,7 @@ class SignUpDataUserFragment : BaseFragment(R.layout.fragment_sign_up_data_user)
     ControllablePagerObserver, NotifyDrawableListener {
 
     private lateinit var binding: FragmentSignUpDataUserBinding
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
     private lateinit var controllablePager: ControllablePager
     private val viewModel by viewModels<AuthViewModel> {
         AuthViewModelFactory(
@@ -36,6 +38,10 @@ class SignUpDataUserFragment : BaseFragment(R.layout.fragment_sign_up_data_user)
         binding = FragmentSignUpDataUserBinding.bind(view)
         addEvents()
         mContext.setDrawableTarget(this)
+
+        if (User.staticInstance.gender == "female") {
+            binding.ivProfileImage.setImageResource(R.drawable.ic_photo_profile_girl_deselected)
+        }
     }
 
     private fun addEvents() {
@@ -61,8 +67,7 @@ class SignUpDataUserFragment : BaseFragment(R.layout.fragment_sign_up_data_user)
             nickName
         ).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                    View.VISIBLE
+                is Resource.Loading -> loadingDialog.startDialog("Cargando...")
                 is Resource.Success -> resultSuccess(result.data)
                 is Resource.Failure -> resultFailure()
             }
@@ -70,11 +75,11 @@ class SignUpDataUserFragment : BaseFragment(R.layout.fragment_sign_up_data_user)
     }
 
     private fun resultFailure() {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
+        loadingDialog.dismiss()
     }
 
     private fun resultSuccess(exist: Boolean) {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
+        loadingDialog.dismiss()
         if (exist.not()) {
             saveData()
         } else {

@@ -1,21 +1,31 @@
 package com.janus.aprendiendonumeros.ui.utilities
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.ui.base.BaseActivity
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
+import kotlinx.coroutines.delay
+import java.util.*
 
 fun ImageView.loadImageFromUrl(url: String) {
     val uri: Uri = Uri.parse(url)
@@ -74,6 +84,92 @@ fun ViewGroup.removeViews() {
     }
 }
 
+fun ConstraintLayout.linkViews(idToConstrain: Int, idLink: Int) {
+    val constraint = ConstraintSet()
+
+    constraint.connect(idToConstrain,
+        ConstraintSet.START,
+        idLink,
+        ConstraintSet.START)
+    constraint.connect(idToConstrain,
+        ConstraintSet.END,
+        idLink,
+        ConstraintSet.END)
+    constraint.connect(idToConstrain,
+        ConstraintSet.TOP,
+        idLink,
+        ConstraintSet.TOP)
+    constraint.connect(idToConstrain,
+        ConstraintSet.BOTTOM,
+        idLink,
+        ConstraintSet.BOTTOM)
+
+    constraint.applyTo(this)
+}
+
+suspend fun ConstraintLayout.animationJumpCoin(
+    restrictionButton: AppCompatButton,
+    addedCoins: Int,
+) {
+    val listViews = mutableListOf<AppCompatImageView>()
+
+    for (number in 1..addedCoins) {
+        val coin: AppCompatImageView = AppCompatImageView(context).apply {
+            this.id = UUID.randomUUID().mostSignificantBits.toInt()
+            val size: Int = context.resources.getDimension(R.dimen.img_size_medium).toInt()
+            this.layoutParams = ConstraintLayout.LayoutParams(size, size)
+            this.setBackgroundResource(R.drawable.ic_coin)
+            this.visibility = View.VISIBLE
+        }
+        this.addView(coin)
+        this.linkViews(coin.id, restrictionButton.id)
+        UIAnimations(context).startAnimation(coin, R.anim.animation_example)
+        listViews.add(coin)
+        delay(200)
+    }
+    delay(1000)
+
+    listViews.forEach {
+        this.removeView(it)
+    }
+}
+
+suspend fun ConstraintLayout.animationJumpCoin(
+    restrictionButton: AppCompatButton,
+    endX: Float,
+    endY: Float,
+    addedCoins: Int,
+) {
+    val listViews = mutableListOf<AppCompatImageView>()
+    for (number in 1..addedCoins) {
+        val coin: AppCompatImageView = AppCompatImageView(context).apply {
+            this.id = UUID.randomUUID().mostSignificantBits.toInt()
+            val size: Int = context.resources.getDimension(R.dimen.img_size_medium).toInt()
+            this.layoutParams = ConstraintLayout.LayoutParams(size, size)
+            this.setBackgroundResource(R.drawable.ic_coin)
+            this.visibility = View.VISIBLE
+        }
+        this.addView(coin)
+        this.linkViews(coin.id, restrictionButton.id)
+        //val translationX = ObjectAnimator.ofFloat(coin, "translationX", coin.x, (endX - coin.x))
+        val translationY = ObjectAnimator.ofFloat(coin, "translationY", coin.y, (coin.y - endY))
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(translationY)//, translationX)
+        animatorSet.duration = 700
+        animatorSet.interpolator = DecelerateInterpolator(0.5F)
+        animatorSet.start()
+
+        listViews.add(coin)
+        delay(150)
+    }
+    delay(1000)
+
+    listViews.forEach {
+        this.removeView(it)
+    }
+    context.message("X = ${endX - restrictionButton.x} \n Y = ${-(restrictionButton.y - endY)}")
+}
+
 fun Context.printUser(user: User) {
     val text: String = "\n nickName: ${user.nickName}" +
             "\n gender: ${user.gender}" +
@@ -91,7 +187,6 @@ fun Context.message(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
-
 fun Int.isLessThan(number: Int): Boolean {
     return this < number
 }
@@ -99,5 +194,3 @@ fun Int.isLessThan(number: Int): Boolean {
 fun Int.isGreaterThan(number: Int): Boolean {
     return this > number
 }
-
-

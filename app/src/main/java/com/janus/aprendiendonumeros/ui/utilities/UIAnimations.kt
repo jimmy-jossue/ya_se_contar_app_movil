@@ -13,4 +13,5 @@ class UIAnimations(private val context: Context) {
             AnimationUtils.loadAnimation(context, idAnimation)
         view.startAnimation(anim)
     }
+
 }

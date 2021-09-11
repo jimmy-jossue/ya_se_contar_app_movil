@@ -8,17 +8,17 @@ import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
+import com.janus.aprendiendonumeros.data.remote.ExerciseDataSource
 import com.janus.aprendiendonumeros.data.remote.ImageDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpBinding
-import com.janus.aprendiendonumeros.presentation.AuthViewModel
-import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
-import com.janus.aprendiendonumeros.presentation.ResourceImageViewModel
-import com.janus.aprendiendonumeros.presentation.ResourceImageViewModelFactory
-import com.janus.aprendiendonumeros.repository.auth.AuthImpl
-import com.janus.aprendiendonumeros.repository.resourceimage.ResourceImageImpl
+import com.janus.aprendiendonumeros.domain.auth.AuthImpl
+import com.janus.aprendiendonumeros.domain.exercise.ExerciseImpl
+import com.janus.aprendiendonumeros.domain.resourceimage.ImageImpl
+import com.janus.aprendiendonumeros.presentation.*
 import com.janus.aprendiendonumeros.ui.adapter.SignUpViewPagerAdapter
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
+import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
 import com.janus.aprendiendonumeros.ui.utilities.Statics
@@ -28,18 +28,20 @@ import java.util.*
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePager {
 
     private lateinit var binding: FragmentSignUpBinding
+    private val loadingDialog by lazy { LoadingDialog(requireActivity()) }
     private val authViewModel by viewModels<AuthViewModel> {
         AuthViewModelFactory(
-            AuthImpl(
-                AuthDataSource()
-            )
+            AuthImpl(AuthDataSource())
         )
     }
-    private val resourceImageViewModel by viewModels<ResourceImageViewModel> {
-        ResourceImageViewModelFactory(
-            ResourceImageImpl(
-                ImageDataSource()
-            )
+    private val resourceImageViewModel by viewModels<ImageViewModel> {
+        ImageViewModelFactory(
+            ImageImpl(ImageDataSource())
+        )
+    }
+    private val exerciseViewModel by viewModels<ExerciseViewModel> {
+        ExerciseViewModelFactory(
+            ExerciseImpl(ExerciseDataSource())
         )
     }
 
@@ -84,6 +86,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
     }
 
     override fun finish() {
+        User.staticInstance.id = UUID.randomUUID().toString()
         validateData()
     }
     //End ControllablePager override method
@@ -93,39 +96,54 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
             User.staticInstance.nickName.isEmpty() -> messageYouForgotData("un nombre de usuario")
             User.staticInstance.passwordChild.isEmpty() -> messageYouForgotData("la contraseña para el inicio de sesión del niño")
             User.staticInstance.passwordAdult.isEmpty() -> messageYouForgotData("la contraseña para el inicio de sesión del adulto acargo de la cuenta")
-            else -> validateProfileImage()
+            else -> saveProfileImage(Statics.profileImageBitmap)
         }
     }
 
-    private fun validateProfileImage() {
-        val userId: String = UUID.randomUUID().toString()
-        saveProfileImage(Statics.profileImageBitmap, userId)
-    }
-
-    private fun saveProfileImage(bitmap: Bitmap, userId: String) {
-        resourceImageViewModel.saveProfileImage(bitmap, userId)
+    private fun saveProfileImage(bitmap: Bitmap) {
+        resourceImageViewModel.saveProfileImage(bitmap, User.staticInstance.id)
             .observe(viewLifecycleOwner, { result ->
                 when (result) {
-                    is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                        View.VISIBLE
+                    is Resource.Loading -> loadingDialog.startDialog("Guardando imagen de perfil...")
                     is Resource.Success -> {
                         User.staticInstance.image = result.data
-                        signUp(userId, User.staticInstance)
+                        signUp(User.staticInstance)
                     }
-                    is Resource.Failure -> resultFailure(result.exception)
+                    is Resource.Failure -> {
+                        loadingDialog.dismiss()
+                        resultFailure(result.exception)
+                    }
                 }
             })
     }
 
-    private fun signUp(userId: String, user: User) {
-        authViewModel.signUp(userId, user).observe(viewLifecycleOwner, { result ->
+    private fun signUp(user: User) {
+        authViewModel.signUp(user).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                    View.VISIBLE
-                is Resource.Success -> resultSuccess()
-                is Resource.Failure -> resultFailure(result.exception)
+                is Resource.Loading -> loadingDialog.setText("Guardando los datos del usuario...")
+                is Resource.Success -> saveExercises()
+                is Resource.Failure -> {
+                    loadingDialog.dismiss()
+                    resultFailure(result.exception)
+                }
             }
         })
+    }
+
+    private fun saveExercises() {
+        exerciseViewModel.createExercises(User.staticInstance.id)
+            .observe(viewLifecycleOwner, { result ->
+                when (result) {
+                    is Resource.Loading -> loadingDialog.setText("Creando datos del menú...")
+                    is Resource.Success -> {
+                        loadingDialog.dismiss()
+                        resultSuccess()
+                    }
+                    is Resource.Failure -> {
+                        loadingDialog.dismiss()
+                    }
+                }
+            })
     }
 
     private fun resultSuccess() {
@@ -134,11 +152,19 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
             title = "¡Genial!",
             text = "La cuenta de usuario se creo correctamente."
         )
+        User.staticInstance.id = ""
+        User.staticInstance.image = ""
+        User.staticInstance.gender = null
+        User.staticInstance.birthDate = null
+        User.staticInstance.email = null
+        User.staticInstance.passwordAdult = ""
+        User.staticInstance.passwordChild = ""
+        User.staticInstance.coins = 0
+
         goTo(R.id.action_signUp_to_signIn)
     }
 
     private fun resultFailure(exception: Exception) {
-        binding.containerProgressBar.progressBar.visibility = View.GONE
         mContext.showDialogInformation(
             icon = InformationDialog.ICON_ERROR,
             title = "¡Oh, no! No se pudo crear la cuenta",

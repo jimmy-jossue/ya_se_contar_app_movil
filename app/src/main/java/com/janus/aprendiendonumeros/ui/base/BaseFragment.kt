@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment(val layout: Int) : Fragment(layout) {
+abstract class BaseFragment(layout: Int) : Fragment(layout) {
 
     protected lateinit var mContext: BaseActivity
 

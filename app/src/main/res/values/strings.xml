@@ -64,5 +64,7 @@
     <string name="response">Respuesta</string>
     <string name="incorrect">Incorrecto</string>
     <string name="what_is_the_sum">¿Cuál es la suma de estos dos números?</string>
+    <string name="number_zero">0</string>
+    <string name="title_activity_example">ExampleActivity</string>
 
 </resources>

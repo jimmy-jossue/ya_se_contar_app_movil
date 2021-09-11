@@ -59,7 +59,8 @@ class SignUpGenderFragment : BaseFragment(R.layout.fragment_sign_up_gender),
 
         gender = when (view.id) {
             binding.ivBoy.id -> Constant.GENDER_MALE
-            else -> Constant.GENDER_MALE
+            binding.ivGirl.id -> Constant.GENDER_FEMALE
+            else -> null
         }
     }
 

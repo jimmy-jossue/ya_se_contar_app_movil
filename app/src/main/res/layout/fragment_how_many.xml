@@ -1,147 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.game.HowManyFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_bg_know_numbers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_coins"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/btn_size_small"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:layout_marginTop="@dimen/separation_small"
+        android:background="@drawable/bg_blurred"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/separation_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_bg_know_numbers"
+            android:id="@+id/iv_coin"
+            android:layout_width="@dimen/size_extra_small"
+            android:layout_height="@dimen/size_extra_small"
+            android:layout_marginEnd="@dimen/separation_extra_small"
+            android:background="@drawable/ic_coin"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_back_to_menu"
-            android:layout_width="@dimen/btn_size_small"
-            android:layout_height="@dimen/btn_size_extra_small"
-            android:layout_margin="@dimen/separation_small"
-            android:background="@drawable/ic_btn_main_menu"
-            android:contentDescription="@string/btn_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_question"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_coin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_60sdp"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:gravity="center_horizontal"
-            android:shadowColor="@color/black"
-            android:shadowRadius="10"
-            android:textColor="@color/text"
-            android:textSize="@dimen/text_title"
+            android:layout_marginStart="@dimen/separation_extra_small"
+            android:gravity="bottom"
+            android:letterSpacing="-.03"
+            android:text="@string/number_zero"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_30ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_coin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_back_to_menu"
-            tools:text="¿Cuantas mariposas hay?" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_repeat_question"
-            android:layout_width="@dimen/btn_size_small"
-            android:layout_height="@dimen/btn_size_extra_small"
-            android:layout_margin="@dimen/separation_small"
-            android:background="@drawable/ic_sound_normal"
-            android:contentDescription="@string/btn_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RelativeLayout
-            android:id="@+id/container_images"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="@dimen/separation_extra_small"
-            android:layout_marginVertical="@dimen/separation_small"
-            app:layout_constraintBottom_toTopOf="@+id/btn_option_two"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_question" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_option_one"
-            android:layout_width="@dimen/btn_size_medium"
-            android:layout_height="@dimen/btn_size_medium"
-            android:layout_marginHorizontal="@dimen/separation_small"
-            android:background="@drawable/btn_bubble_option"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:gravity="center"
-            android:textColor="@color/dark"
-            android:textSize="@dimen/_45ssp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_option_two"
-            app:layout_constraintEnd_toStartOf="@id/btn_option_two"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_option_two"
-            tools:text="10" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_option_two"
-            android:layout_width="@dimen/btn_size_medium"
-            android:layout_height="@dimen/btn_size_medium"
-            android:background="@drawable/btn_bubble_option"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:gravity="center"
-            android:textColor="@color/dark"
-            android:textSize="@dimen/_45ssp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_option_three"
-            app:layout_constraintStart_toEndOf="@+id/btn_option_one"
-            android:layout_marginHorizontal="@dimen/separation_small"
-            android:layout_marginBottom="@dimen/separation_small"
-            tools:text="10" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_option_three"
-            android:layout_width="@dimen/btn_size_medium"
-            android:layout_height="@dimen/btn_size_medium"
-            android:layout_marginHorizontal="@dimen/separation_small"
-            android:background="@drawable/btn_bubble_option"
-            android:fontFamily="@font/balsamiq_sans_bold"
-            android:gravity="center"
-            android:textColor="@color/dark"
-            android:textSize="@dimen/_45ssp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_option_two"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_option_two"
-            app:layout_constraintTop_toTopOf="@+id/btn_option_two"
-            tools:text="1" />
+            app:layout_constraintStart_toEndOf="@id/iv_coin"
+            app:layout_constraintTop_toTopOf="@id/iv_coin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/container_progress_bar"
-        layout="@layout/progress_bar" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_back_to_menu"
+        android:layout_width="@dimen/btn_size_small"
+        android:layout_height="@dimen/btn_size_extra_small"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/ic_btn_main_menu"
+        android:contentDescription="@string/btn_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black_25"
-            android:paddingHorizontal="@dimen/separation_long"
-            android:paddingVertical="@dimen/separation_small"
-            android:visibility="gone">
+    <TextView
+        android:id="@+id/tv_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_110sdp"
+        android:layout_marginEnd="@dimen/_120sdp"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:gravity="center_horizontal"
+        android:shadowColor="@color/black"
+        android:shadowRadius="10"
+        android:textColor="@color/text"
+        android:textSize="@dimen/text_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_repeat_question"
+        app:layout_constraintTop_toTopOf="@+id/btn_back_to_menu"
+        tools:text="¿Cuantas mariposas hay?" />
 
-            <include
-                android:id="@+id/dialog"
-                layout="@layout/dialog_end_of_exercise"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/separation_long" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_repeat_question"
+        android:layout_width="@dimen/btn_size_small"
+        android:layout_height="@dimen/btn_size_extra_small"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/ic_sound_normal"
+        android:contentDescription="@string/btn_back"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_to_menu"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <RelativeLayout
+        android:id="@+id/container_images"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/separation_extra_small"
+        android:layout_marginTop="@dimen/separation_small"
+        android:layout_marginBottom="@dimen/separation_small"
+        app:layout_constraintBottom_toTopOf="@+id/btn_option_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_option_one"
+        android:layout_width="@dimen/btn_size_medium"
+        android:layout_height="@dimen/btn_size_medium"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:background="@drawable/btn_bubble_option"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:gravity="center"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/_45ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_option_two"
+        app:layout_constraintEnd_toStartOf="@id/btn_option_two"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_option_two"
+        tools:text="10" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_option_two"
+        android:layout_width="@dimen/btn_size_medium"
+        android:layout_height="@dimen/btn_size_medium"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:layout_marginBottom="@dimen/separation_small"
+        android:background="@drawable/btn_bubble_option"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:gravity="center"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/_45ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_option_three"
+        app:layout_constraintStart_toEndOf="@+id/btn_option_one"
+        tools:text="10" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_option_three"
+        android:layout_width="@dimen/btn_size_medium"
+        android:layout_height="@dimen/btn_size_medium"
+        android:layout_marginHorizontal="@dimen/separation_small"
+        android:background="@drawable/btn_bubble_option"
+        android:fontFamily="@font/balsamiq_sans_bold"
+        android:gravity="center"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/_45ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_option_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_option_two"
+        app:layout_constraintTop_toTopOf="@+id/btn_option_two"
+        tools:text="1" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_info_response"
+        android:layout_width="@dimen/btn_size_medium"
+        android:layout_height="@dimen/btn_size_medium"
+        android:elevation="@dimen/_10sdp"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

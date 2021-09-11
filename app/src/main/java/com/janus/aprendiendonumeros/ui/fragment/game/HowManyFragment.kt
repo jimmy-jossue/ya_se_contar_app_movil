@@ -1,149 +1,117 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
+import android.app.Activity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.firestore.FirebaseFirestore
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
-import com.janus.aprendiendonumeros.data.model.LogExercise
+import com.janus.aprendiendonumeros.data.model.Exercise
 import com.janus.aprendiendonumeros.data.model.Rank
 import com.janus.aprendiendonumeros.data.model.ResourceImage
 import com.janus.aprendiendonumeros.data.remote.ImageDataSource
 import com.janus.aprendiendonumeros.data.remote.ImageDataSource.Level
 import com.janus.aprendiendonumeros.databinding.FragmentHowManyBinding
-import com.janus.aprendiendonumeros.presentation.ResourceImageViewModel
-import com.janus.aprendiendonumeros.presentation.ResourceImageViewModelFactory
-import com.janus.aprendiendonumeros.repository.resourceimage.ResourceImageImpl
-import com.janus.aprendiendonumeros.ui.base.BaseFragment
-import com.janus.aprendiendonumeros.ui.utilities.*
+import com.janus.aprendiendonumeros.domain.resourceimage.ImageImpl
+import com.janus.aprendiendonumeros.presentation.ImageViewModel
+import com.janus.aprendiendonumeros.presentation.ImageViewModelFactory
+import com.janus.aprendiendonumeros.ui.base.BaseGameFragment
+import com.janus.aprendiendonumeros.ui.base.MultiFigurePrinter
+import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
+import com.janus.aprendiendonumeros.ui.fragment.menu.MenuFragmentArgs
+import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
+import com.janus.aprendiendonumeros.ui.utilities.animationJumpCoin
+import com.janus.aprendiendonumeros.ui.utilities.linkViews
+import com.janus.aprendiendonumeros.ui.utilities.removeViews
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class HowManyFragment : BaseFragment(R.layout.fragment_how_many) {
+class HowManyFragment : BaseGameFragment(R.layout.fragment_how_many,
+    Exercise.NAME_HOW_MANY,
+    Exercise.NAME_LESS_OR_MORE), MultiFigurePrinter {
 
     private lateinit var binding: FragmentHowManyBinding
+    private val args: MenuFragmentArgs by navArgs()
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
+    private val anim: UIAnimations by lazy { UIAnimations(requireContext()) }
     private lateinit var listNumbers: List<Int>
-    private lateinit var listImages: List<ResourceImage>
-    private lateinit var level: Level
-    private lateinit var randomResourceImage: ResourceImage
+    override lateinit var activity: Activity
+    override lateinit var listImages: List<ResourceImage>
+    override lateinit var randomResourceImage: ResourceImage
     private var indexNumbers: Int = 0
-    private val soundCorrect: Sound =
-        Sound("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/general_sounds%2Fcorrect.mp3?alt=media&token=341fa8c6-fd7c-4ab2-9024-a9aac170c99f")
-    private val soundIncorrect: Sound =
-        Sound("https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/general_sounds%2Fincorrect.mp3?alt=media&token=5ab58ab0-2514-4fb7-8227-b1de04235bd4")
-    private val log: LogExercise = LogExercise()
-    private val viewModel by viewModels<ResourceImageViewModel> {
-        ResourceImageViewModelFactory(
-            ResourceImageImpl(
-                ImageDataSource()
-            )
+    private val viewModel by viewModels<ImageViewModel> {
+        ImageViewModelFactory(
+            ImageImpl(ImageDataSource())
         )
     }
 
     override fun initUI(view: View) {
-        level = Level.FIRST
+        super.initUI(view)
         binding = FragmentHowManyBinding.bind(view)
-        generateListOfNumbers()
+        setUpData()
         binding.containerImages.post { initGame() }
         addEvents()
     }
 
-    private fun addEvents() {
-        binding.btnBackToMenu.setOnClickListener { goTo(R.id.action_howMany_to_menu) }
-        binding.btnOptionOne.setOnClickListener { evaluateOption((it as AppCompatButton)) }
-        binding.btnOptionTwo.setOnClickListener { evaluateOption((it as AppCompatButton)) }
-        binding.btnOptionThree.setOnClickListener { evaluateOption((it as AppCompatButton)) }
-        binding.btnRepeatQuestion.setOnClickListener { }
-    }
-
-
-    private fun initGame() {
-        viewModel.fetchResourceImage(level).observe(viewLifecycleOwner, { result ->
-            when (result) {
-                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                    View.VISIBLE
-                is Resource.Success -> {
-                    binding.containerProgressBar.progressBar.visibility = View.GONE
-                    listImages = result.data
-                    generateQuestion(listNumbers[indexNumbers])
-                }
-                is Resource.Failure -> {
-                    binding.containerProgressBar.progressBar.visibility = View.GONE
-                }
-            }
-        })
+    private fun setUpData() {
+        userId = args.userId
+        level = Level.FIRST
+        generateListOfNumbers()
+        attemptsTotal = listNumbers.size
+        activity = mContext
     }
 
     private fun generateListOfNumbers() {
         listNumbers = (1..9).toList().shuffled()
-        //Numbers.getRandomNumberList(1, 9)
     }
 
-    private fun addImages(totalImages: Int) {
-        val randomNumber: Int = (listImages.indices).random()
-        randomResourceImage = listImages[randomNumber]
-
-        val imageViewSize = when {
-            (totalImages < 3) -> resources.getDimension(R.dimen.img_size_large)
-            (totalImages < 5) -> resources.getDimension(R.dimen.img_size_medium)
-            else -> resources.getDimension(R.dimen.img_size_small)
-        }.toInt()
-
-        val containerWidth = (binding.containerImages.measuredWidth - imageViewSize)
-        val containerHeight = (binding.containerImages.measuredHeight - imageViewSize)
-
-        for (i: Int in 1..totalImages) {
-            var x: Int = (0..containerWidth).random()
-            var y: Int = (0..containerHeight).random()
-
-            while (binding.containerImages.positionIsRepeated(x, y, imageViewSize)) {
-                x = (0..containerWidth).random()
-                y = (0..containerHeight).random()
+    override fun initGame() {
+        viewModel.getImages(level).observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Loading -> loadingDialog.startDialog("Cargando imagenes...")
+                is Resource.Success -> {
+                    loadingDialog.dismiss()
+                    listImages = result.data
+                    generateQuestion(listNumbers[indexNumbers])
+                }
+                is Resource.Failure -> loadingDialog.dismiss()
             }
-            val view: ImageView = createImage(x, y, imageViewSize)
-            binding.containerImages.addView(view)
-            binding.containerImages.requestLayout()
-            binding.containerImages.invalidate()
-        }
+        })
     }
 
-    private fun createImage(x: Int, y: Int, size: Int): ImageView {
-        val layoutParams: ViewGroup.LayoutParams = ViewGroup.LayoutParams(size, size)
-        val image = ImageView(context).apply {
-            this.layoutParams = layoutParams
-            this.adjustViewBounds = true
-            this.x = x.toFloat()
-            this.y = y.toFloat()
+    private fun addEvents() {
+        binding.btnBackToMenu.setOnClickListener {
+            finish(waitTime = 0) { }
         }
-        image.loadImageFromUrl(randomResourceImage.icon)
-        return image
+        binding.btnOptionOne.setOnClickListener { evaluateOption((it as AppCompatButton)) }
+        binding.btnOptionTwo.setOnClickListener { evaluateOption((it as AppCompatButton)) }
+        binding.btnOptionThree.setOnClickListener { evaluateOption((it as AppCompatButton)) }
+        binding.btnRepeatQuestion.setOnClickListener { }
+        returnToMainMenu()
     }
 
     private fun generateTextQuestion() {
-        val howMany: String =
-            if (randomResourceImage.gender == Constant.GENDER_FEMALE) "Cuántas" else "Cuántos"
-        var name: String
         FirebaseFirestore.getInstance().collection("vocabularies").document("es")
             .get()
             .addOnCompleteListener {
-                name = it.result?.get(randomResourceImage.name).toString()
-                binding.tvQuestion.text = getString(R.string.how_many_question_es, howMany, name)
+                val question = it.result?.get(randomResourceImage.question).toString()
+                binding.tvQuestion.text = question
             }
     }
 
     private fun generateOptions(number: Int) {
-        val listOptions: List<AppCompatButton> =
-            listOf(binding.btnOptionOne, binding.btnOptionTwo, binding.btnOptionThree)
-        val answerPosition: Int = (0..2).random()
-        var distractionOne: Int
-        var distractionTwo: Int
-
         val rank: Rank = when (level) {
             Level.FIRST -> Rank(1, listNumbers.size)
             Level.SECOND -> Rank.getRank(number, 5, listNumbers)
             else -> Rank.getRank(number, 2, listNumbers)
         }
+
+        var distractionOne: Int
+        var distractionTwo: Int
 
         do {
             distractionOne = (rank.min..rank.max).random()
@@ -152,65 +120,99 @@ class HowManyFragment : BaseFragment(R.layout.fragment_how_many) {
             distractionTwo = (rank.min..rank.max).random()
         } while (distractionTwo == number || distractionTwo == distractionOne)
 
-        when (answerPosition) {
-            0 -> {
-                listOptions[0].text = number.toString()
-                listOptions[1].text = distractionOne.toString()
-                listOptions[2].text = distractionTwo.toString()
-            }
-            1 -> {
-                listOptions[0].text = distractionOne.toString()
-                listOptions[1].text = number.toString()
-                listOptions[2].text = distractionTwo.toString()
-            }
-            else -> {
-                listOptions[0].text = distractionOne.toString()
-                listOptions[1].text = distractionTwo.toString()
-                listOptions[2].text = number.toString()
-            }
+        when ((0..2).random()) {
+            0 -> orderOption(number, distractionOne, distractionTwo)
+            1 -> orderOption(distractionTwo, number, distractionOne)
+            else -> orderOption(distractionOne, distractionTwo, number)
         }
+    }
 
-        listOptions.forEach {
-            if (it.visibility == View.INVISIBLE) {
-                it.visibility = View.VISIBLE
-            }
-        }
+    private fun orderOption(firstOption: Int, secondOption: Int, thirdOption: Int) {
+        val listOptions = listOf(binding.btnOptionOne, binding.btnOptionTwo, binding.btnOptionThree)
+        listOptions[0].text = firstOption.toString()
+        listOptions[1].text = secondOption.toString()
+        listOptions[2].text = thirdOption.toString()
     }
 
     private fun evaluateOption(button: AppCompatButton) {
         if (listNumbers[indexNumbers] == button.text.toString().toInt()) {
-            correct()
+            correct(action = {
+                lifecycleScope.launch {
+                    informationResponse(button, true)
+                    //binding.root.animationJumpCoin(button, 3)
+                    binding.root.animationJumpCoin(button,
+                        binding.containerCoins.x,
+                        binding.containerCoins.y,
+                        3)
+                    binding.tvCoin.addCoins(binding.containerCoins, 1)
+                }
+            })
         } else {
-            incorrect()
+            incorrect(action = {
+                lifecycleScope.launch {
+                    playSoundIncorrect()
+                    informationResponse(button, false)
+                }
+            })
         }
 
         indexNumbers++
         if (indexNumbers < listNumbers.size) {
-            binding.containerImages.removeViews()
-            generateQuestion(listNumbers[indexNumbers])
+            lifecycleScope.launch {
+                delay(1500)
+                binding.containerImages.removeViews()
+                generateQuestion(listNumbers[indexNumbers])
+            }
         } else {
-            finish(log)
+            if (isPerfectScore()) {
+                binding.tvCoin.addCoins(binding.containerCoins, 20)
+            }
+            finish(
+                waitTime = 2000,
+                actionBefore = {
+
+                }
+            )
         }
     }
 
-    private fun finish(log: LogExercise) {
-        mContext.showDialogEndOfExercise("jimmy", 0, 0, log)
-    }
-
-
     private fun generateQuestion(number: Int) {
-        addImages(number)
+        addImages(binding.containerImages, number)
         generateTextQuestion()
         generateOptions(number)
+        optionsIsEnabled(true)
     }
 
-    private fun incorrect() {
-        log.attemptsIncorrect++
-        soundIncorrect.play()
+    private fun optionsIsEnabled(isEnabled: Boolean) {
+        binding.btnOptionOne.isEnabled = isEnabled
+        binding.btnOptionTwo.isEnabled = isEnabled
+        binding.btnOptionThree.isEnabled = isEnabled
     }
 
-    private fun correct() {
-        log.attemptsCorrect++
-        soundCorrect.play()
+    private suspend fun informationResponse(button: AppCompatButton, isCorrect: Boolean) {
+        optionsIsEnabled(false)
+        val idImage: Int = when (isCorrect) {
+            true -> R.drawable.ic_correct
+            false -> R.drawable.ic_incorrect
+        }
+        binding.ivInfoResponse.setImageResource(idImage)
+        binding.root.linkViews(binding.ivInfoResponse.id, button.id)
+        anim.startAnimation(binding.ivInfoResponse, R.anim.animation_response)
+        delay(1000)
+        binding.ivInfoResponse.visibility = View.INVISIBLE
+    }
+
+    private fun TextView.addCoins(view: View, addCoins: Int) {
+        val textView: TextView = this
+        val waitTime: Long = (2000 / addCoins).toLong()
+        lifecycleScope.launch {
+            for (coin in 1..addCoins) {
+                coins++
+                textView.text = coins.toString()
+                playSoundCoin()
+                UIAnimations(context).startAnimation(view, R.anim.fast_zoom)
+                delay(waitTime)
+            }
+        }
     }
 }

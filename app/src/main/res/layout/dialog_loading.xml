@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/separation_small">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/btn_size_semi_small"
+        android:layout_height="@dimen/btn_size_semi_small"
+        android:layout_marginBottom="@dimen/separation_small"
+        android:indeterminateDrawable="@drawable/ic_progress" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsamiq_sans_regular"
+        android:gravity="center"
+        android:maxWidth="@dimen/_150sdp"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/_15ssp"
+        tools:text="Comprobando informacion del usuario" />
+
+
+</LinearLayout>

@@ -19,7 +19,7 @@ class ImageDataSource {
         private const val QUALITY_HIGH: Int = 100
     }
 
-    suspend fun getResourceImages(level: Level): List<ResourceImage> {
+    suspend fun getImages(level: Level): List<ResourceImage> {
         val list = mutableListOf<ResourceImage>()
         val path: String = when (level) {
             Level.FIRST -> FIRST_LEVEL
@@ -35,6 +35,7 @@ class ImageDataSource {
         }
         return list
     }
+
 
     suspend fun saveProfileImage(imageBitmap: Bitmap, idUser: String): String {
         val storageRef = FirebaseStorage.getInstance().reference

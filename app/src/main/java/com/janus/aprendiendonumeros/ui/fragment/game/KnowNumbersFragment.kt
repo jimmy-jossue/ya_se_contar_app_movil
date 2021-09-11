@@ -1,121 +1,105 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
-import android.os.Bundle
+import android.app.Activity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
+import com.janus.aprendiendonumeros.data.model.Exercise
 import com.janus.aprendiendonumeros.data.model.ResourceImage
 import com.janus.aprendiendonumeros.data.remote.ImageDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentKnowNumbersBinding
-import com.janus.aprendiendonumeros.presentation.ResourceImageViewModel
-import com.janus.aprendiendonumeros.presentation.ResourceImageViewModelFactory
-import com.janus.aprendiendonumeros.repository.resourceimage.ResourceImageImpl
-import com.janus.aprendiendonumeros.ui.utilities.goTo
-import com.janus.aprendiendonumeros.ui.utilities.loadImageFromUrl
-import com.janus.aprendiendonumeros.ui.utilities.positionIsRepeated
+import com.janus.aprendiendonumeros.domain.resourceimage.ImageImpl
+import com.janus.aprendiendonumeros.presentation.ImageViewModel
+import com.janus.aprendiendonumeros.presentation.ImageViewModelFactory
+import com.janus.aprendiendonumeros.ui.base.BaseGameFragment
+import com.janus.aprendiendonumeros.ui.base.MultiFigurePrinter
+import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 
-class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
-
+class KnowNumbersFragment : BaseGameFragment(
+    R.layout.fragment_know_numbers,
+    Exercise.NAME_KNOW_NUMBERS,
+    Exercise.NAME_HOW_MANY
+), MultiFigurePrinter {
     private lateinit var binding: FragmentKnowNumbersBinding
-    private lateinit var level: ImageDataSource.Level
-    private lateinit var listImages: List<ResourceImage>
-    private lateinit var randomResourceImage: ResourceImage
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
+    private val args: KnowNumbersFragmentArgs by navArgs()
+    override lateinit var activity: Activity
+    override lateinit var listImages: List<ResourceImage>
+    override lateinit var randomResourceImage: ResourceImage
     private var indexNumbers: Int = 1
-    private val viewModel by viewModels<ResourceImageViewModel> {
-        ResourceImageViewModelFactory(
-            ResourceImageImpl(
-                ImageDataSource()
-            )
+
+    private val viewModel by viewModels<ImageViewModel> {
+        ImageViewModelFactory(
+            ImageImpl(ImageDataSource())
         )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initUI(view: View) {
+        super.initUI(view)
         binding = FragmentKnowNumbersBinding.bind(view)
-        level = ImageDataSource.Level.FIRST
-
-        binding.btnBackToMenu.setOnClickListener { goTo(R.id.action_knowNumbers_to_menu) }
-        binding.btnNext.setOnClickListener { next() }
-        binding.btnPrevious.setOnClickListener { previous() }
+        setUpData()
+        setUpEvents()
         binding.containerImages.post { initGame() }
+        returnToMainMenu()
     }
 
-    private fun initGame() {
-        viewModel.fetchResourceImage(level).observe(viewLifecycleOwner, { result ->
+    private fun setUpData() {
+        level = ImageDataSource.Level.FIRST
+        userId = args.userId
+        attemptsTotal = 9
+        activity = mContext
+    }
+
+    private fun setUpEvents() {
+        binding.btnBackToMenu.setOnClickListener {
+            finish(100) {}
+        }
+        binding.btnNext.setOnClickListener { next() }
+        binding.btnPrevious.setOnClickListener { previous() }
+    }
+
+    override fun initGame() {
+        viewModel.getImages(level).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> binding.containerProgressBar.progressBar.visibility =
-                    View.VISIBLE
+                is Resource.Loading -> loadingDialog.startDialog("Cargando...")
                 is Resource.Success -> {
-                    Toast.makeText(context, "Success\n $indexNumbers", Toast.LENGTH_SHORT).show()
-                    binding.containerProgressBar.progressBar.visibility = View.GONE
+                    loadingDialog.dismiss()
                     listImages = result.data
-                    addImages(indexNumbers)
+                    addImages(binding.containerImages, indexNumbers)
                     binding.tvQuantity.text = indexNumbers.toString()
                 }
                 is Resource.Failure -> {
+                    loadingDialog.dismiss()
                     Toast.makeText(
                         context,
                         "Failure: ${result.exception.message}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    binding.containerProgressBar.progressBar.visibility = View.GONE
                 }
             }
         })
     }
 
-    private fun addImages(totalImages: Int) {
-        val randomNumber: Int = (listImages.indices).random()
-        randomResourceImage = listImages[randomNumber]
-
-        val imageViewSize = when {
-            (totalImages < 3) -> resources.getDimension(R.dimen.img_size_large)
-            (totalImages < 5) -> resources.getDimension(R.dimen.img_size_medium)
-            else -> resources.getDimension(R.dimen.img_size_small)
-        }.toInt()
-
-        val containerWidth = (binding.containerImages.measuredWidth - imageViewSize)
-        val containerHeight = (binding.containerImages.measuredHeight - imageViewSize)
-
-        for (i: Int in 1..totalImages) {
-            var x: Int = (0..containerWidth).random()
-            var y: Int = (0..containerHeight).random()
-
-            while (binding.containerImages.positionIsRepeated(x, y, imageViewSize)) {
-                x = (0..containerWidth).random()
-                y = (0..containerHeight).random()
-            }
-
-            val view: ImageView = createImage(x, y, imageViewSize)
-            binding.containerImages.addView(view)
-        }
-    }
-
-    private fun createImage(x: Int, y: Int, size: Int): ImageView {
-        val layoutParams: ViewGroup.LayoutParams = ViewGroup.LayoutParams(size, size)
-        val image = ImageView(context)
-        image.layoutParams = layoutParams
-        image.adjustViewBounds = true
-        image.x = x.toFloat()
-        image.y = y.toFloat()
-        image.loadImageFromUrl(randomResourceImage.icon)
-        return image
-    }
-
     private fun next() {
-        if (indexNumbers < 9) {
+        if (indexNumbers < attemptsTotal) {
             binding.containerImages.removeAllViews()
             indexNumbers++
-            addImages(indexNumbers)
+            correct {}
+            addImages(binding.containerImages, indexNumbers)
             binding.tvQuantity.text = indexNumbers.toString()
         }
 
-        if (indexNumbers == 9) binding.btnNext.visibility = View.INVISIBLE
+        if (indexNumbers == attemptsTotal) {
+            binding.btnNext.visibility = View.INVISIBLE
+            correct {}
+            finish() {
+                binding.btnNext.isEnabled = false
+                binding.btnPrevious.isEnabled = false
+            }
+        }
         if (binding.btnPrevious.visibility != View.VISIBLE) binding.btnPrevious.visibility =
             View.VISIBLE
     }
@@ -124,10 +108,9 @@ class KnowNumbersFragment : Fragment(R.layout.fragment_know_numbers) {
         if (indexNumbers > 1) {
             binding.containerImages.removeAllViews()
             indexNumbers--
-            addImages(indexNumbers)
+            addImages(binding.containerImages, indexNumbers)
             binding.tvQuantity.text = indexNumbers.toString()
         }
-
         if (indexNumbers == 1) binding.btnPrevious.visibility = View.INVISIBLE
         if (binding.btnNext.visibility != View.VISIBLE) binding.btnNext.visibility = View.VISIBLE
     }

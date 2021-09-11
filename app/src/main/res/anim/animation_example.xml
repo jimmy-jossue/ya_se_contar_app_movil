@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillBefore="false"
+    android:fillEnabled="false"
     android:interpolator="@android:anim/accelerate_decelerate_interpolator">
 
     <alpha
@@ -9,7 +11,7 @@
         android:toAlpha="1.0" />
 
     <scale
-        android:duration="100"
+        android:duration="120"
         android:fromXScale="1"
         android:fromYScale="1"
         android:pivotX="50%"
@@ -21,7 +23,7 @@
         android:toYScale="0.8" />
 
     <translate
-        android:duration="350"
+        android:duration="250"
         android:fromXDelta="0"
         android:fromYDelta="0"
         android:repeatCount="1"
@@ -33,6 +35,6 @@
         android:duration="300"
         android:fillAfter="true"
         android:fromAlpha="1.0"
-        android:startOffset="700"
+        android:startOffset="400"
         android:toAlpha="0.0" />
 </set>

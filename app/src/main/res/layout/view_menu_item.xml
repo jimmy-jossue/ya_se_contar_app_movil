@@ -11,7 +11,7 @@
         android:background="@drawable/bg_item_menu_button_locked"
         android:padding="@dimen/menuItem_button_separator_small"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_blocked_activity"
+        android:src="@drawable/ic_locked_exercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

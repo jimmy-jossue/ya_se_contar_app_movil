@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
-import com.janus.aprendiendonumeros.repository.auth.AuthProvider
+import com.janus.aprendiendonumeros.domain.auth.AuthProvider
 import kotlinx.coroutines.Dispatchers
 
 class AuthViewModel(private val repository: AuthProvider) : ViewModel() {
@@ -28,10 +28,10 @@ class AuthViewModel(private val repository: AuthProvider) : ViewModel() {
         }
     }
 
-    fun signUp(userId: String, user: User) = liveData(Dispatchers.IO) {
+    fun signUp(user: User) = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
-            emit(Resource.Success(repository.signUp(userId, user)))
+            emit(Resource.Success(repository.signUp(user)))
         } catch (ex: Exception) {
             emit(Resource.Failure(ex))
         }

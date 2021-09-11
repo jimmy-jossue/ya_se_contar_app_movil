@@ -8,9 +8,7 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.janus.aprendiendonumeros.data.model.LogExercise
 import com.janus.aprendiendonumeros.ui.dialog.ConfirmBeingAdultDialog
-import com.janus.aprendiendonumeros.ui.dialog.EndOfExerciseDialog
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import com.janus.aprendiendonumeros.ui.dialog.ProfileImageDialog
 import com.janus.aprendiendonumeros.ui.listener.NotifyDrawableListener
@@ -34,7 +32,6 @@ abstract class BaseActivity : AppCompatActivity(), ProfileImageDialog.Listener,
     }
 
     abstract fun getLayout(): Int
-
     abstract fun initUI()
 
     protected fun hideSystemUI() {
@@ -83,27 +80,6 @@ abstract class BaseActivity : AppCompatActivity(), ProfileImageDialog.Listener,
             putString(InformationDialog.ARGUMENT_TEXT, text)
         }
         val dialog = InformationDialog()
-        dialog.arguments = arguments
-        dialog.show(supportFragmentManager, null)
-    }
-
-    fun showDialogEndOfExercise(
-        userId: String,
-        actionReturnMenu: Int,
-        actionNextExercise: Int,
-        logExercise: LogExercise,
-    ) {
-        val arguments: Bundle = Bundle().apply {
-            putString(EndOfExerciseDialog.USER_ID, userId)
-            putInt(EndOfExerciseDialog.ACTION_RETURN_MENU, actionReturnMenu)
-            putInt(EndOfExerciseDialog.ACTION_NEXT_EXERCISE, actionNextExercise)
-            putString(LogExercise.NAME_EXERCISE, logExercise.nameExercise)
-            putInt(LogExercise.ATTEMPTS_CORRECT, logExercise.attemptsCorrect)
-            putInt(LogExercise.ATTEMPTS_INCORRECT, logExercise.attemptsIncorrect)
-            putInt(LogExercise.ATTEMPTS_TOTAL, logExercise.attemptsTotal)
-            putInt(LogExercise.TIME_ELAPSED_IN_MILLISECONDS, logExercise.timeElapsedInMilliseconds)
-        }
-        val dialog = EndOfExerciseDialog()
         dialog.arguments = arguments
         dialog.show(supportFragmentManager, null)
     }

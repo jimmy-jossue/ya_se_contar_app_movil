@@ -1,4 +1,4 @@
-package com.janus.aprendiendonumeros.repository.settingssession
+package com.janus.aprendiendonumeros.domain.settingssession
 
 import com.janus.aprendiendonumeros.data.datastore.SettingsSessionDataStore
 import com.janus.aprendiendonumeros.data.model.SettingsSession

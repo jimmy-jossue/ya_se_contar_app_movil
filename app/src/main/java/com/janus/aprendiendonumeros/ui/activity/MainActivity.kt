@@ -1,6 +1,7 @@
-package com.janus.aprendiendonumeros.ui.base
+package com.janus.aprendiendonumeros.ui.activity
 
 import com.janus.aprendiendonumeros.R
+import com.janus.aprendiendonumeros.ui.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 

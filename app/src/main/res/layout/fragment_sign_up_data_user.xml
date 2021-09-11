@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,15 +7,9 @@
     android:background="@color/bg_login"
     tools:context=".ui.fragment.auth.signup.SignUpDataUserFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/primary_light"
             android:fadingEdge="horizontal"
@@ -87,20 +81,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_forward"
-            android:layout_width="@dimen/width_button_short"
-            android:layout_height="@dimen/height_button_medium"
-            android:layout_margin="@dimen/separation_small"
-            android:background="@drawable/btn_next_bubble"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_forward"
+        android:layout_width="@dimen/width_button_short"
+        android:layout_height="@dimen/height_button_medium"
+        android:layout_margin="@dimen/separation_small"
+        android:background="@drawable/btn_next_bubble"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <include
-        android:id="@+id/container_progress_bar"
-        layout="@layout/progress_bar" />
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

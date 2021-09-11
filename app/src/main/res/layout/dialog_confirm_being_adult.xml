@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_410sdp"
+    android:layout_width="@dimen/_415sdp"
     android:layout_height="@dimen/_230sdp"
     android:background="@drawable/bg_dialog_information"
     android:padding="@dimen/separation_medium">
@@ -23,6 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/separation_small"
+        android:layout_marginEnd="@dimen/width_button_shorted"
         android:fontFamily="@font/balsamiq_sans_bold"
         android:maxWidth="@dimen/_300sdp"
         android:text="@string/confirm_being_adult"
@@ -30,6 +31,14 @@
         android:textSize="@dimen/_22ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/size_extra_small"
+        android:layout_height="@dimen/size_extra_small"
+        android:background="@drawable/btn_close"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -41,7 +50,7 @@
         android:text="@string/what_is_the_sum"
         android:textColor="@color/gray"
         android:textSize="@dimen/text_normal"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_icon"
         app:layout_constraintStart_toStartOf="@+id/tv_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -63,7 +72,7 @@
             android:layout_marginStart="@dimen/separation_long"
             android:elegantTextHeight="true"
             android:fontFamily="@font/balsamiq_sans_bold"
-            android:textColor="@color/dark"
+            android:textColor="@color/primary_dark"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_second_number"
@@ -78,7 +87,7 @@
             android:layout_marginEnd="@dimen/separation_long"
             android:elegantTextHeight="true"
             android:fontFamily="@font/balsamiq_sans_bold"
-            android:textColor="@color/dark"
+            android:textColor="@color/accent_dark"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

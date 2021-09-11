@@ -11,5 +11,6 @@ class Constant {
         const val STATUS_SELECTED: String = "selected"
         const val STATUS_DESELECTED: String = "deselected"
 
+        const val TIME_ZONE: String = "America/Mexico_City"
     }
 }

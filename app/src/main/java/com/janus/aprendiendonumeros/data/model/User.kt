@@ -3,6 +3,7 @@ package com.janus.aprendiendonumeros.data.model
 import com.google.firebase.Timestamp
 
 data class User(
+    var id: String = "",
     var nickName: String = "",
     var gender: String? = null,
     var image: String = "",
