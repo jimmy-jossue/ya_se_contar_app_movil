@@ -3,8 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/drawable/btn_close.xml" value="0.1425925925925926" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/drawable/btn_pic_selectable.xml" value="0.1425925925925926" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/drawable/ic_mark_deselected.xml" value="0.1425925925925926" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/drawable/ic_mark_selection.xml" value="0.1425925925925926" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/ProgressBar.xml" value="0.21145833333333333" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_how_many.xml" value="0.209375" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_in.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_in_adult.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_in_children.xml" value="0.2" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_up.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_up_birth_date.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_up_data_to_recover_account.xml" value="0.2" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_up_data_user.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/fragment_sign_up_password_child.xml" value="0.21145833333333333" />
+        <entry key="..\:/Users/anamg/Desktop/jimmy/Proyectos/Android/Aprendiendo_Numeros/code/app/src/main/res/layout/grid_images_password.xml" value="0.25" />
       </map>
     </option>
   </component>

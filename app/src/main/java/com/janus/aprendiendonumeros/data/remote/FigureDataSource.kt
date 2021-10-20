@@ -3,11 +3,11 @@ package com.janus.aprendiendonumeros.data.remote
 import android.graphics.Bitmap
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.janus.aprendiendonumeros.data.model.ResourceImage
+import com.janus.aprendiendonumeros.data.model.Figure
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 
-class ImageDataSource {
+class FigureDataSource {
 
     enum class Level { FIRST, SECOND, THIRD }
 
@@ -19,23 +19,22 @@ class ImageDataSource {
         private const val QUALITY_HIGH: Int = 100
     }
 
-    suspend fun getImages(level: Level): List<ResourceImage> {
-        val list = mutableListOf<ResourceImage>()
+    suspend fun getAll(level: String): List<Figure> {
+        val list = mutableListOf<Figure>()
         val path: String = when (level) {
-            Level.FIRST -> FIRST_LEVEL
-            Level.SECOND -> SECOND_LEVEL
-            Level.THIRD -> THIRD_LEVEL
+            Level.FIRST.toString() -> FIRST_LEVEL
+            Level.SECOND.toString() -> SECOND_LEVEL
+            else -> THIRD_LEVEL
         }
 
         val documentSnapshot = FirebaseFirestore.getInstance().collection(path).get().await()
         for (document in documentSnapshot.documents) {
-            document.toObject(ResourceImage::class.java)?.let {
+            document.toObject(Figure::class.java)?.let {
                 list.add(it)
             }
         }
         return list
     }
-
 
     suspend fun saveProfileImage(imageBitmap: Bitmap, idUser: String): String {
         val storageRef = FirebaseStorage.getInstance().reference

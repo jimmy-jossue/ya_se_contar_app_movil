@@ -8,15 +8,24 @@ import kotlinx.coroutines.tasks.await
 
 class ExerciseDataSource {
 
+    companion object {
+        const val PATH: String = "/exercises"
+        const val INDEX_IN_MENU: String = "indexInMenu"
+        const val NAME: String = "name"
+        const val IMAGE: String = "image"
+        const val STATUS: String = "status"
+        const val POSITION: String = "position"
+    }
+
     suspend fun createExercises(userId: String) {
         val map = getImages()
 
-        val userDocumentRef = FirebaseFirestore
+        val userDocumentReference = FirebaseFirestore
             .getInstance()
             .collection(User.PATH_USERS)
             .document(userId)
 
-        val exerciseCollectionRef = userDocumentRef.collection(Exercise.PATH_EXERCISES)
+        val exerciseCollectionRef = userDocumentReference.collection(PATH)
 
         var index = 0
         map.forEach { (keyName, value) ->
@@ -33,11 +42,11 @@ class ExerciseDataSource {
             }
 
             val data = hashMapOf(
-                Exercise.INDEX_IN_MENU to index,
-                Exercise.NAME to keyName,
-                Exercise.IMAGE to value,
-                Exercise.STATUS to status,
-                Exercise.POSITION to position,
+                INDEX_IN_MENU to index,
+                NAME to keyName,
+                IMAGE to value,
+                STATUS to status,
+                POSITION to position,
             )
             exerciseCollectionRef.document(keyName).set(data).await()
             index++
@@ -47,12 +56,14 @@ class ExerciseDataSource {
     private suspend fun getImages(): Map<String, String> {
         val map = mutableMapOf<String, String>()
 
-        val exercisesCollectionRef = FirebaseFirestore
+        val exercisesCollectionReference = FirebaseFirestore
             .getInstance()
             .collection("/defaults")
             .document("/default_exercises_images")
 
-        val data = exercisesCollectionRef.get().await()
+        val data = exercisesCollectionReference
+            .get()
+            .await()
 
         map[Exercise.NAME_KNOW_NUMBERS] = data.get(Exercise.NAME_KNOW_NUMBERS).toString()
         map[Exercise.NAME_SELECT_AND_COUNT] = data.get(Exercise.NAME_SELECT_AND_COUNT).toString()
@@ -60,7 +71,6 @@ class ExerciseDataSource {
         map[Exercise.NAME_HOW_MANY] = data.get(Exercise.NAME_HOW_MANY).toString()
         map[Exercise.NAME_LESS_OR_MORE] = data.get(Exercise.NAME_LESS_OR_MORE).toString()
         map[Exercise.NAME_ORDER_AND_COUNT] = data.get(Exercise.NAME_ORDER_AND_COUNT).toString()
-        //map[Exercise.NAME_LOCKED] = data.get(Exercise.NAME_LOCKED).toString()
 
         return map
     }
@@ -70,16 +80,19 @@ class ExerciseDataSource {
             .getInstance()
             .collection(User.PATH_USERS)
             .document(userId)
-            .collection(Exercise.PATH_EXERCISES)
+            .collection(PATH)
 
-        val exerciseDocumentRef = exercisesCollectionReference.document(nameExercise).get().await()
+        val exerciseDocumentRef = exercisesCollectionReference
+            .document(nameExercise)
+            .get()
+            .await()
 
         return Exercise(
-            indexInMenu = exerciseDocumentRef.data?.get(Exercise.INDEX_IN_MENU).toString().toInt(),
-            name = exerciseDocumentRef.data?.get(Exercise.NAME).toString(),
-            image = exerciseDocumentRef.data?.get(Exercise.IMAGE).toString(),
-            status = exerciseDocumentRef.data?.get(Exercise.STATUS).toString().toInt(),
-            position = exerciseDocumentRef.data?.get(Exercise.POSITION).toString().toInt()
+            indexInMenu = exerciseDocumentRef.data?.get(INDEX_IN_MENU).toString().toInt(),
+            name = exerciseDocumentRef.data?.get(NAME).toString(),
+            image = exerciseDocumentRef.data?.get(IMAGE).toString(),
+            status = exerciseDocumentRef.data?.get(STATUS).toString().toInt(),
+            position = exerciseDocumentRef.data?.get(POSITION).toString().toInt()
         )
     }
 
@@ -90,19 +103,19 @@ class ExerciseDataSource {
             .getInstance()
             .collection(User.PATH_USERS)
             .document(userId)
-            .collection(Exercise.PATH_EXERCISES)
-            .orderBy(Exercise.INDEX_IN_MENU)
+            .collection(PATH)
+            .orderBy(INDEX_IN_MENU)
             .get()
             .await()
 
 
         for (document in exercisesCollectionRef.documents) {
             val exercise = Exercise(
-                indexInMenu = document.data?.get(Exercise.INDEX_IN_MENU).toString().toInt(),
-                name = document.data?.get(Exercise.NAME).toString(),
-                image = document.data?.get(Exercise.IMAGE).toString(),
-                status = document.data?.get(Exercise.STATUS).toString().toInt(),
-                position = document.data?.get(Exercise.POSITION).toString().toInt()
+                indexInMenu = document.data?.get(INDEX_IN_MENU).toString().toInt(),
+                name = document.data?.get(NAME).toString(),
+                image = document.data?.get(IMAGE).toString(),
+                status = document.data?.get(STATUS).toString().toInt(),
+                position = document.data?.get(POSITION).toString().toInt()
             )
             list.add(exercise)
         }
@@ -115,14 +128,14 @@ class ExerciseDataSource {
             .getInstance()
             .collection(User.PATH_USERS)
             .document(userId)
-            .collection(Exercise.PATH_EXERCISES)
+            .collection(PATH)
 
         val data = hashMapOf(
-            Exercise.INDEX_IN_MENU to exercise.indexInMenu,
-            Exercise.NAME to exercise.name,
-            Exercise.IMAGE to exercise.image,
-            Exercise.STATUS to exercise.status,
-            Exercise.POSITION to exercise.position
+            INDEX_IN_MENU to exercise.indexInMenu,
+            NAME to exercise.name,
+            IMAGE to exercise.image,
+            STATUS to exercise.status,
+            POSITION to exercise.position
         )
 
         exercisesCollectionReference
@@ -138,7 +151,7 @@ class ExerciseDataSource {
             .document(userId)
 
         val exerciseDocumentRef = usersDocumentRef
-            .collection(Exercise.PATH_EXERCISES)
+            .collection(PATH)
             .document(nameExercise)
 
         exerciseDocumentRef.update(data).await()

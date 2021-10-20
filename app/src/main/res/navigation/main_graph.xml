@@ -31,11 +31,6 @@
             android:defaultValue='""'
             app:argType="string" />
         <action
-            android:id="@+id/action_menu_to_opening"
-            app:destination="@id/openingFragment"
-            app:popUpTo="@id/openingFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_menu_to_knowNumbers"
             app:destination="@id/knowNumbersFragment"
             app:popUpToInclusive="true" />
@@ -81,11 +76,6 @@
             android:defaultValue='""'
             app:argType="string" />
         <action
-            android:id="@+id/action_knowNumbers_to_menu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_knowNumbers_to_endOfExercise"
             app:destination="@id/endOfExerciseFragment" />
     </fragment>
@@ -99,11 +89,6 @@
             android:name="userId"
             android:defaultValue='""'
             app:argType="string" />
-        <action
-            android:id="@+id/action_selectAndCount_to_menu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_selectAndCount_to_endOfExercise"
             app:destination="@id/endOfExerciseFragment" />
@@ -119,11 +104,6 @@
             android:defaultValue='""'
             app:argType="string" />
         <action
-            android:id="@+id/action_moveAndCount_to_menu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_moveAndCount_to_endOfExercise"
             app:destination="@id/endOfExerciseFragment" />
     </fragment>
@@ -137,11 +117,6 @@
             android:name="userId"
             android:defaultValue='""'
             app:argType="string" />
-        <action
-            android:id="@+id/action_howMany_to_menu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_howMany_to_endOfExercise"
             app:destination="@id/endOfExerciseFragment" />
@@ -157,11 +132,6 @@
             android:defaultValue='""'
             app:argType="string" />
         <action
-            android:id="@+id/action_lessOrMore_to_menu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_lessOrMore_to_endOfExercise"
             app:destination="@id/endOfExerciseFragment" />
     </fragment>
@@ -175,11 +145,6 @@
             android:name="userId"
             android:defaultValue='""'
             app:argType="string" />
-        <action
-            android:id="@+id/action_orderAndCount_to_menu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_orderAndCount_to_endOfExercise"
             app:destination="@id/endOfExerciseFragment" />

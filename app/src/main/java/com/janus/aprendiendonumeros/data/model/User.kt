@@ -15,14 +15,5 @@ data class User(
 ) {
     companion object {
         val staticInstance: User = User()
-        const val PATH_USERS: String = "/users"
-        const val NICK_NAME = "nickName"
-        const val GENDER = "gender"
-        const val IMAGE = "image"
-        const val PASSWORD_CHILD = "passwordChild"
-        const val PASSWORD_ADULT = "passwordAdult"
-        const val BIRTH_DATE = "birthDate"
-        const val EMAIL = "email"
-        const val COINS = "coins"
     }
 }

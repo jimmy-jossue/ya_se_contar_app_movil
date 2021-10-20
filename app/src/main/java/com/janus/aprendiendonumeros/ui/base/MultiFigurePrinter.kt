@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.janus.aprendiendonumeros.R
-import com.janus.aprendiendonumeros.data.model.ResourceImage
+import com.janus.aprendiendonumeros.data.model.Figure
 import com.janus.aprendiendonumeros.ui.utilities.loadImageFromUrl
 import com.janus.aprendiendonumeros.ui.utilities.positionIsRepeated
 
 interface MultiFigurePrinter {
 
-    var listImages: List<ResourceImage>
-    var randomResourceImage: ResourceImage
+    var listImages: List<Figure>
+    var randomFigure: Figure
     var activity: Activity
 
     fun addImages(
@@ -21,7 +21,7 @@ interface MultiFigurePrinter {
         eventClick: View.OnClickListener? = null,
     ) {
         val randomNumber: Int = (listImages.indices).random()
-        randomResourceImage = listImages[randomNumber]
+        randomFigure = listImages[randomNumber]
 
         val imageViewSize = when {
             (totalImages < 3) -> activity.resources.getDimension(R.dimen.img_size_large)
@@ -57,7 +57,7 @@ interface MultiFigurePrinter {
         image.adjustViewBounds = true
         image.x = x.toFloat()
         image.y = y.toFloat()
-        image.loadImageFromUrl(randomResourceImage.icon)
+        image.loadImageFromUrl(randomFigure.icon)
         return image
     }
 }

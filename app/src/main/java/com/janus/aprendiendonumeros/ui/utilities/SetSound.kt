@@ -4,20 +4,15 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
 
-class SetSound {
-    private val context: Context
-    private var soundPool: SoundPool
+class SetSound(private val context: Context) {
 
-    constructor(context: Context) {
-        this.context = context
-        this.soundPool = SoundPool.Builder().apply {
-            setAudioAttributes(AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
-            )
-            setMaxStreams(20)
-        }.build()
-    }
+    private val soundPool: SoundPool = SoundPool.Builder().apply {
+        setAudioAttributes(AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .build()
+        )
+        setMaxStreams(20)
+    }.build()
 
     fun addSound(idSound: Int): Int {
         return soundPool.load(context, idSound, 1)

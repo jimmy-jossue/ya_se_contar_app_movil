@@ -30,8 +30,6 @@
             android:id="@+id/btn_sign_in"
             android:layout_width="@dimen/width_button_short"
             android:layout_height="@dimen/height_button_medium"
-            android:layout_marginHorizontal="@dimen/separation_medium"
-            android:layout_marginBottom="@dimen/separation_small"
             android:background="@drawable/btn_next_bubble"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"

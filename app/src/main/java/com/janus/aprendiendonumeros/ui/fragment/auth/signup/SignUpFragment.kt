@@ -9,16 +9,15 @@ import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
 import com.janus.aprendiendonumeros.data.remote.ExerciseDataSource
-import com.janus.aprendiendonumeros.data.remote.ImageDataSource
+import com.janus.aprendiendonumeros.data.remote.FigureDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpBinding
 import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.domain.exercise.ExerciseImpl
-import com.janus.aprendiendonumeros.domain.resourceimage.ImageImpl
+import com.janus.aprendiendonumeros.domain.figure.FigureImpl
 import com.janus.aprendiendonumeros.presentation.*
 import com.janus.aprendiendonumeros.ui.adapter.SignUpViewPagerAdapter
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
-import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
 import com.janus.aprendiendonumeros.ui.utilities.Statics
@@ -28,7 +27,6 @@ import java.util.*
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePager {
 
     private lateinit var binding: FragmentSignUpBinding
-    private val loadingDialog by lazy { LoadingDialog(requireActivity()) }
     private val authViewModel by viewModels<AuthViewModel> {
         AuthViewModelFactory(
             AuthImpl(AuthDataSource())
@@ -36,7 +34,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
     }
     private val resourceImageViewModel by viewModels<ImageViewModel> {
         ImageViewModelFactory(
-            ImageImpl(ImageDataSource())
+            FigureImpl(FigureDataSource())
         )
     }
     private val exerciseViewModel by viewModels<ExerciseViewModel> {
@@ -104,13 +102,13 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
         resourceImageViewModel.saveProfileImage(bitmap, User.staticInstance.id)
             .observe(viewLifecycleOwner, { result ->
                 when (result) {
-                    is Resource.Loading -> loadingDialog.startDialog("Guardando imagen de perfil...")
+                    is Resource.Loading -> startLoading("Guardando imagen de perfil...")
                     is Resource.Success -> {
                         User.staticInstance.image = result.data
                         signUp(User.staticInstance)
                     }
                     is Resource.Failure -> {
-                        loadingDialog.dismiss()
+                        dismissLoading()
                         resultFailure(result.exception)
                     }
                 }
@@ -120,10 +118,10 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
     private fun signUp(user: User) {
         authViewModel.signUp(user).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> loadingDialog.setText("Guardando los datos del usuario...")
+                is Resource.Loading -> startLoading("Guardando los datos del usuario...")
                 is Resource.Success -> saveExercises()
                 is Resource.Failure -> {
-                    loadingDialog.dismiss()
+                    dismissLoading()
                     resultFailure(result.exception)
                 }
             }
@@ -134,13 +132,13 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
         exerciseViewModel.createExercises(User.staticInstance.id)
             .observe(viewLifecycleOwner, { result ->
                 when (result) {
-                    is Resource.Loading -> loadingDialog.setText("Creando datos del menú...")
+                    is Resource.Loading -> startLoading("Creando datos del menú...")
                     is Resource.Success -> {
-                        loadingDialog.dismiss()
+                        dismissLoading()
                         resultSuccess()
                     }
                     is Resource.Failure -> {
-                        loadingDialog.dismiss()
+                        dismissLoading()
                     }
                 }
             })

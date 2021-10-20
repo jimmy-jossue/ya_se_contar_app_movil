@@ -36,7 +36,7 @@ class UIDesign {
                 inputStream.close()
             } catch (e: IOException) {
                 // Log exception
-                null
+                return null
             }
             return bm
         }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.AppCompatButton
@@ -53,6 +54,21 @@ fun EditText.fieldIsEmpty(mContext: BaseActivity, nameEditText: String) {
         title = "¡Vaya! Campo vacío",
         text = "Parece que se te olvidó ingresar $nameEditText."
     )
+}
+
+suspend fun TextView.addCoins(view: View, addCoins: Int) {
+    val waitTime: Long = (800 / addCoins).toLong()
+    val setSounds = SetSound(context)
+    val soundCoin: Int = setSounds.addSound(R.raw.sound_coin)
+    var coins = this.text.toString().toInt()
+
+    for (coin in 1..addCoins) {
+        coins++
+        this.text = coins.toString()
+        setSounds.playSound(soundCoin)
+        UIAnimations(context).startAnimation(view, R.anim.fast_zoom)
+        delay(waitTime)
+    }
 }
 
 fun Fragment.goTo(@IdRes idAction: Int) {
@@ -127,7 +143,7 @@ suspend fun ConstraintLayout.animationJumpCoin(
         listViews.add(coin)
         delay(200)
     }
-    delay(1000)
+    delay(800)
 
     listViews.forEach {
         this.removeView(it)
@@ -167,7 +183,6 @@ suspend fun ConstraintLayout.animationJumpCoin(
     listViews.forEach {
         this.removeView(it)
     }
-    context.message("X = ${endX - restrictionButton.x} \n Y = ${-(restrictionButton.y - endY)}")
 }
 
 fun Context.printUser(user: User) {

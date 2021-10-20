@@ -66,5 +66,8 @@
     <string name="what_is_the_sum">¿Cuál es la suma de estos dos números?</string>
     <string name="number_zero">0</string>
     <string name="title_activity_example">ExampleActivity</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

@@ -5,16 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.janus.aprendiendonumeros.core.Resource
-import com.janus.aprendiendonumeros.data.remote.ImageDataSource
-import com.janus.aprendiendonumeros.domain.resourceimage.ImageProvider
+import com.janus.aprendiendonumeros.domain.figure.FigureProvider
 import kotlinx.coroutines.Dispatchers
 
-class ImageViewModel(private val repository: ImageProvider) : ViewModel() {
+class ImageViewModel(private val repository: FigureProvider) : ViewModel() {
 
-    fun getImages(level: ImageDataSource.Level) = liveData(Dispatchers.IO) {
+    fun getImages(level: String) = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
-            emit(Resource.Success(repository.getImages(level)))
+            emit(Resource.Success(repository.getAll(level)))
         } catch (ex: Exception) {
             emit(Resource.Failure(ex))
         }
@@ -30,9 +29,9 @@ class ImageViewModel(private val repository: ImageProvider) : ViewModel() {
     }
 }
 
-class ImageViewModelFactory(private val repository: ImageProvider) :
+class ImageViewModelFactory(private val repository: FigureProvider) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(ImageProvider::class.java).newInstance(repository)
+        return modelClass.getConstructor(FigureProvider::class.java).newInstance(repository)
     }
 }
