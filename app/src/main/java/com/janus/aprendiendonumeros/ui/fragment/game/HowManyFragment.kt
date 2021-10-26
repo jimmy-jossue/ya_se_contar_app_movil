@@ -1,32 +1,22 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
-import android.app.Activity
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
-import com.google.firebase.firestore.FirebaseFirestore
 import com.janus.aprendiendonumeros.R
-import com.janus.aprendiendonumeros.core.Resource
+import com.janus.aprendiendonumeros.core.TextProvider
 import com.janus.aprendiendonumeros.data.model.Exercise
-import com.janus.aprendiendonumeros.data.model.Figure
-import com.janus.aprendiendonumeros.data.model.Rank
-import com.janus.aprendiendonumeros.data.remote.FigureDataSource
+import com.janus.aprendiendonumeros.data.model.LogExercise
 import com.janus.aprendiendonumeros.data.remote.FigureDataSource.Level
 import com.janus.aprendiendonumeros.databinding.FragmentHowManyBinding
-import com.janus.aprendiendonumeros.domain.figure.FigureImpl
-import com.janus.aprendiendonumeros.presentation.ImageViewModel
-import com.janus.aprendiendonumeros.presentation.ImageViewModelFactory
+import com.janus.aprendiendonumeros.presentation.HowManyViewModel
+import com.janus.aprendiendonumeros.ui.animation.coins.AnimationReward
 import com.janus.aprendiendonumeros.ui.base.BaseGameFragment
 import com.janus.aprendiendonumeros.ui.base.MultiFigurePrinter
-import com.janus.aprendiendonumeros.ui.base.Questionable
-import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
-import com.janus.aprendiendonumeros.ui.fragment.menu.MenuFragmentArgs
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
-import com.janus.aprendiendonumeros.ui.utilities.animationJumpCoin
-import com.janus.aprendiendonumeros.ui.utilities.linkViews
+import com.janus.aprendiendonumeros.ui.utilities.Constant
+import com.janus.aprendiendonumeros.ui.utilities.message
 import com.janus.aprendiendonumeros.ui.utilities.removeViews
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,10 +25,190 @@ class HowManyFragment : BaseGameFragment(
     R.layout.fragment_how_many,
     Exercise.NAME_HOW_MANY,
     Exercise.NAME_LESS_OR_MORE
-), MultiFigurePrinter, Questionable {
+), MultiFigurePrinter {
 
     private lateinit var binding: FragmentHowManyBinding
-    private val args: MenuFragmentArgs by navArgs()
+    private val howManyViewModel: HowManyViewModel by viewModels()
+    private lateinit var reward: AnimationReward
+    private val questionFemale =
+        TextProvider.exerciseHowMany["question_female"] ?: "¿Cuántas ##### hay?"
+    private val questionMale =
+        TextProvider.exerciseHowMany["question_male"] ?: "¿Cuántos ##### hay?"
+
+    override fun initUI(view: View) {
+        super.initUI(view)
+        binding = FragmentHowManyBinding.bind(view)
+        howManyViewModel.onCreate(Level.FIRST.toString())
+        binding.containerImages.post { initObservers() }
+        binding.containerCoins.post {
+            reward = AnimationReward(binding.root)
+            reward.setPositionDestinationCoins(binding.containerCoins.x, binding.containerCoins.y)
+            reward.setSizeCoins(binding.ivCoin.width, binding.ivCoin.height)
+        }
+        setUpEvents()
+    }
+
+    private fun initObservers() {
+        howManyViewModel.isLoading.observe(this, { isLoading ->
+            if (isLoading) startLoading("Cargando...") else dismissLoading()
+        })
+        howManyViewModel.isFinishing.observe(this, { isFinishing ->
+            if (isFinishing) endGame(3000)
+        })
+        howManyViewModel.index.observe(this, { progressValue ->
+            binding.progressBar.progress = progressValue
+        })
+        howManyViewModel.coins.observe(this, { coins ->
+            binding.tvCoin.text = coins.toString()
+            animator.startAnimation(binding.containerCoins, R.anim.fast_zoom)
+        })
+
+        howManyViewModel.game.observe(this, { game ->
+            viewLifecycleOwner.lifecycleScope.launch {
+                binding.containerImages.removeViews()
+
+                if (game.questionAudio.isNotEmpty()) {
+                    questionAudio.reset()
+                    questionAudio.setUrl(game.questionAudio)
+                }
+                setUpQuestionText(game.figure.gender, game.figure.plural) {
+                    sayInstruction(game.questionAudio, binding.tvQuestion.text.toString())
+                }
+                setUpFigures(game.number, game.figure.icon)
+                setUpOptions(game.number, game.firstDistraction, game.secondDistraction)
+            }
+        })
+    }
+
+    private fun setUpEvents() {
+        binding.btnBackToMenu.setOnClickListener { endGame() }
+        binding.btnOptionOne.setOnClickListener { evaluateOption((it as AppCompatButton)) }
+        binding.btnOptionTwo.setOnClickListener { evaluateOption((it as AppCompatButton)) }
+        binding.btnOptionThree.setOnClickListener { evaluateOption((it as AppCompatButton)) }
+        binding.btnRepeatQuestion.setOnClickListener {
+            sayInstruction(
+                urlQuestionAudio = howManyViewModel.game.value!!.questionAudio,
+                textQuestion = binding.tvQuestion.text.toString(),
+            )
+        }
+        returnToMainMenu()
+    }
+
+    override fun initGame() {}
+
+    private fun setUpQuestionText(
+        gender: String,
+        keyPluralNameFigure: String,
+        onEndAction: () -> Unit = {},
+    ) {
+        val incompleteQuestion = when (gender) {
+            Constant.GENDER_MALE -> questionMale
+            else -> questionFemale
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val figureName = TextProvider.figures[keyPluralNameFigure] ?: "imagenes"
+            val question = incompleteQuestion.replace("#####", figureName)
+            binding.tvQuestion.text = question
+        }
+        onEndAction()
+    }
+
+    private fun setUpFigures(number: Int, icon: String, onEndAction: () -> Unit = {}) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            setUpFigures(binding.containerImages, number, icon)
+            binding.containerImages.children.forEach { figure ->
+                animator.fadeInWithScale(figure)
+                delay(50)
+            }
+            onEndAction()
+        }
+    }
+
+    private fun setUpOptions(firstOption: Int, secondOption: Int, thirdOption: Int) {
+        val listOptions =
+            listOf(binding.btnOptionOne, binding.btnOptionTwo, binding.btnOptionThree).shuffled()
+        listOptions[0].text = firstOption.toString()
+        listOptions[1].text = secondOption.toString()
+        listOptions[2].text = thirdOption.toString()
+    }
+
+    private fun evaluateOption(button: AppCompatButton) {
+        val chosenOptionText = button.text.toString()
+        if (chosenOptionText.isNotEmpty()) {
+            val chosenOptionInt = chosenOptionText.toInt()
+            val correctAnswer = binding.containerImages.childCount
+            val positionX = (button.x + (button.width / 2)) - binding.ivCoin.width
+            val positionY = (button.y + (button.height / 2)) - binding.ivCoin.height
+
+            when (chosenOptionInt) {
+                correctAnswer -> correctAnswerAnimation(positionX, positionY)
+                else -> incorrectAnswerAnimation()
+            }
+            howManyViewModel.nextNumber()
+        } else howManyViewModel.nextNumber()
+    }
+
+    private fun incorrectAnswerAnimation() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            playSoundIncorrect()
+        }
+    }
+
+    private fun correctAnswerAnimation(positionX: Float, positionY: Float) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            playSoundCorrect()
+            reward.onEndAnimationCoin = {
+                playSoundCoin()
+            }
+            reward.give(AnimationReward.REWARD_SIMPLE, positionX, positionY)
+            howManyViewModel.addCoins(AnimationReward.REWARD_SIMPLE)
+        }
+    }
+
+    private fun giveFeedback(isAnswerCorrect: Boolean) {
+        if (isAnswerCorrect) {
+            mContext.message("give_Feedback answer = $isAnswerCorrect")
+        } else {
+            mContext.message("give_Feedback answer = $isAnswerCorrect")
+        }
+    }
+
+    private fun endGame(delayTimeSeconds: Long = 0) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(delayTimeSeconds)
+            navigateToFragmentEndExercise(
+                LogExercise(
+                    nameExercise = nameExercise,
+                    level = Level.FIRST.toString(),
+                    attemptsCorrect = 0,
+                    attemptsIncorrect = 0,
+                    attemptsTotal = 0,
+                    timeElapsedInSeconds = 0
+                )
+            )
+        }
+    }
+
+    private fun hideOptions() {
+        animator.fadeOutWithScale(binding.btnOptionOne)
+        animator.fadeOutWithScale(binding.btnOptionTwo)
+        animator.fadeOutWithScale(binding.btnOptionThree)
+    }
+
+    private fun showOptions() {
+        animator.fadeOutWithScale(binding.btnOptionOne)
+        animator.fadeOutWithScale(binding.btnOptionTwo)
+        animator.fadeOutWithScale(binding.btnOptionThree)
+    }
+
+    override fun onPause() {
+        reward.onDestroy()
+        talkative.onDestroy()
+        super.onPause()
+    }
+}
+/*
+    private val args: HowManyFragmentArgs by navArgs()
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
     private val anim: UIAnimations by lazy { UIAnimations(requireContext()) }
     private lateinit var listNumbers: List<Int>
@@ -242,6 +412,7 @@ class HowManyFragment : BaseGameFragment(
 }
 
 
+ */
 /*
 private fun evaluateOption(button: AppCompatButton) {
     if (listNumbers[indexNumbers] == button.text.toString().toInt()) {
@@ -282,7 +453,6 @@ private fun evaluateOption(button: AppCompatButton) {
     }
 }
  */
-
 /*
 private fun generateQuestion(number: Int) {
     addImages(binding.containerImages, number)
@@ -291,7 +461,6 @@ private fun generateQuestion(number: Int) {
     optionsIsEnabled(true)
 }
 */
-
 /*
     private fun generateOptions(number: Int) {
         val rank: Rank = when (logExercise.level) {

@@ -2,7 +2,6 @@ package com.janus.aprendiendonumeros.data.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.janus.aprendiendonumeros.data.model.Exercise
-import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.ui.fragment.menu.MenuItemView
 import kotlinx.coroutines.tasks.await
 
@@ -22,7 +21,7 @@ class ExerciseDataSource {
 
         val userDocumentReference = FirebaseFirestore
             .getInstance()
-            .collection(User.PATH_USERS)
+            .collection(UserDataSource.PATH)
             .document(userId)
 
         val exerciseCollectionRef = userDocumentReference.collection(PATH)
@@ -78,7 +77,7 @@ class ExerciseDataSource {
     suspend fun getExercise(userId: String, nameExercise: String): Exercise {
         val exercisesCollectionReference = FirebaseFirestore
             .getInstance()
-            .collection(User.PATH_USERS)
+            .collection(UserDataSource.PATH)
             .document(userId)
             .collection(PATH)
 
@@ -101,7 +100,7 @@ class ExerciseDataSource {
 
         val exercisesCollectionRef = FirebaseFirestore
             .getInstance()
-            .collection(User.PATH_USERS)
+            .collection(UserDataSource.PATH)
             .document(userId)
             .collection(PATH)
             .orderBy(INDEX_IN_MENU)
@@ -126,7 +125,7 @@ class ExerciseDataSource {
     suspend fun setExercise(userId: String, exercise: Exercise) {
         val exercisesCollectionReference = FirebaseFirestore
             .getInstance()
-            .collection(User.PATH_USERS)
+            .collection(UserDataSource.PATH)
             .document(userId)
             .collection(PATH)
 
@@ -147,7 +146,7 @@ class ExerciseDataSource {
     suspend fun updateExercise(userId: String, nameExercise: String, data: Map<String, Any>) {
         val usersDocumentRef = FirebaseFirestore
             .getInstance()
-            .collection(User.PATH_USERS)
+            .collection(UserDataSource.PATH)
             .document(userId)
 
         val exerciseDocumentRef = usersDocumentRef

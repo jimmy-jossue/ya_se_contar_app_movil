@@ -14,8 +14,8 @@
 
     <dimen name="menuItem_button_size">@dimen/_110sdp</dimen>
     <dimen name="menuItem_button_separator_small">@dimen/_10ssp</dimen>
-    <dimen name="menuItem_separationLine_width">@dimen/_75sdp</dimen>
-    <dimen name="menuItem_separationLine_height">@dimen/_7ssp</dimen>
+    <dimen name="menuItem_separationLine_width">@dimen/_80sdp</dimen>
+    <dimen name="menuItem_separationLine_height">@dimen/_8ssp</dimen>
     <dimen name="menuItem_status_size">@dimen/_25sdp</dimen>
     <dimen name="menuItem_Status_marginTop">@dimen/_15sdp</dimen>
 

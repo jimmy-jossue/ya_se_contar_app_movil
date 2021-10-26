@@ -65,7 +65,7 @@
     </fragment>
 
 
-    <!-- Game Fragments -->
+    <!-- GameHowMany Fragments -->
     <fragment
         android:id="@+id/knowNumbersFragment"
         android:name="com.janus.aprendiendonumeros.ui.fragment.game.KnowNumbersFragment"

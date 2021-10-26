@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.data.model.User
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseActivity
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import kotlinx.coroutines.delay
@@ -195,7 +196,7 @@ fun Context.printUser(user: User) {
             "\n email: ${user.email}" +
             "\n coins: ${user.coins}"
 
-    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
 
 fun Context.message(text: String) {

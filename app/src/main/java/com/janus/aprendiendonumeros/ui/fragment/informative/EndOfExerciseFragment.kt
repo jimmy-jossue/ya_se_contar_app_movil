@@ -19,10 +19,14 @@ import com.janus.aprendiendonumeros.presentation.LogExerciseViewModel
 import com.janus.aprendiendonumeros.presentation.LogExerciseViewModelFactory
 import com.janus.aprendiendonumeros.presentation.UserViewModel
 import com.janus.aprendiendonumeros.presentation.UserViewModelFactory
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
-import com.janus.aprendiendonumeros.ui.utilities.*
+import com.janus.aprendiendonumeros.ui.utilities.SetSound
+import com.janus.aprendiendonumeros.ui.utilities.goTo
+import com.janus.aprendiendonumeros.ui.utilities.isGreaterThan
+import com.janus.aprendiendonumeros.ui.utilities.loadImageFromUrl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

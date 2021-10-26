@@ -7,11 +7,11 @@ import com.google.firebase.Timestamp
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpBirthDateBinding
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 import com.janus.aprendiendonumeros.ui.utilities.fieldIsEmpty
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

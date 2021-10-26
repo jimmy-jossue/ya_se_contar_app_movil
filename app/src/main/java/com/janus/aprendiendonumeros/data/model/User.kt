@@ -14,6 +14,6 @@ data class User(
     var coins: Int = 0,
 ) {
     companion object {
-        val staticInstance: User = User()
+        var staticInstance: User = User()
     }
 }

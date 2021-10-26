@@ -41,7 +41,7 @@
                 android:layout_marginTop="@dimen/separation_long"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/_50sdp"
+                android:paddingHorizontal="@dimen/img_size_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

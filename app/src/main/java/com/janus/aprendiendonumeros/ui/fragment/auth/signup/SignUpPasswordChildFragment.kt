@@ -10,17 +10,18 @@ import com.janus.aprendiendonumeros.core.AESCrypt
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
+import com.janus.aprendiendonumeros.data.remote.UserDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpPasswordChildBinding
 import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.presentation.AuthViewModel
 import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
 import com.janus.aprendiendonumeros.ui.utilities.Constant
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 import com.janus.aprendiendonumeros.ui.utilities.removeViews
 
 class SignUpPasswordChildFragment : BaseFragment(R.layout.fragment_sign_up_password_child),
@@ -88,7 +89,7 @@ class SignUpPasswordChildFragment : BaseFragment(R.layout.fragment_sign_up_passw
         val passwordEncrypt: String = AESCrypt.encrypt(passwordChild)
 
         viewModel.fieldExistsInUser(
-            User.PASSWORD_CHILD,
+            UserDataSource.PASSWORD_CHILD,
             passwordEncrypt
         ).observe(viewLifecycleOwner, { result ->
             when (result) {

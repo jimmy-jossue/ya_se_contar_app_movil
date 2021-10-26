@@ -82,6 +82,7 @@ class MenuFragment : BaseFragment(R.layout.fragment_menu), NotifyQuestionListene
     }
 
     private fun getExerciseData(user: User) {
+        User.staticInstance = user
         exerciseViewModel.getAllExercises(user.id).observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Resource.Loading -> loadingDialog.setText("Opteniendo datos del menú...")

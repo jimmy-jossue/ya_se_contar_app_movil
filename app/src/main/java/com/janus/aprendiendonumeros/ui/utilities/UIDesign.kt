@@ -1,6 +1,6 @@
 package com.janus.aprendiendonumeros.ui.utilities
 
-import android.content.res.Resources
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.janus.aprendiendonumeros.R
@@ -13,12 +13,11 @@ import java.net.URLConnection
 class UIDesign {
 
     companion object {
-        fun getSize(totalImages: Int): Int {
-            val resources: Resources = Resources.getSystem()
+        fun getSize(context: Context, totalImages: Int): Int {
             val imageViewSize = when {
-                (totalImages < 3) -> resources.getDimension(R.dimen.img_size_large)
-                (totalImages < 5) -> resources.getDimension(R.dimen.img_size_medium)
-                else -> resources.getDimension(R.dimen.img_size_small)
+                (totalImages < 3) -> context.resources.getDimension(R.dimen.img_size_large)
+                (totalImages < 5) -> context.resources.getDimension(R.dimen.img_size_medium)
+                else -> context.resources.getDimension(R.dimen.img_size_small)
             }
             return imageViewSize.toInt()
         }

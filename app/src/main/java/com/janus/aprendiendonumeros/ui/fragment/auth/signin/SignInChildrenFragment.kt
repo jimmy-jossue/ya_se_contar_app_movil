@@ -1,5 +1,6 @@
 package com.janus.aprendiendonumeros.ui.fragment.auth.signin
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,11 +15,11 @@ import com.janus.aprendiendonumeros.databinding.FragmentSignInChildrenBinding
 import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.presentation.AuthViewModel
 import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.utilities.Constant
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 import com.janus.aprendiendonumeros.ui.utilities.goTo
 
 class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) {
@@ -37,12 +38,12 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
 
     override fun initUI(view: View) {
         binding = FragmentSignInChildrenBinding.bind(view)
-
         addEvents()
     }
 
     private fun addEvents() {
         binding.btnSignIn.setOnClickListener { validateCredentials() }
+        binding.containerImagesPassword.btnBackspace.setOnClickListener { removeLast() }
         addEventImagesPassword()
     }
 
@@ -63,11 +64,27 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
         }
     }
 
+    private fun removeLast() {
+        val sizeList = listPassword.size
+        val sizePreviewPassword = binding.containerImagesPassword.previewPassword.childCount
+
+        Log.i("Remove_Last",
+            "\n\nsizeList = ${listPassword.size}" +
+                    "\n\nsizePreviewPassword = $sizePreviewPassword\n"
+        )
+
+        if (sizeList > 0 && sizePreviewPassword > 0) {
+            val removedElement = listPassword[sizeList - 1]
+            listPassword.remove(removedElement)
+            binding.containerImagesPassword.previewPassword.removeViewAt(sizePreviewPassword - 1)
+        }
+    }
+
     private fun signIn(passwordAdult: String) {
         val passwordEncrypt: String = AESCrypt.encrypt(passwordAdult)
         authViewModel.signInChild(passwordEncrypt).observe(viewLifecycleOwner, { result ->
             when (result) {
-                is Resource.Loading -> loadingDialog.startDialog(TextProvider.alertDialogs["login_failed_title"]
+                is Resource.Loading -> loadingDialog.startDialog(TextProvider.alertDialogs["checking_user"]
                     ?: "Comprobando la contraseña...")
                 is Resource.Success -> resultSuccess(result.data)
                 is Resource.Failure -> resultFailure()
@@ -91,27 +108,9 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
         )
     }
 
-//    private fun selectImageForPassword(view: ImageView) {
-//        val tag: String = view.tag.toString()
-//        if (tag == Constant.STATUS_DESELECTED) {
-//            if (listPassword.size < Constant.USER_PASSWORD_CHILDREN_LENGTH) {
-//                view.selectView(Constant.STATUS_SELECTED, R.drawable.ic_mark_selection, 0)
-//                val index: Int =
-//                    binding.containerImagesPassword.gridImagesPassword.indexOfChild(view) + 1
-//                listPassword[index] = view
-//                addImagesToContainer(listPassword.values.toList())
-//            } else
-//                listPassword.values.forEach { anim.startAnimation(it, R.anim.attention) }
-//        } else {
-//            val padding = resources.getDimension(R.dimen.separation_extra_small).toInt()
-//            view.selectView(Constant.STATUS_DESELECTED, 0, padding)
-//            listPassword.remove(binding.containerImagesPassword.gridImagesPassword.indexOfChild(view) + 1)
-//            addImagesToContainer(listPassword.values.toList())
-//        }
-//    }
-
     private fun selectImageForPassword(view: ImageView) {
-        if (listPassword.size < Constant.USER_PASSWORD_CHILDREN_LENGTH) {
+        val countImagesPassword = binding.containerImagesPassword.previewPassword.childCount
+        if (countImagesPassword < Constant.USER_PASSWORD_CHILDREN_LENGTH) {
             val index: Int =
                 binding.containerImagesPassword.gridImagesPassword.indexOfChild(view) + 1
             listPassword.add(index)
@@ -121,16 +120,8 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
         }
     }
 
-
-//    private fun ImageView.selectView(tag: String, resDrawable: Int, padding: Int) {
-//        this.tag = tag
-//        this.setBackgroundResource(resDrawable)
-//        this.setPadding(padding, padding, padding, padding)
-//    }
-
     private fun addImagesToContainer(view: ImageView) {
         val padding = resources.getDimension(R.dimen.separation_extra_small).toInt()
-
         val previewView: ImageView = ImageView(context).apply {
             val size: Int = resources.getDimension(R.dimen.height_button_small).toInt()
             this.layoutParams = ViewGroup.LayoutParams(size, size)
@@ -138,6 +129,7 @@ class SignInChildrenFragment : BaseFragment(R.layout.fragment_sign_in_children) 
             this.setImageDrawable(view.drawable)
             this.alpha = 0.7F
             this.setPadding(padding, padding, padding, padding)
+            this.tag = view.tag
         }
         binding.containerImagesPassword.previewPassword.addView(previewView)
     }

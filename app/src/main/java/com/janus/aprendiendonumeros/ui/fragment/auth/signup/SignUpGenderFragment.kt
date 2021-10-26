@@ -5,11 +5,11 @@ import androidx.core.content.ContextCompat.getColor
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpGenderBinding
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
 import com.janus.aprendiendonumeros.ui.utilities.Constant
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 
 class SignUpGenderFragment : BaseFragment(R.layout.fragment_sign_up_gender),
     ControllablePagerObserver {

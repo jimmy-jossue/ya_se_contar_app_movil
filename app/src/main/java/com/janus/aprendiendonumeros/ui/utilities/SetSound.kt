@@ -6,6 +6,8 @@ import android.media.SoundPool
 
 class SetSound(private val context: Context) {
 
+    var volumeLoop: Float = 1f
+
     private val soundPool: SoundPool = SoundPool.Builder().apply {
         setAudioAttributes(AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -19,4 +21,5 @@ class SetSound(private val context: Context) {
     }
 
     fun playSound(soundID: Int) = soundPool.play(soundID, 1F, 1F, 1, 0, 1F)
+    fun playLoopSound(soundID: Int) = soundPool.play(soundID, volumeLoop, volumeLoop, 1, -1, 1F)
 }

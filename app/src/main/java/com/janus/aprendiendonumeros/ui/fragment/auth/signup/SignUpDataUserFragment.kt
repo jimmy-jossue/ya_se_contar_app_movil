@@ -8,17 +8,22 @@ import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.User
 import com.janus.aprendiendonumeros.data.remote.AuthDataSource
+import com.janus.aprendiendonumeros.data.remote.UserDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentSignUpDataUserBinding
 import com.janus.aprendiendonumeros.domain.auth.AuthImpl
 import com.janus.aprendiendonumeros.presentation.AuthViewModel
 import com.janus.aprendiendonumeros.presentation.AuthViewModelFactory
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseFragment
 import com.janus.aprendiendonumeros.ui.dialog.InformationDialog
 import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
 import com.janus.aprendiendonumeros.ui.listener.ControllablePager
 import com.janus.aprendiendonumeros.ui.listener.ControllablePagerObserver
 import com.janus.aprendiendonumeros.ui.listener.NotifyDrawableListener
-import com.janus.aprendiendonumeros.ui.utilities.*
+import com.janus.aprendiendonumeros.ui.utilities.Constant
+import com.janus.aprendiendonumeros.ui.utilities.Statics
+import com.janus.aprendiendonumeros.ui.utilities.fieldIsEmpty
+import com.janus.aprendiendonumeros.ui.utilities.isLessThan
 
 class SignUpDataUserFragment : BaseFragment(R.layout.fragment_sign_up_data_user),
     ControllablePagerObserver, NotifyDrawableListener {
@@ -63,7 +68,7 @@ class SignUpDataUserFragment : BaseFragment(R.layout.fragment_sign_up_data_user)
 
     private fun nickNameAlreadyExists(nickName: String) {
         viewModel.fieldExistsInUser(
-            User.NICK_NAME,
+            UserDataSource.NICK_NAME,
             nickName
         ).observe(viewLifecycleOwner, { result ->
             when (result) {

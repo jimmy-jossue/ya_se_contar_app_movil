@@ -86,7 +86,6 @@
                     android:rotation="-30"
                     android:src="@drawable/ic_without_star" />
 
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_star_second"
                     android:layout_width="@dimen/_85sdp"
@@ -102,7 +101,8 @@
                     android:layout_marginTop="@dimen/separation_medium"
                     android:layout_marginBottom="@dimen/separation_extra_small"
                     android:rotation="30"
-                    android:src="@drawable/ic_without_star" />
+                    android:src="@drawable/ic_without_star"
+                    tools:ignore="ImageContrastCheck" />
 
             </LinearLayout>
 
@@ -113,9 +113,9 @@
                 android:fontFamily="@font/balsamiq_sans_bold"
                 android:gravity="bottom"
                 android:letterSpacing=".1"
-                android:shadowColor="#E9DCFC"
+                android:shadowColor="#C4B0E1"
                 android:shadowRadius="10"
-                android:textColor="#454080"
+                android:textColor="#42327B"
                 android:textSize="@dimen/_50ssp"
                 app:layout_constraintBottom_toTopOf="@+id/container_coins"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:textColor="@color/dark"
-                    android:textSize="@dimen/_25ssp"
+                    android:textSize="@dimen/text_title"
                     android:textStyle="bold"
                     tools:text="100" />
 
@@ -173,7 +173,8 @@
                     android:layout_marginEnd="@dimen/separation_medium"
                     android:background="@color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/btn_bubble_main_menu" />
+                    android:src="@drawable/btn_bubble_main_menu"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btn_continue"
@@ -191,7 +192,8 @@
                     android:layout_marginStart="@dimen/separation_medium"
                     android:background="@color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/btn_bubble_repeat" />
+                    android:src="@drawable/btn_bubble_repeat"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.Guideline
@@ -206,6 +208,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/separation_small"
+                android:padding="@dimen/separation_extra_small"
                 android:scaleType="centerInside"
                 android:src="@drawable/jawi_normal"
                 app:layout_constraintBottom_toBottomOf="parent"

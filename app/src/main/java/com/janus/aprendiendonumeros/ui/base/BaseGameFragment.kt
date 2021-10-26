@@ -6,17 +6,25 @@ import androidx.lifecycle.lifecycleScope
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.data.model.Exercise
 import com.janus.aprendiendonumeros.data.model.LogExercise
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.fragment.game.*
+import com.janus.aprendiendonumeros.ui.listener.Talkative
 import com.janus.aprendiendonumeros.ui.utilities.SetSound
+import com.janus.aprendiendonumeros.ui.utilities.Sound
 import com.janus.aprendiendonumeros.ui.utilities.goTo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 abstract class BaseGameFragment(
     layoutId: Int,
-    private val nameExercise: String,
+    protected val nameExercise: String,
     private val nextExercise: String,
 ) : BaseFragment(layoutId) {
+
+    protected val talkative: Talkative by lazy { Talkative(requireContext()) }
+    protected val animator: UIAnimations by lazy { UIAnimations(mContext) }
+    protected val questionAudio by lazy { Sound(mContext) }
+
 
     protected var userId: String = ""
     protected var coins: Int = 0
@@ -33,6 +41,7 @@ abstract class BaseGameFragment(
         soundCoin = setSounds.addSound(R.raw.sound_coin)
         soundCorrect = setSounds.addSound(R.raw.sound_correct)
         soundIncorrect = setSounds.addSound(R.raw.sound_incorrect)
+        talkative.speakOut("")
     }
 
     protected fun playSoundCorrect() = setSounds.playSound(soundCorrect)
@@ -45,19 +54,35 @@ abstract class BaseGameFragment(
         }
     }
 
-    protected fun isPerfectScore(): Boolean {
-        return (logExercise.attemptsCorrect == logExercise.attemptsTotal)
+    protected fun sayInstruction(
+        urlQuestionAudio: String,
+        textQuestion: String,
+        onEndAction: () -> Unit = {},
+    ) {
+        if (urlQuestionAudio.isNotEmpty()) {
+            questionAudio.play {
+                onEndAction()
+            }
+        } else {
+            talkative.speakOut(text = textQuestion) {
+                onEndAction()
+            }
+        }
     }
 
-    protected fun correct(action: () -> Unit) {
-        logExercise.attemptsCorrect++
-        action()
-    }
-
-    protected fun incorrect(action: () -> Unit) {
-        logExercise.attemptsIncorrect++
-        action()
-    }
+//    protected fun isPerfectScore(): Boolean {
+//        return (logExercise.attemptsCorrect == logExercise.attemptsTotal)
+//    }
+//
+//    protected fun correct(action: () -> Unit) {
+//        logExercise.attemptsCorrect++
+//        action()
+//    }
+//
+//    protected fun incorrect(action: () -> Unit) {
+//        logExercise.attemptsIncorrect++
+//        action()
+//    }
 
     protected fun finish(waitTime: Long = 1500, actionBefore: () -> Unit = {}) {
         lifecycleScope.launch {
@@ -67,7 +92,7 @@ abstract class BaseGameFragment(
         }
     }
 
-    private fun navigateToFragmentEndExercise(logExercise: LogExercise) {
+    protected fun navigateToFragmentEndExercise(logExercise: LogExercise) {
         when (logExercise.nameExercise) {
             Exercise.NAME_KNOW_NUMBERS -> {
                 val navDirection = KnowNumbersFragmentDirections

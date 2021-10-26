@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.databinding.DialogConfirmBeingAdultBinding
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

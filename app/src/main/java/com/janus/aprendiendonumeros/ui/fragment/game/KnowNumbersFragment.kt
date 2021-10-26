@@ -1,6 +1,5 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
-import android.app.Activity
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -9,16 +8,15 @@ import androidx.navigation.fragment.navArgs
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.Exercise
-import com.janus.aprendiendonumeros.data.model.Figure
 import com.janus.aprendiendonumeros.data.remote.FigureDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentKnowNumbersBinding
 import com.janus.aprendiendonumeros.domain.figure.FigureImpl
 import com.janus.aprendiendonumeros.presentation.ImageViewModel
 import com.janus.aprendiendonumeros.presentation.ImageViewModelFactory
+import com.janus.aprendiendonumeros.ui.animation.UIAnimations
 import com.janus.aprendiendonumeros.ui.base.BaseGameFragment
 import com.janus.aprendiendonumeros.ui.base.MultiFigurePrinter
 import com.janus.aprendiendonumeros.ui.dialog.LoadingDialog
-import com.janus.aprendiendonumeros.ui.utilities.UIAnimations
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -30,9 +28,10 @@ class KnowNumbersFragment : BaseGameFragment(
     private lateinit var binding: FragmentKnowNumbersBinding
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireActivity()) }
     private val args: KnowNumbersFragmentArgs by navArgs()
-    override lateinit var activity: Activity
-    override lateinit var listImages: List<Figure>
-    override lateinit var randomFigure: Figure
+
+    //override lateinit var activity: Activity
+    //override lateinit var listImages: List<Figure>
+    //override lateinit var randomFigure: Figure
     private var indexNumbers: Int = 1
 
     private val viewModel by viewModels<ImageViewModel> {
@@ -56,7 +55,7 @@ class KnowNumbersFragment : BaseGameFragment(
         userId = args.userId
         logExercise.nameExercise = Exercise.NAME_KNOW_NUMBERS
         logExercise.attemptsTotal = 9
-        activity = mContext
+        //activity = mContext
     }
 
     private fun setUpEvents() {
@@ -73,8 +72,8 @@ class KnowNumbersFragment : BaseGameFragment(
                 is Resource.Loading -> loadingDialog.startDialog("Cargando...")
                 is Resource.Success -> {
                     loadingDialog.dismiss()
-                    listImages = result.data
-                    addImages(binding.containerImages, indexNumbers)
+                    //listImages = result.data
+                    //addImages(binding.containerImages, indexNumbers)
                     binding.tvQuantity.text = indexNumbers.toString()
                 }
                 is Resource.Failure -> {
@@ -90,17 +89,19 @@ class KnowNumbersFragment : BaseGameFragment(
     }
 
     private fun next() {
+        binding.btnNext.animate().cancel()
+
         if (indexNumbers < logExercise.attemptsTotal) {
             binding.containerImages.removeAllViews()
             indexNumbers++
-            correct {}
-            addImages(binding.containerImages, indexNumbers)
+            //correct {}
+            //addImages(binding.containerImages, indexNumbers)
             binding.tvQuantity.text = indexNumbers.toString()
         }
 
         if (indexNumbers == logExercise.attemptsTotal) {
             binding.btnNext.visibility = View.INVISIBLE
-            correct {}
+            //correct {}
             finish {
                 binding.btnNext.isEnabled = false
                 binding.btnPrevious.isEnabled = false
@@ -114,7 +115,7 @@ class KnowNumbersFragment : BaseGameFragment(
         if (indexNumbers > 1) {
             binding.containerImages.removeAllViews()
             indexNumbers--
-            addImages(binding.containerImages, indexNumbers)
+            //addImages(binding.containerImages, indexNumbers)
             binding.tvQuantity.text = indexNumbers.toString()
         }
         if (indexNumbers == 1) binding.btnPrevious.visibility = View.INVISIBLE
