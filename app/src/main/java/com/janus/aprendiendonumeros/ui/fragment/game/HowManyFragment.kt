@@ -67,12 +67,12 @@ class HowManyFragment : BaseGameFragment(
             viewLifecycleOwner.lifecycleScope.launch {
                 binding.containerImages.removeViews()
 
-                if (game.questionAudio.isNotEmpty()) {
+                if (game.instructionAudio.isNotEmpty()) {
                     questionAudio.reset()
-                    questionAudio.setUrl(game.questionAudio)
+                    questionAudio.setUrl(game.instructionAudio)
                 }
                 setUpQuestionText(game.figure.gender, game.figure.plural) {
-                    sayInstruction(game.questionAudio, binding.tvQuestion.text.toString())
+                    sayInstruction(game.instructionAudio, binding.tvQuestion.text.toString())
                 }
                 setUpFigures(game.number, game.figure.icon)
                 setUpOptions(game.number, game.firstDistraction, game.secondDistraction)
@@ -87,7 +87,7 @@ class HowManyFragment : BaseGameFragment(
         binding.btnOptionThree.setOnClickListener { evaluateOption((it as AppCompatButton)) }
         binding.btnRepeatQuestion.setOnClickListener {
             sayInstruction(
-                urlQuestionAudio = howManyViewModel.game.value!!.questionAudio,
+                urlQuestionAudio = howManyViewModel.game.value!!.instructionAudio,
                 textQuestion = binding.tvQuestion.text.toString(),
             )
         }

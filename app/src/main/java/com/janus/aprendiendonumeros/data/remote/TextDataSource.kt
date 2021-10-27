@@ -33,23 +33,22 @@ class TextDataSource {
             val textDocument = textCollectionReference.document(language).get().await()
 
             textDocument.data.let { maps ->
-                TextProvider.figures = maps?.get(FIGURES) as Map<String, String>
-                TextProvider.signInSection = maps?.get(SIGN_IN_SECTION) as Map<String, String>
-                TextProvider.signUpSection = maps?.get(SIGN_UP_SECTION) as Map<String, String>
-                TextProvider.settingsSection = maps?.get(SETTINGS_SECTION) as Map<String, String>
-                TextProvider.alertDialogs = maps?.get(ALERT_DIALOGS) as Map<String, String>
+                TextProvider.figures = (maps?.get(FIGURES) as Map<String, String>)
+                TextProvider.signInSection = (maps[SIGN_IN_SECTION] as Map<String, String>)
+                TextProvider.signUpSection = maps[SIGN_UP_SECTION] as Map<String, String>
+                TextProvider.settingsSection = maps[SETTINGS_SECTION] as Map<String, String>
+                TextProvider.alertDialogs = maps[ALERT_DIALOGS] as Map<String, String>
                 TextProvider.exerciseKnowNumbers =
-                    maps?.get(EXERCISE_KNOW_NUMBERS) as Map<String, String>
+                    maps[EXERCISE_KNOW_NUMBERS] as Map<String, String>
                 TextProvider.exerciseSelectAndCount =
-                    maps?.get(EXERCISE_SELECT_AND_COUNT) as Map<String, String>
+                    maps[EXERCISE_SELECT_AND_COUNT] as Map<String, String>
                 TextProvider.exerciseMoveAndCount =
-                    maps?.get(EXERCISE_MOVE_AND_COUNT) as Map<String, String>
-                TextProvider.exerciseHowMany = maps?.get(EXERCISE_HOW_MANY) as Map<String, String>
-                TextProvider.exerciseLessOrMore =
-                    maps?.get(EXERCISE_LESS_OR_MORE) as Map<String, String>
+                    maps[EXERCISE_MOVE_AND_COUNT] as Map<String, String>
+                TextProvider.exerciseHowMany = maps.get(EXERCISE_HOW_MANY) as Map<String, String>
+                TextProvider.exerciseLessOrMore = maps[EXERCISE_LESS_OR_MORE] as Map<String, String>
                 TextProvider.exerciseOrderAndCount =
-                    maps?.get(EXERCISE_ORDER_AND_COUNT) as Map<String, String>
-                TextProvider.otherPhrases = maps?.get(OTHER_PHRASES) as Map<String, String>
+                    maps[EXERCISE_ORDER_AND_COUNT] as Map<String, String>
+                TextProvider.otherPhrases = maps.get(OTHER_PHRASES) as Map<String, String>
             }
         }
     }

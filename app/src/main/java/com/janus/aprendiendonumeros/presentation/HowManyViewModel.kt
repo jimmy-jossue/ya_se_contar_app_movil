@@ -3,33 +3,32 @@ package com.janus.aprendiendonumeros.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.janus.aprendiendonumeros.data.model.Figure
+import com.janus.aprendiendonumeros.data.model.Exercise
+import com.janus.aprendiendonumeros.data.model.Game
 import com.janus.aprendiendonumeros.data.model.Rank
 import com.janus.aprendiendonumeros.data.remote.FigureDataSource
+import com.janus.aprendiendonumeros.data.remote.InstructionHowManyDataSource
 import com.janus.aprendiendonumeros.domain.figure.FigureImpl
 import com.janus.aprendiendonumeros.domain.figure.FigureProvider
 import kotlinx.coroutines.launch
 
 class HowManyViewModel : ViewModel() {
 
-    private val games = mutableListOf<GameHowMany>()
-    val game = MutableLiveData<GameHowMany>()
+    private val games = mutableListOf<Game>()
+    val game = MutableLiveData<Game>()
     var index = MutableLiveData<Int>()
     val isLoading = MutableLiveData<Boolean>()
     val isFinishing = MutableLiveData(false)
     val coins = MutableLiveData<Int>()
-    val mapUrlQuestions = mutableMapOf<String, String>()
 
     fun onCreate(level: String) {
         viewModelScope.launch {
-            mapUrlQuestions["bee"] =
-                "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/sounds%2FhowMany%2FhowManyBee.mp3?alt=media&token=141ed1da-43b9-410f-acee-5f1e92c3092a"
-            mapUrlQuestions["kite"] =
-                "https://firebasestorage.googleapis.com/v0/b/aprendiendo-numeros-8196e.appspot.com/o/sounds%2FhowMany%2FhowManyKite.mp3?alt=media&token=cc5f573f-0424-48a2-800f-7409d3d1dfcf"
             isLoading.postValue(true)
             coins.postValue(0)
             index.postValue(0)
 
+            val instruction = InstructionHowManyDataSource()
+            val mapUrlQuestions = instruction.get(Exercise.NAME_HOW_MANY)
             val figureProvider: FigureProvider = FigureImpl(FigureDataSource())
             val figures = figureProvider.getAll(level)
             val listNumbers = (1..9).toList().shuffled()
@@ -40,8 +39,8 @@ class HowManyViewModel : ViewModel() {
                     setSecondDistraction(level, number, firstDistraction, listNumbers)
                 val figure = figures[(figures.indices).random()]
                 games.add(
-                    GameHowMany(
-                        questionAudio = mapUrlQuestions[figure.name] ?: "",
+                    Game(
+                        instructionAudio = mapUrlQuestions[figure.name] ?: "",
                         figure = figure,
                         number = number,
                         firstDistraction = firstDistraction,
@@ -61,7 +60,7 @@ class HowManyViewModel : ViewModel() {
             index.postValue(count)
             game.postValue(games[count])
         }
-        if (count >= games.size - 1) {
+        if (count > games.size - 1) {
             isFinishing.postValue(true)
         }
     }
@@ -94,11 +93,3 @@ class HowManyViewModel : ViewModel() {
         return secondDistraction
     }
 }
-
-data class GameHowMany(
-    val questionAudio: String = "",
-    val figure: Figure,
-    val number: Int = 0,
-    val firstDistraction: Int = 0,
-    val secondDistraction: Int = 0,
-)
