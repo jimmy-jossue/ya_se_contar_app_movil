@@ -22,7 +22,7 @@ class LogExerciseViewModel(private val repository: LogExerciseProvider) : ViewMo
 
 class LogExerciseViewModelFactory(private val repository: LogExerciseProvider) :
     ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(LogExerciseProvider::class.java).newInstance(repository)
     }
 }

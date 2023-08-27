@@ -12,17 +12,16 @@ class InstructionHowManyDataSource {
     }
 
     suspend fun get(exerciseName: String): Map<String, String> {
-        var map: Map<String, String> = emptyMap()
+        var map: Map<String, String>
 
         withContext(Dispatchers.IO) {
             val instructionCollectionReference = FirebaseFirestore
                 .getInstance()
                 .collection(PATH)
 
-            val instructionDocument =
-                instructionCollectionReference.document(exerciseName).get().await()
+            val instructionDocument = instructionCollectionReference.document(exerciseName).get().await()
 
-            map = instructionDocument.data?.get("urlQuestionsAudio") as Map<String, String>
+            map = instructionDocument.data?.get("urlQuestionsAudio") as? Map<String, String> ?: emptyMap()
         }
 
         return map

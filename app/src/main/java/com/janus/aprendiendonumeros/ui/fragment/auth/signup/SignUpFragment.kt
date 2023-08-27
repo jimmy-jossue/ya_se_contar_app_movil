@@ -1,6 +1,7 @@
 package com.janus.aprendiendonumeros.ui.fragment.auth.signup
 
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -100,10 +101,11 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
 
     private fun saveProfileImage(bitmap: Bitmap) {
         resourceImageViewModel.saveProfileImage(bitmap, User.staticInstance.id)
-            .observe(viewLifecycleOwner, { result ->
+            .observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> startLoading("Guardando imagen de perfil...")
                     is Resource.Success -> {
+                        dismissLoading()
                         User.staticInstance.image = result.data
                         signUp(User.staticInstance)
                     }
@@ -112,25 +114,28 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
                         resultFailure(result.exception)
                     }
                 }
-            })
+            }
     }
 
     private fun signUp(user: User) {
-        authViewModel.signUp(user).observe(viewLifecycleOwner, { result ->
+        authViewModel.signUp(user).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Loading -> startLoading("Guardando los datos del usuario...")
-                is Resource.Success -> saveExercises()
+                is Resource.Success -> {
+                    dismissLoading()
+                    saveExercises()
+                }
                 is Resource.Failure -> {
                     dismissLoading()
                     resultFailure(result.exception)
                 }
             }
-        })
+        }
     }
 
     private fun saveExercises() {
         exerciseViewModel.createExercises(User.staticInstance.id)
-            .observe(viewLifecycleOwner, { result ->
+            .observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> startLoading("Creando datos del menú...")
                     is Resource.Success -> {
@@ -139,9 +144,10 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
                     }
                     is Resource.Failure -> {
                         dismissLoading()
+                        resultFailure(result.exception)
                     }
                 }
-            })
+            }
     }
 
     private fun resultSuccess() {
@@ -163,6 +169,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up), ControllablePage
     }
 
     private fun resultFailure(exception: Exception) {
+        Log.e("apm_error", "Error: ${exception.message}")
         mContext.showDialogInformation(
             icon = InformationDialog.ICON_ERROR,
             title = "¡Oh, no! No se pudo crear la cuenta",

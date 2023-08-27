@@ -31,7 +31,7 @@ class ImageViewModel(private val repository: FigureProvider) : ViewModel() {
 
 class ImageViewModelFactory(private val repository: FigureProvider) :
     ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(FigureProvider::class.java).newInstance(repository)
     }
 }

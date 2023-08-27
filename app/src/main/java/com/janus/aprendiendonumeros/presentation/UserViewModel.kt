@@ -20,7 +20,7 @@ class UserViewModel(private val repository: UserProvider) : ViewModel() {
 }
 
 class UserViewModelFactory(private val repository: UserProvider) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(UserProvider::class.java)
             .newInstance(repository)
     }

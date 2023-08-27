@@ -20,7 +20,7 @@ class SettingsSessionViewModel(private val repository: SettingsSessionProvider) 
 
 class SettingsSessionViewModelFactory(private val repository: SettingsSessionProvider) :
     ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(SettingsSessionProvider::class.java)
             .newInstance(repository)
     }

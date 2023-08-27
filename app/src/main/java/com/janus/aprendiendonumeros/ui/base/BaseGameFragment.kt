@@ -70,19 +70,19 @@ abstract class BaseGameFragment(
         }
     }
 
-//    protected fun isPerfectScore(): Boolean {
-//        return (logExercise.attemptsCorrect == logExercise.attemptsTotal)
-//    }
-//
-//    protected fun correct(action: () -> Unit) {
-//        logExercise.attemptsCorrect++
-//        action()
-//    }
-//
-//    protected fun incorrect(action: () -> Unit) {
-//        logExercise.attemptsIncorrect++
-//        action()
-//    }
+    protected fun isPerfectScore(): Boolean {
+        return (logExercise.attemptsCorrect == logExercise.attemptsTotal)
+    }
+
+    protected fun correct(action: () -> Unit) {
+        logExercise.attemptsCorrect++
+        action()
+    }
+
+    protected fun incorrect(action: () -> Unit) {
+        logExercise.attemptsIncorrect++
+        action()
+    }
 
     protected fun finish(waitTime: Long = 1500, actionBefore: () -> Unit = {}) {
         lifecycleScope.launch {
@@ -96,32 +96,32 @@ abstract class BaseGameFragment(
         when (logExercise.nameExercise) {
             Exercise.NAME_KNOW_NUMBERS -> {
                 val navDirection = KnowNumbersFragmentDirections
-                    .actionKnowNumbersToEndOfExercise(userId, coins, nextExercise, logExercise)
+                    .actionKnowNumbersToEndOfExercise(logExercise = logExercise, userId = userId, coins = coins, nextFragment = nextExercise)
                 goTo(navDirection)
             }
             Exercise.NAME_SELECT_AND_COUNT -> {
                 val navDirection = SelectAndCountFragmentDirections
-                    .actionSelectAndCountToEndOfExercise(userId, coins, nextExercise, logExercise)
+                    .actionSelectAndCountToEndOfExercise(logExercise = logExercise, userId = userId, coins = coins, nextFragment = nextExercise)
                 goTo(navDirection)
             }
             Exercise.NAME_MOVE_AND_COUNT -> {
                 val navDirection = MoveAndCountFragmentDirections
-                    .actionMoveAndCountToEndOfExercise(userId, coins, nextExercise, logExercise)
+                    .actionMoveAndCountToEndOfExercise(logExercise = logExercise, userId = userId, coins = coins, nextFragment = nextExercise)
                 goTo(navDirection)
             }
             Exercise.NAME_HOW_MANY -> {
                 val navDirection = HowManyFragmentDirections
-                    .actionHowManyToEndOfExercise(userId, coins, nextExercise, logExercise)
+                    .actionHowManyToEndOfExercise(logExercise = logExercise, userId = userId, coins = coins, nextFragment = nextExercise)
                 goTo(navDirection)
             }
             Exercise.NAME_LESS_OR_MORE -> {
                 val navDirection = LessOrMoreFragmentDirections
-                    .actionLessOrMoreToEndOfExercise(userId, coins, nextExercise, logExercise)
+                    .actionLessOrMoreToEndOfExercise(logExercise = logExercise, userId = userId, coins = coins, nextFragment = nextExercise)
                 goTo(navDirection)
             }
             Exercise.NAME_ORDER_AND_COUNT -> {
                 val navDirection = OrderAndCountFragmentDirections
-                    .actionOrderAndCountToEndOfExercise(userId, coins, nextExercise, logExercise)
+                    .actionOrderAndCountToEndOfExercise(logExercise = logExercise, userId = userId, coins = coins, nextFragment = nextExercise)
                 goTo(navDirection)
             }
         }

@@ -65,7 +65,7 @@ class ExerciseViewModel(private val repository: ExerciseProvider) : ViewModel() 
 
 class ExerciseViewModelFactory(private val repository: ExerciseProvider) :
     ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(ExerciseProvider::class.java)
             .newInstance(repository)
     }

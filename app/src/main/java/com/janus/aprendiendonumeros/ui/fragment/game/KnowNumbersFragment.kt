@@ -1,5 +1,6 @@
 package com.janus.aprendiendonumeros.ui.fragment.game
 
+import android.app.Activity
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.janus.aprendiendonumeros.R
 import com.janus.aprendiendonumeros.core.Resource
 import com.janus.aprendiendonumeros.data.model.Exercise
+import com.janus.aprendiendonumeros.data.model.Figure
 import com.janus.aprendiendonumeros.data.remote.FigureDataSource
 import com.janus.aprendiendonumeros.databinding.FragmentKnowNumbersBinding
 import com.janus.aprendiendonumeros.domain.figure.FigureImpl
@@ -67,7 +69,7 @@ class KnowNumbersFragment : BaseGameFragment(
     }
 
     override fun initGame() {
-        viewModel.getImages(logExercise.level).observe(viewLifecycleOwner, { result ->
+        viewModel.getImages(logExercise.level).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Loading -> loadingDialog.startDialog("Cargando...")
                 is Resource.Success -> {
@@ -85,7 +87,7 @@ class KnowNumbersFragment : BaseGameFragment(
                     ).show()
                 }
             }
-        })
+        }
     }
 
     private fun next() {

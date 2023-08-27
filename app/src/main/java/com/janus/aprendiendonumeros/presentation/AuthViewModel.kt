@@ -57,7 +57,7 @@ class AuthViewModel(private val repository: AuthProvider) : ViewModel() {
 }
 
 class AuthViewModelFactory(private val repository: AuthProvider) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(AuthProvider::class.java)
             .newInstance(repository)
     }
